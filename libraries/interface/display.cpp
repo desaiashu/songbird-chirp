@@ -1,17 +1,19 @@
 #include <display.h>
+#include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
 
 // OLED FeatherWing buttons map to different pins depending on board:
-  #define BUTTON_A  5
-  #define BUTTON_B  21
-  #define BUTTON_C  20
+#define BUTTON_A  5
+#define BUTTON_B  21
+#define BUTTON_C  20
 
 
 Display::Display()
 {
+
   Adafruit_SH1107 display(64, 128, &Wire);
 
   Serial.println("File Structure");
@@ -20,11 +22,6 @@ Display::Display()
   Serial.println("OLED begun");
 
 
-    for (int i = 0; i < 5000; i++) {
-    Serial.print("DISP");
-    delay(400);
-  }
-
   // Show image buffer on the display hardware.
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
@@ -43,66 +40,27 @@ Display::Display()
   pinMode(BUTTON_C, INPUT_PULLUP);
 
   // text display tests
-  display.setTextSize(5);
+  display.setTextSize(3);
   display.setTextColor(SH110X_WHITE);
   display.setCursor(0,0);
   display.print("Songbird");
   display.display(); // actually display all of the above
 
-}
-
-void Display::setLabel1(const std::string& text)
-{
-
-    Adafruit_SH1107 display(64, 128, &Wire);
-
-  Serial.println("File Structure");
-  display.begin(0x3C, true); // Address 0x3C default
-
-  Serial.println("OLED begun");
-
-
     for (int i = 0; i < 5000; i++) {
     Serial.print("DISP");
     delay(400);
   }
 
-  // Show image buffer on the display hardware.
-  // Since the buffer is intialized with an Adafruit splashscreen
-  // internally, this will display the splashscreen.
-//  display.display();
-//  delay(1000); 
+}
 
-  // Clear the buffer.
-  display.clearDisplay();
-  display.display();
-
-  display.setRotation(1);
-  Serial.println("Button test");
-
-  pinMode(BUTTON_A, INPUT_PULLUP);
-  pinMode(BUTTON_B, INPUT_PULLUP);
-  pinMode(BUTTON_C, INPUT_PULLUP);
-
-  // text display tests
-  display.setTextSize(5);
-  display.setTextColor(SH110X_WHITE);
-  display.setCursor(0,0);
-  display.print("Songbird");
-  display.display(); 
-//       if(!digitalRead(BUTTON_A)) Serial.print("A");
-//   if(!digitalRead(BUTTON_B)) Serial.print("B");
-//   if(!digitalRead(BUTTON_C)) Serial.print("C");
-//   Serial.print("yay");
-// delay(100);
-//   yield();
-//   display.display();
-  
+void Display::setLabel1(const std::string& text)
+{
+  return;
 }
 
 void Display::setLabel2(const std::string& text)
 {
-  
+  return;
 }
 
 

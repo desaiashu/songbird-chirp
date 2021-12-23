@@ -1,5 +1,5 @@
 # Update libraries
-echo "Removing cached libs"
+echo "Removing cached libraries"
 rm -rf ~/Documents/Arduino/libraries/arrangement
 rm -rf ~/Documents/Arduino/libraries/clock
 rm -rf ~/Documents/Arduino/libraries/composition
@@ -11,7 +11,7 @@ rm -rf ~/Documents/Arduino/libraries/sequencing
 rm -rf ~/Documents/Arduino/libraries/theory
 rm -rf ~/Documents/Arduino/libraries/voices
 
-echo "Copying new libs"
+echo "Copying new libraries"
 cp -rf libraries/arrangement ~/Documents/Arduino/libraries/
 cp -rf libraries/clock ~/Documents/Arduino/libraries/
 cp -rf libraries/composition ~/Documents/Arduino/libraries/

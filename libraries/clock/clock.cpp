@@ -2,6 +2,12 @@
 // #takes in midi clock if it's sensing one, otherwise sets BPM internally
 // #registers instruments to master clock
 
+#include <clock.h>
+#include <MIDI.h>
+
+
+
+
 // import time
 // from songbird.interface.midi import midi
 // from songbird.sequencing.sequencer import Sequencer

@@ -1,13 +1,14 @@
-//#include <display.h>
+#include <display.h>
 #include <Arduino.h>
 
 
-//Display d;
+Display* d;
 int stp = 0;
 
 void setup() {
+  
   Serial.begin(115200);
-  // d = Display();
+  d = new Display();
   // d.setLabel1("foo");
   Serial.print("yay");
 

@@ -4,6 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/libraries/**",
                 "~/Documents/Arduino/libraries/**",
                 "~/Library/Arduino15/packages/esp32/**"
             ],
