@@ -1,7 +1,6 @@
 #ifndef INTERFACE_DISPLAY
 #define INTERFACE_DISPLAY
 
-#include <Arduino.h>
 #include <string>
 
 class Display {
