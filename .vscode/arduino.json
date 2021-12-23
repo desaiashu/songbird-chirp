@@ -1,0 +1,6 @@
+{
+    "configuration": "CDCOnBoot=cdc,MSCOnBoot=default,DFUOnBoot=default,PSRAM=enabled,PartitionScheme=fatflash,CPUFreq=240,FlashSize=16M,UploadSpeed=921600,DebugLevel=verbose",
+    "board": "esp32:esp32:feathers2",
+    "port": "/dev/cu.usbmodem14101",
+    "sketch": "songbird-chirp.ino"
+}
