@@ -6,4 +6,5 @@ T="$(date +%s)"
 clang++ $@
 
 T="$(($(date +%s)-T))"
-echo "Compilation took ${T} seconds!"
+tput bold
+echo "$(tput bold)Compiling finished in ${T} seconds!$(tput sgr0)"

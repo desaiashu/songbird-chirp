@@ -1,39 +1,42 @@
 #!/bin/bash
 set -e #exit if any command fails
+T="$(date +%s)"
 
+libs=(
+    arrangement
+    clock
+    composition
+    effects
+    interface
+    midifile
+    notes
+    sequencing
+    theory
+    voices
+)
+    
 # Update libraries
-echo "Removing cached libraries"
-rm -rf ~/Documents/Arduino/libraries/arrangement
-rm -rf ~/Documents/Arduino/libraries/clock
-rm -rf ~/Documents/Arduino/libraries/composition
-rm -rf ~/Documents/Arduino/libraries/effects
-rm -rf ~/Documents/Arduino/libraries/interface
-rm -rf ~/Documents/Arduino/libraries/midifile
-rm -rf ~/Documents/Arduino/libraries/notes
-rm -rf ~/Documents/Arduino/libraries/sequencing
-rm -rf ~/Documents/Arduino/libraries/theory
-rm -rf ~/Documents/Arduino/libraries/voices
+echo "Copying updated libraries"
+for l in ${libs[@]}; do
+  rm -rf ~/Documents/Arduino/libraries/${l}
+  cp -r libraries/${l} ~/Documents/Arduino/libraries
+done
 
-echo "Copying new libraries"
-cp -rf libraries/arrangement ~/Documents/Arduino/libraries/
-cp -rf libraries/clock ~/Documents/Arduino/libraries/
-cp -rf libraries/composition ~/Documents/Arduino/libraries/
-cp -rf libraries/effects ~/Documents/Arduino/libraries/
-cp -rf libraries/interface ~/Documents/Arduino/libraries/
-cp -rf libraries/midifile ~/Documents/Arduino/libraries/
-cp -rf libraries/notes ~/Documents/Arduino/libraries/
-cp -rf libraries/sequencing ~/Documents/Arduino/libraries/
-cp -rf libraries/theory ~/Documents/Arduino/libraries/
-cp -rf libraries/voices ~/Documents/Arduino/libraries/
+# Compile
+echo "Compiling"
+arduino-cli compile --fqbn $1 songbird-chirp 
 
-# Build
-echo "Building"
-arduino-cli compile --fqbn esp32:esp32:feathers2 songbird-chirp 
+T="$(($(date +%s)-T))"
+echo "$(tput bold)Compiling finished in ${T} seconds!$(tput sgr0)"
+T="$(date +%s)"
 
 # Flash on chip
 echo "Flashing"
-arduino-cli upload -p /dev/cu.usbmodem14101 --fqbn esp32:esp32:feathers2 songbird-chirp
+arduino-cli upload -p $2 --fqbn $1 songbird-chirp
+
+T="$(($(date +%s)-T))"
+echo "$(tput bold)Flashing finished in ${T} seconds!$(tput sgr0)"
 
 # Monitor serial port
 echo "Monitoring"
-arduino-cli monitor -p /dev/cu.usbmodem14101
+arduino-cli monitor -p $3

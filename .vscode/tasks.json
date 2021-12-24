@@ -7,6 +7,26 @@
             "label": "build-and-flash",
             "type": "shell",
             "command": "./flash.sh",
+            "args": [
+                "esp32:esp32:feathers2",
+                "/dev/cu.usbmodem14101",
+                "/dev/cu.usbmodem14101"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+        //     "presentation": {
+        //         "showReuseMessage": false
+        //    }
+        },
+        {
+            "label": "alt-port-build-and-flash",
+            "type": "shell",
+            "command": "./flash.sh",
+            "args": [
+                "esp32:esp32:feathers2",
+                "/dev/cu.usbmodem01",
+                "/dev/cu.usbmodem14101"
+            ],
             "problemMatcher": [],
             "group": "build",
             "presentation": {
