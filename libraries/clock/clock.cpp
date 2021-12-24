@@ -8,7 +8,7 @@
 #include <console.h>
 #else
 #include "../interface/console.h"
-#include "../interface/midi.h"
+#include "../interface/midi_io.h"
 #include <unistd.h>
 #endif
 

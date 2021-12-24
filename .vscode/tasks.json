@@ -6,7 +6,7 @@
         {
             "label": "build-and-flash",
             "type": "shell",
-            "command": "./flash.sh",
+            "command": "./utils/flash.sh",
             "args": [
                 "esp32:esp32:feathers2",
                 "/dev/cu.usbmodem14101",
@@ -21,7 +21,7 @@
         {
             "label": "alt-port-build-and-flash",
             "type": "shell",
-            "command": "./flash.sh",
+            "command": "./utils/flash.sh",
             "args": [
                 "esp32:esp32:feathers2",
                 "/dev/cu.usbmodem01",
@@ -52,7 +52,7 @@
         {
             "type": "shell",
             "label": "build-local",
-            "command": "./local.sh",
+            "command": "./utils/local.sh",
             "args": [
                 "-std=c++17",
                 "-stdlib=libc++",
@@ -75,6 +75,24 @@
             "presentation": {
                 "showReuseMessage": false
            }
-        }
+        },
+        { // Requires chip to be in bootloader mode
+            "label": "flash-files", 
+            "type": "shell",
+            "command": "./utils/files.sh",
+            "args": [
+                "files",
+                "0xbef000",
+                "esp32s2",
+                "/dev/cu.usbmodem01",
+                "921600",
+                "0x411000"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "showReuseMessage": false
+           }
+        },
     ]
 }

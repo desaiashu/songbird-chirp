@@ -1,0 +1,39 @@
+[
+    {
+        "key": "cmd+r",
+        "command": "workbench.action.tasks.build"
+    },
+    {
+        "key": "shift+cmd+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "build-and-flash"
+    },
+    {
+        "key": "shift+cmd+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "alt-port-build-and-flash"
+    },
+    {
+        "key": "shift+cmd+alt+f",
+        "command": "workbench.action.tasks.runTask",
+        "args": "flash-files"
+    },
+    {
+        "key": "shift+cmd+b",
+        "command": "-workbench.action.tasks.build"
+    },
+    {
+        "key": "cmd+d",
+        "command": "workbench.action.debug.start",
+        "when": "debuggersAvailable && debugState == 'inactive'"
+    },
+    {
+        "key": "f5",
+        "command": "-workbench.action.debug.start",
+        "when": "debuggersAvailable && debugState == 'inactive'"
+    },
+    {
+        "key": "shift+cmd+e",
+        "command": "C_Cpp.ConfigurationSelect"
+    }
+]

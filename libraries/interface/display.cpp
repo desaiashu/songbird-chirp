@@ -3,6 +3,7 @@
 
 #if ARDUINO
 #include <Arduino.h>
+#include <FFat.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -48,12 +49,13 @@ Display::Display()
   display.setTextColor(SH110X_WHITE);
   display.setCursor(0,0);
   display.print("Songbird");
+  display.print(FFat.usedBytes());
   display.display(); // actually display all of the above
 
-    for (int i = 0; i < 5000; i++) {
-    print_to_console("DISP");
-    delay(400);
-  }
+  //   for (int i = 0; i < 5000; i++) {
+  //   print_to_console("DISP");
+  //   delay(400);
+  // }
 
 }
 

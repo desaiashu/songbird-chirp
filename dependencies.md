@@ -6,7 +6,7 @@
 -- Installed in /usr/local/bin (assuming PATH includes /usr/local/bin)
 -- Assumes Arduino library path is ~/Documents/Arduino/libraries
 - VSCode
--- Need to set up build task keyboard shortcut for VSCode task "build-and-flash"
+-- Add keyboard shortcuts from utils/build_bindings.json to VSCode's keybindings.json
 
 **VSCode extensions**
 - Arduino
@@ -21,7 +21,8 @@
 **Arduino Board Config** (via VS Code extension or CLI)
 - UM FeatherS2 (esp32)
 - USB CDC on Boot: Enabled
-- Partition Scheme: 16M Flash (3MB APP/9MB FATFS)
+- Partition Scheme: 16M Flash (2MB APP/12.5MB FATFS)
+-- If this changes, task flash-files will need updating
 - CPU Frequency: 240 MHz
 - Flash Size: 16MB
 - Upload Speed: 921600
