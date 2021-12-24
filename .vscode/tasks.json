@@ -14,9 +14,9 @@
             ],
             "problemMatcher": [],
             "group": "build",
-        //     "presentation": {
-        //         "showReuseMessage": false
-        //    }
+            "presentation": {
+                "showReuseMessage": false
+           }
         },
         {
             "label": "alt-port-build-and-flash",
@@ -56,10 +56,17 @@
             "args": [
                 "-std=c++17",
                 "-stdlib=libc++",
+                "-D__MACOSX_CORE__",
                 "-g",
                 "songbird.cpp",
                 "libraries/**/*.cpp",
                 "libraries/**/**/*.cpp",
+                "-framework",
+                "CoreMIDI",
+                "-framework",
+                "CoreAudio",
+                "-framework",
+                "CoreFoundation",
                 "-o",
                 "songbird"
               ],

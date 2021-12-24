@@ -13,4 +13,4 @@ class Display {
         void setLabel2(const std::string& text);
 };
 
-#endif
+#endif // INTERFACE_DISPLAY

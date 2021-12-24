@@ -5,4 +5,6 @@
 
 void print_to_console(const char* str);
 
-#endif
+void print_to_console(int i);
+
+#endif // INTERFACE_CONSOLE

@@ -8,12 +8,21 @@
 #include <console.h>
 #else
 #include "../interface/console.h"
+#include "../interface/midi.h"
+#include <unistd.h>
 #endif
 
 
 Transport::Transport()
 {
     print_to_console("yay");
+    for (int i = 0; i < 100; i++) {
+        send_midi_note(true, 60, 127, 2);
+        sleep(1);
+        send_midi_note(false, 60, 0, 2);
+        sleep(1);
+    }
+    
 }
 
 // import time

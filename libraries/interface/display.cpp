@@ -67,7 +67,7 @@ void Display::setLabel2(const std::string& text)
   return;
 }
 
-#else
+#else // Mac OSX
 #endif
 
 

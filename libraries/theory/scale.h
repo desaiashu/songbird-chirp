@@ -19,4 +19,4 @@ struct Scale {
 
 };
 
-#endif
+#endif // THEORY_SCALE

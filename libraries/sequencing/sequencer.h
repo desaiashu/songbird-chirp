@@ -24,4 +24,4 @@ class Sequencer {
         void stop();
 };
 
-#endif
+#endif // SEQUENCING_SEQUENCER

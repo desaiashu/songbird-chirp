@@ -1,5 +1,5 @@
 {
-    "configuration": "CDCOnBoot=cdc,MSCOnBoot=default,DFUOnBoot=default,PSRAM=enabled,PartitionScheme=fatflash,CPUFreq=240,FlashSize=16M,UploadSpeed=921600,DebugLevel=verbose",
+    "configuration": "CDCOnBoot=cdc,MSCOnBoot=default,DFUOnBoot=default,PSRAM=enabled,PartitionScheme=app3M_fat9M_16MB,CPUFreq=240,FlashSize=16M,UploadSpeed=921600,DebugLevel=info",
     "board": "esp32:esp32:feathers2",
     "port": "/dev/cu.usbmodem14101",
     "sketch": "songbird-chirp.ino"
