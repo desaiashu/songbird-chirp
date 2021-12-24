@@ -5,10 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/songbird",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build-local"
+        },
+        {
             "name": "Arduino",
             "type": "arduino",
             "request": "launch",
-            "program": "${workspaceFolder}/songbird-chirp/songbird-chirp.ino",
+            "program": "${workspaceFolder}/songbird-chirp.ino",
             "cwd": "${workspaceFolder}",
             "MIMode": "gdb",
             "targetArchitecture": "arm",

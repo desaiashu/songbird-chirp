@@ -1,7 +1,11 @@
 #ifndef CLOCK_CLOCK
 #define CLOCK_CLOCK
 
+#ifdef ARDUINO
 #include <sequencer.h>
+#else
+#include "../sequencing/sequencer.h"
+#endif
 
 #define MAX_SEQUENCERS 20
 

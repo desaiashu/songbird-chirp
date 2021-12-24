@@ -1,13 +1,26 @@
 ### Dependencies:
 
-Tools:
-- Arduino CLI (installed in /usr/local/bin)
-- ESP32 board driver (installed via Arduino)
+Toolchain:
+- Mac OSX
+- Arduino CLI 
+-- Installed in /usr/local/bin (assuming PATH includes /usr/local/bin)
+-- Assumes Arduino library path is ~/Documents/Arduino/libraries
 - VSCode
+-- Need to set up build task keyboard shortcut for VSCode task "build-and-flash"
 - VSCode Arduino extension
 
-Libraries:
+Libraries (can be installed via Arduino CLI or IDE):
+- Arduino Core for ESP32 (includes ESP-IDF)
+-- Need to add additional board URL for (ESP32)[https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json]
 - Arduino Midi Library
 - Adafruit BusIO
 - Adafruit SH110X
 - Adafruit GFX
+
+Hardware:
+- FeatherS2 board by Unexpected Maker
+- FeatherWing OLED - 128x64
+- MIDI FeatherWing
+- 3x I2C QT Rotary Encoder
+- DS3231 Precision RTC (optional, needed for tight master clock)
+- Quad Side-By-Side FeatherWing Kit 

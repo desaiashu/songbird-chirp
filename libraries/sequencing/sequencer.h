@@ -1,7 +1,12 @@
 #ifndef SEQUENCING_SEQUENCER
 #define SEQUENCING_SEQUENCER
 
-#include <Scale.h>
+#ifdef FEATHER
+#include <scale.h>
+#else
+#include "../theory/scale.h"
+#endif
+
 
 class Sequencer {
     private:

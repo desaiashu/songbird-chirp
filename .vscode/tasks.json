@@ -8,10 +8,46 @@
             "type": "shell",
             "command": "./flash.sh",
             "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "showReuseMessage": false
+           }
+        },
+        {
+            "label": "run-local",
+            "type": "shell",
+            "command": "./songbird",
+            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "dependsOn": [
+                "build-local"
+            ],
+            "presentation": {
+                "showReuseMessage": false
+           }
+        },
+        {
+            "type": "shell",
+            "label": "build-local",
+            "command": "./local.sh",
+            "args": [
+                "-std=c++17",
+                "-stdlib=libc++",
+                "-g",
+                "songbird.cpp",
+                "libraries/**/*.cpp",
+                "libraries/**/**/*.cpp",
+                "-o",
+                "songbird"
+              ],
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "showReuseMessage": false
+           }
         }
     ]
 }

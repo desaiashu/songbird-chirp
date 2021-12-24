@@ -1,7 +1,6 @@
 #ifndef THEORY_SCALE
 #define THEORY_SCALE
 
-#include <Scale.h>
 #include <string>
 
 struct Scale {

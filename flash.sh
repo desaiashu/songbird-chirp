@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e #exit if any command fails
+
 # Update libraries
 echo "Removing cached libraries"
 rm -rf ~/Documents/Arduino/libraries/arrangement
@@ -25,12 +28,12 @@ cp -rf libraries/voices ~/Documents/Arduino/libraries/
 
 # Build
 echo "Building"
-arduino-cli compile --fqbn esp32:esp32:feathers2 songbird-chirp
+arduino-cli compile --fqbn esp32:esp32:feathers2 songbird-chirp 
 
 # Flash on chip
 echo "Flashing"
 arduino-cli upload -p /dev/cu.usbmodem14101 --fqbn esp32:esp32:feathers2 songbird-chirp
 
-# Monitor Serial
+# Monitor serial port
 echo "Monitoring"
 arduino-cli monitor -p /dev/cu.usbmodem14101

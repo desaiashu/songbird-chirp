@@ -1,9 +1,13 @@
-#include <display.h>
+#include "display.h"
+#include "console.h"
+
+#if ARDUINO
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
+
 
 // OLED FeatherWing buttons map to different pins depending on board:
 #define BUTTON_A  5
@@ -16,10 +20,10 @@ Display::Display()
 
   Adafruit_SH1107 display(64, 128, &Wire);
 
-  Serial.println("File Structure");
+  print_to_console("File Structure");
   display.begin(0x3C, true); // Address 0x3C default
 
-  Serial.println("OLED begun");
+  print_to_console("OLED begun");
 
 
   // Show image buffer on the display hardware.
@@ -33,7 +37,7 @@ Display::Display()
   display.display();
 
   display.setRotation(1);
-  Serial.println("Button test");
+  print_to_console("Button test");
 
   pinMode(BUTTON_A, INPUT_PULLUP);
   pinMode(BUTTON_B, INPUT_PULLUP);
@@ -47,7 +51,7 @@ Display::Display()
   display.display(); // actually display all of the above
 
     for (int i = 0; i < 5000; i++) {
-    Serial.print("DISP");
+    print_to_console("DISP");
     delay(400);
   }
 
@@ -63,6 +67,8 @@ void Display::setLabel2(const std::string& text)
   return;
 }
 
+#else
+#endif
 
 
 // import board

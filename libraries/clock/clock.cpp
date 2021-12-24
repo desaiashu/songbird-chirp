@@ -2,11 +2,19 @@
 // #takes in midi clock if it's sensing one, otherwise sets BPM internally
 // #registers instruments to master clock
 
-#include <clock.h>
-#include <MIDI.h>
+#include "clock.h"
+// #include <MIDI.h>
+#if ARDUINO
+#include <console.h>
+#else
+#include "../interface/console.h"
+#endif
 
 
-
+Transport::Transport()
+{
+    print_to_console("yay");
+}
 
 // import time
 // from songbird.interface.midi import midi

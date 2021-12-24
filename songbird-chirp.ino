@@ -1,6 +1,6 @@
-#include <display.h>
 #include <Arduino.h>
-
+#include <display.h>
+#include <console.h>
 
 Display* d;
 int stp = 0;
@@ -10,7 +10,7 @@ void setup() {
   Serial.begin(115200);
   d = new Display();
   // d.setLabel1("foo");
-  Serial.print("yay");
+  print_to_console("yay");
 
   stp = 1;
 
@@ -22,7 +22,7 @@ void loop() {
     setup();
     stp = 1;
   }
-  Serial.print("foo");
+  print_to_console("foo");
   delay(400);
 }
 
