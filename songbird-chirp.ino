@@ -36,7 +36,7 @@ void setup() {
 
   print_to_console("FFAT");
 
-      Serial.println("Partition list:");
+    Serial.println("Partition list:");
     partloop(ESP_PARTITION_TYPE_APP);
     partloop(ESP_PARTITION_TYPE_DATA);
 
