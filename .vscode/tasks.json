@@ -54,7 +54,7 @@
             "label": "build-local",
             "command": "./utils/local.sh",
             "args": [
-                "-std=c++17",
+                "-std=c++11",
                 "-stdlib=libc++",
                 "-D__MACOSX_CORE__",
                 "-g",
