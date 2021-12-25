@@ -1,13 +1,18 @@
 
-// note_index = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#","B"]
-// middle_c_offset = 60
+#include "note.h"
 
-// gen_octave_offset = lambda octave: 12*octave
+#define NOTES_PER_OCTAVE 12
 
-// def number_from_note(note, octave):
-//     note_num = note_index.index(note)
-//     return note_num + gen_octave_offset(octave)
+const string notes[12] = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
-// def note_from_number(num):
-//     note_num = num % 12
-//     return note_index[note_num]
+const int number_from_note(const string note, const int octave) 
+{
+    int index = std::distance(notes,
+                               std::find(notes, &notes[12], note));
+    return index + octave*NOTES_PER_OCTAVE;
+}
+
+const string note_from_number(const int num) 
+{
+    return notes[num%NOTES_PER_OCTAVE];
+}

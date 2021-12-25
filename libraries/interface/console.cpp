@@ -2,24 +2,19 @@
 
 #if ARDUINO
 #include <Arduino.h>
-void print_to_console(const char* str) {
-    Serial.println(str);     
-}
 
-void print_to_console(int i) {
-    Serial.println(i);   
+template <class type>
+void print_to_console(type value) {
+    Serial.println(value);     
 }
 
 #else // Mac OSX
 #include <iostream>
 #include <string>
 
-void print_to_console(const char* str) {
-    std::cout << str << std::endl;     
-}
-
-void print_to_console(int i) {
-    std::cout << i << std::endl;   
+template <class type>
+void print_to_console(type value) {
+    std::cout << value << std::endl;     
 }
 
 #endif

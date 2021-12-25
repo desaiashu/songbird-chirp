@@ -59,12 +59,12 @@ Display::Display()
 
 }
 
-void Display::setLabel1(const std::string& text)
+void Display::setLabel1(const string text)
 {
   return;
 }
 
-void Display::setLabel2(const std::string& text)
+void Display::setLabel2(const string text)
 {
   return;
 }

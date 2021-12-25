@@ -2,6 +2,7 @@
 #define INTERFACE_DISPLAY
 
 #include <string>
+using std::string;
 
 class Display {
     private:
@@ -9,8 +10,8 @@ class Display {
 
     public:
         Display();
-        void setLabel1(const std::string& text);
-        void setLabel2(const std::string& text);
+        void setLabel1(const string text);
+        void setLabel2(const string text);
 };
 
 #endif // INTERFACE_DISPLAY
