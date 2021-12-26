@@ -6,6 +6,12 @@
 
 template <class type>
 void print_to_console(type value) {
+    Serial.print(value);  
+    Serial.print(" ");   
+}
+
+template <class type>
+void println_to_console(type value) {
     Serial.println(value);     
 }
 
@@ -14,6 +20,12 @@ void print_to_console(type value) {
 
 template <class type>
 void print_to_console(type value) {
+    std::cout << value; 
+    std::cout << " ";    
+}
+
+template <class type>
+void println_to_console(type value) {
     std::cout << value << std::endl;     
 }
 

@@ -7,9 +7,9 @@
 
 int main()
 {
-    print_to_console("Chirp Chirp");
+    println_to_console("Chirp Chirp");
 
-    test_notes();
+    test_scale();
 
     intialize_midi();
     

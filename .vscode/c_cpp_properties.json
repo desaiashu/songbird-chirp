@@ -12,7 +12,7 @@
             ],
             "forcedInclude": [],
             "cStandard": "c11",
-            "cppStandard": "c++98",
+            "cppStandard": "c++11",
             "defines": [
                 "__MACOSX_CORE__"
             ]

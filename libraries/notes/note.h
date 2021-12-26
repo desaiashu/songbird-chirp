@@ -1,6 +1,8 @@
 #ifndef NOTES_NOTE
 #define NOTES_NOTE
 
+#define NOTES_PER_OCTAVE 12
+
 #include <string> 
 using std::string;
 

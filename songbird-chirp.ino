@@ -29,7 +29,7 @@ void setup() {
 
   print_to_console("FFATty");
 
-  for (int i = 0; i < 10; i++) {
+  for (size_t i = 0; i < 10; i++) {
     print_to_console("setup");
     delay(400);
   }

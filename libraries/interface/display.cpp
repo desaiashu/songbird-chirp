@@ -52,7 +52,7 @@ Display::Display()
   display.print(FFat.usedBytes());
   display.display(); // actually display all of the above
 
-  //   for (int i = 0; i < 5000; i++) {
+  //   for (size_t i = 0; i < 5000; i++) {
   //   print_to_console("DISP");
   //   delay(400);
   // }

@@ -16,7 +16,7 @@
 Transport::Transport()
 {
     print_to_console("yay");
-    for (int i = 0; i < 100; i++) {
+    for (size_t i = 0; i < 100; i++) {
         send_midi_note(true, 60, 127, 2);
         sleep(1);
         send_midi_note(false, 60, 0, 2);
