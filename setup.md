@@ -1,20 +1,18 @@
-### Setup Guide
+## Setup Guide (macOS)
 
-## Mac OSX Setup Instructions
-
-**1. Run install script**
+1. **Run install script**
 ```
 ./setup.sh
 ```
-This install script installs:
+This install script auto installs:
 
 - Arduino CLI the Arduino CLI to /usr/local/bin.
-    - Assumes /usr/local/bin is included in PATH file
-    - Assumes Arduino library path is ~/Documents/Arduino/libraries
+    - *Assumes /usr/local/bin is included in PATH file*
+    - *Assumes Arduino library path is ~/Documents/Arduino/libraries*
 - Arduino Core for ESP32/ESP32-S2
 - Arduino libraries
 
-**2. Install (Visual Studio Code)[https://code.visualstudio.com] and extensions**
+2. **Install (Visual Studio Code)[https://code.visualstudio.com] and extensions**
 
     - Arduino
     - C/C++
@@ -25,9 +23,11 @@ This install script installs:
     - Atom One Dark
     - Atom One Light
 
-**3. Add build shortcuts**
+3. **Add build shortcuts**
 
-Add keyboard shortcuts from ```utils/build_bindings.json``` to VSCode's ```keybindings.json```. VSCode shortcuts are saved on a user basis not project basis, so you can customize shortcuts for build tasks.
+Add keyboard shortcuts from ```utils/build_bindings.json``` to VSCode's ```keybindings.json```. 
+
+*VSCode shortcuts are saved on a user basis not project basis, so you can customize shortcuts for build tasks.*
 
 
 ## Additional config info
