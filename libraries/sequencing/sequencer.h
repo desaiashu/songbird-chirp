@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_SEQUENCER
 #define SEQUENCING_SEQUENCER
 
-#ifdef FEATHER
+#ifdef ARDUINO
 #include <scale.h>
 #else
 #include "../theory/scale.h"

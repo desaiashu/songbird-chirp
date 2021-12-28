@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 set -e #exit if any command fails
 T="$(date +%s)"
 

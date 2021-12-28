@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 T="$(date +%s)"
 
 # Create image

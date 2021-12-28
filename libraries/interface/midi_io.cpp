@@ -18,46 +18,60 @@
 
 
 #include "midi_io.h"
+
 #if ARDUINO
 #include <MIDI.h>
-#else
-#include "../rtmidi/RtMidi.h"
-#include "console.h"
-#include <cstdlib>
-RtMidiOut* midiout;
-#endif
+#include <console.h>
 
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial0,  MIDI);
 
 void intialize_midi() 
 {
-    #if ARDUINO
-    MIDI_CREATE_DEFAULT_INSTANCE();
     MIDI.begin(MIDI_CHANNEL_OMNI);
-
-    #else
-
-    print_to_console("initializing midi");
-    midiout = new RtMidiOut();
-    midiout->openVirtualPort();
-
-    #endif
 }
-
-#ifndef ARDUINO
-static const int note_on=0x90;
-static const int note_off=0x80;
-static const int clock_pulse=0xF8;
-#endif
 
 void send_midi_note(bool on, int note, int velocity, int channel) 
 {
-    #if ARDUINO
     if (on) {
         MIDI.sendNoteOn(note, velocity, channel);
     } else {
         MIDI.sendNoteOff(note, velocity, channel);
     }
-    #else
+}
+
+void send_midi_cc(int cc, int value, int channel) 
+{
+
+}
+
+void send_midi_pulse() 
+{
+    MIDI.sendClock();
+}
+
+
+
+#else // macOS
+
+
+#include "../rtmidi/RtMidi.h"
+#include "console.h"
+#include <cstdlib>
+RtMidiOut* midiout;
+
+static const int note_on=0x90;
+static const int note_off=0x80;
+static const int clock_pulse=0xF8;
+
+void intialize_midi() 
+{
+    print_to_console("initializing midi");
+    midiout = new RtMidiOut();
+    midiout->openVirtualPort();
+}
+
+void send_midi_note(bool on, int note, int velocity, int channel) 
+{
     std::vector<unsigned char> message;
     if (on) {
         message.push_back(note_on+channel);
@@ -74,28 +88,25 @@ void send_midi_note(bool on, int note, int velocity, int channel)
         print_to_console("Note off");
         println_to_console(note);
     }
-    #endif
 }
 
 void send_midi_cc(int cc, int value, int channel) 
 {
-    #if ARDUINO
-    #else
     // Control Change: 176, 7, 100 (volume)
 //   message[0] = 176;
 //   message[1] = 7;
 //   message.push_back( 100 );
 //   midiout->sendMessage( &message );
-    #endif
 }
 
 void send_midi_pulse() 
 {
-    #if ARDUINO
-    MIDI.sendClock();
-    #else
     std::vector<unsigned char> message;
     message.push_back(0xF8);
     midiout->sendMessage( &message );
-    #endif
 }
+
+#endif
+
+
+

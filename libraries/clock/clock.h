@@ -7,6 +7,7 @@
 #include "../sequencing/sequencer.h"
 #endif
 
+#include <thread>
 #include <vector>
 using std::vector;
 
@@ -33,6 +34,7 @@ class Clock {
         int ticks;
         inline void calc_miliseconds(double bpm=0.0);
         inline void estimate_BPM();
+        std::thread t;
         Clock();
 
     public:
@@ -45,7 +47,12 @@ class Clock {
         double midi_time;
         double time_since_pulse;
         double time_since_tick;
+
+        #ifdef ARDUINO
+        unsigned long time;
+        #else
         std::chrono::high_resolution_clock::time_point time;
+        #endif
 
         Transport transport;
         static Clock& getInstance()

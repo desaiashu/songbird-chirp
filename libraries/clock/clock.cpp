@@ -3,8 +3,6 @@
 // #registers instruments to master clock
 
 #include "clock.h"
-#include <thread>
-#include <functional>
 #if ARDUINO
 #include <console.h>
 #include <midi_io.h>
@@ -49,6 +47,11 @@ void Transport::stop()
 
 // Clock
 
+// TODOs
+// Clean up unused variables
+// Implement RTC once it part arrives
+// Implement function for clock retrieval
+
 // PPQ = Pulses per quarter note (1 quarter note = 1 beat)
 static int PPQ = 24;
 static int MS_PER_MIN = 60000;
@@ -67,7 +70,6 @@ Clock::Clock()
     estimated_BPM = 0.0;
 
     midi_time = -1.0;
-    time = std::chrono::high_resolution_clock::now();
 
     ticks = 0;
     pulses = 0;
@@ -98,55 +100,59 @@ void Clock::tick()
     ticks++;
 }
 
-// long current_ms()
-// {
-//     using namespace std::chrono;
-//     auto now = system_clock::now();
-//     auto now_ms = time_point_cast<milliseconds>(now);
-//     auto value = now_ms.time_since_epoch();
-//     long duration = value.count();
-//     return duration;
-// }
-
-void timer(Clock* midiclock) 
+void timer_loop(Clock* midiclock) 
 {
     while (true) {    
         int delta = midiclock->update_time();
         if (midiclock->internal) {
             if (midiclock->transport.playing)
-                if (midiclock-> midi_time == 0.0 || midiclock->time_since_tick >= midiclock->ms_per_tick)
+                if (midiclock->time_since_tick >= midiclock->ms_per_tick)
                     midiclock->tick();
         } else {
             // TODO handle external clock
+            // Check for midi clock in
         }
     }
 }
+// #endif
 
 inline double Clock::update_time() {
+
+    #ifdef ARDUINO
+    unsigned long now = micros();
+    double delta_time = (now - time)/1000.0;
+    #else
     using namespace std::chrono;
     high_resolution_clock::time_point now = high_resolution_clock::now();
-    duration<double, std::milli> fp_ms = now - time;
-    double delta_time = fp_ms.count();
-    if (midi_time >= 0) {
+    duration<double, std::milli> milliseconds = now - time;
+    double delta_time = milliseconds.count();
+    #endif
+
+    if (midi_time >= 0) { 
         midi_time += delta_time;
         time_since_tick += delta_time;
-    } else {
-        delta_time = 0;
+    } else { // If clock just started, set values to zero
+        delta_time = 0.0;
         midi_time = 0.0;
         time_since_tick = 0.0;
     }
+
     time = now;
     return delta_time;
 }
 
-inline void Clock::start() 
+void Clock::start() 
 {
     transport.start();
     if (internal) {
         println_to_console("internal");
         println_to_console(ms_per_tick);
-        std::thread t(timer, this);
+
+        t = std::thread(timer_loop, this);
         t.join();
+
+        tick();
+
     } else {
         // TODO: enable ticks with external clock
     }
@@ -154,8 +160,9 @@ inline void Clock::start()
 
 void Clock::stop() 
 {
+    t.~thread();
     transport.stop();
-    midi_time = -1.0;
+    midi_time = -1.0; // Workaround to ensure 
     ticks = 0;
     pulses = 0;
 }

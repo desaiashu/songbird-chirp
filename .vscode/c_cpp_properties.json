@@ -42,10 +42,6 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "/Users/Ashu/Documents/Arduino/libraries/**",
-                "${workspaceFolder}/libraries/**",
-                "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/**",
-                "/Users/Ashu/Library/Arduino15/packages/esp32/tools/**",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/esp-dsp/modules/math/addc/include",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/esp-dsp/modules/math/mulc/include",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/esp-dsp/modules/math/sqrt/include",
@@ -78,6 +74,7 @@
                 "/Users/Ashu/Documents/Arduino/libraries/Adafruit_GFX_Library",
                 "/Users/Ashu/Documents/Arduino/libraries/Adafruit_SH110X",
                 "/Users/Ashu/Documents/Arduino/libraries/Adafruit_BusIO",
+                "/Users/Ashu/Documents/Arduino/libraries/MIDI_Library/src",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/config",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/newlib/platform_include",
                 "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/tools/sdk/esp32s2/include/freertos/include",
