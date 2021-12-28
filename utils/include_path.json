@@ -1,0 +1,6 @@
+[
+    "/Users/Ashu/Documents/Arduino/libraries/**",
+    "${workspaceFolder}/libraries/**",
+    "/Users/Ashu/Library/Arduino15/packages/esp32/hardware/esp32/2.0.2/**",
+    "/Users/Ashu/Library/Arduino15/packages/esp32/tools/**"
+]

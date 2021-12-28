@@ -28,3 +28,35 @@
 
 //     def stop(self):
 //         pass
+
+#include "sequencer.h"
+
+Sequencer::Sequencer() 
+{
+    
+}
+
+void Sequencer::changeScale(Scale* scale) 
+{
+    
+}
+
+void Sequencer::pulse() 
+{
+    
+}
+
+void Sequencer::tick() 
+{
+    
+}
+
+void Sequencer::start() 
+{
+    
+}
+
+void Sequencer::stop() 
+{
+    
+}

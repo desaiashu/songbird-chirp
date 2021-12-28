@@ -3,27 +3,199 @@
 // #registers instruments to master clock
 
 #include "clock.h"
-// #include <MIDI.h>
+#include <thread>
+#include <functional>
 #if ARDUINO
 #include <console.h>
+#include <midi_io.h>
 #else
 #include "../interface/console.h"
 #include "../interface/midi_io.h"
 #include <unistd.h>
 #endif
 
-
 Transport::Transport()
 {
-    print_to_console("yay");
-    for (size_t i = 0; i < 100; i++) {
-        send_midi_note(true, 60, 127, 2);
-        sleep(1);
-        send_midi_note(false, 60, 0, 2);
-        sleep(1);
-    }
-    
+    playing = false;
 }
+
+void Transport::pulse() 
+{
+    for (Sequencer s : sequencers)
+        s.pulse();
+}
+
+void Transport::tick() 
+{
+    for (Sequencer s : sequencers)
+        s.tick();
+}
+
+void Transport::start() 
+{
+    for (Sequencer s : sequencers)
+        s.start();
+    playing = true;
+    println_to_console("Start");
+}
+
+void Transport::stop() 
+{
+    for (Sequencer s : sequencers)
+        s.stop();
+    playing = false;
+    println_to_console("Stop");
+}
+
+// Clock
+
+// PPQ = Pulses per quarter note (1 quarter note = 1 beat)
+static int PPQ = 24;
+static int MS_PER_MIN = 60000;
+static int QUARTER_NOTE_PER_BAR = 4; // This may change later
+static int TICKS_PER_PULSE = 4; // Assumes 24ppq clock and 96ppq midi files
+static int TICKS_PER_BAR = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_BAR;
+
+Clock::Clock()
+{
+    internal = true;
+    transport = Transport();
+    if (internal) {
+        BPM = 120.0;
+        calc_miliseconds();
+    }
+    estimated_BPM = 0.0;
+
+    midi_time = -1.0;
+    time = std::chrono::high_resolution_clock::now();
+
+    ticks = 0;
+    pulses = 0;
+    time_since_pulse = 0.0;
+    time_since_tick = 0.0;
+}
+
+void Clock::register_sequencer(Sequencer sequencer) 
+{
+    transport.sequencers.push_back(sequencer);
+}
+
+void Clock::pulse() 
+{
+    transport.pulse();
+    time_since_pulse = 0.0;
+    if (internal)
+        send_midi_pulse();
+    pulses+=1;
+}
+
+void Clock::tick() 
+{
+    transport.tick();
+    time_since_tick = 0.0;
+    if (ticks % TICKS_PER_PULSE == 0)
+        pulse();
+    ticks++;
+}
+
+// long current_ms()
+// {
+//     using namespace std::chrono;
+//     auto now = system_clock::now();
+//     auto now_ms = time_point_cast<milliseconds>(now);
+//     auto value = now_ms.time_since_epoch();
+//     long duration = value.count();
+//     return duration;
+// }
+
+void timer(Clock* midiclock) 
+{
+    while (true) {    
+        int delta = midiclock->update_time();
+        if (midiclock->internal) {
+            if (midiclock->transport.playing)
+                if (midiclock-> midi_time == 0.0 || midiclock->time_since_tick >= midiclock->ms_per_tick)
+                    midiclock->tick();
+        } else {
+            // TODO handle external clock
+        }
+    }
+}
+
+inline double Clock::update_time() {
+    using namespace std::chrono;
+    high_resolution_clock::time_point now = high_resolution_clock::now();
+    duration<double, std::milli> fp_ms = now - time;
+    double delta_time = fp_ms.count();
+    if (midi_time >= 0) {
+        midi_time += delta_time;
+        time_since_tick += delta_time;
+    } else {
+        delta_time = 0;
+        midi_time = 0.0;
+        time_since_tick = 0.0;
+    }
+    time = now;
+    return delta_time;
+}
+
+inline void Clock::start() 
+{
+    transport.start();
+    if (internal) {
+        println_to_console("internal");
+        println_to_console(ms_per_tick);
+        std::thread t(timer, this);
+        t.join();
+    } else {
+        // TODO: enable ticks with external clock
+    }
+}
+
+void Clock::stop() 
+{
+    transport.stop();
+    midi_time = -1.0;
+    ticks = 0;
+    pulses = 0;
+}
+
+void Clock::calc_miliseconds(double bpm) 
+{
+    if (bpm == 0.0)
+        bpm = BPM;
+    ms_per_pulse = MS_PER_MIN/(bpm*PPQ);
+    ms_per_tick = ms_per_pulse / TICKS_PER_PULSE;
+}
+
+void Clock::estimate_BPM() 
+{
+    if (delta_ms > 0) {
+        if (estimated_BPM == 0.0)
+            estimated_BPM = MS_PER_MIN/(time_since_pulse)*PPQ;
+        else
+            estimated_BPM = 0.5 * (estimated_BPM + MS_PER_MIN/(time_since_pulse*PPQ));
+        calc_miliseconds(estimated_BPM);
+    }
+
+}
+
+
+
+
+
+// void clock_start(std::function<void(void)> func, unsigned int interval)
+// {
+//   std::thread([func, interval]()
+//   { 
+//     while (true)
+//     { 
+//       auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(interval);
+//       func();
+//       std::this_thread::sleep_until(x);
+//     }
+//   }).detach();
+// }
 
 // import time
 // from songbird.interface.midi import midi

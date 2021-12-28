@@ -19,7 +19,7 @@
 
 #include "midi_io.h"
 #if ARDUINO
-// #include <MIDI.h>
+#include <MIDI.h>
 #else
 #include "../rtmidi/RtMidi.h"
 #include "console.h"
@@ -31,7 +31,9 @@ RtMidiOut* midiout;
 void intialize_midi() 
 {
     #if ARDUINO
-    // MIDI_CREATE_DEFAULT_INSTANCE();
+    MIDI_CREATE_DEFAULT_INSTANCE();
+    MIDI.begin(MIDI_CHANNEL_OMNI);
+
     #else
 
     print_to_console("initializing midi");
@@ -44,16 +46,17 @@ void intialize_midi()
 #ifndef ARDUINO
 static const int note_on=0x90;
 static const int note_off=0x80;
+static const int clock_pulse=0xF8;
 #endif
 
 void send_midi_note(bool on, int note, int velocity, int channel) 
 {
     #if ARDUINO
-    // if (on) {
-    //     MIDI.sendNoteOn(note, velocity, channel);
-    // } else {
-    //     MIDI.sendNoteOff(note, velocity, channel);
-    // }
+    if (on) {
+        MIDI.sendNoteOn(note, velocity, channel);
+    } else {
+        MIDI.sendNoteOff(note, velocity, channel);
+    }
     #else
     std::vector<unsigned char> message;
     if (on) {
@@ -62,14 +65,14 @@ void send_midi_note(bool on, int note, int velocity, int channel)
         message.push_back(velocity);
         midiout->sendMessage( &message );
         print_to_console("Sent note");
-        print_to_console(note);
+        println_to_console(note);
     } else {
         message.push_back(note_off+channel);
         message.push_back(note);
         message.push_back(velocity);
         midiout->sendMessage( &message );
-        print_to_console("Sent note");
-        print_to_console(note);
+        print_to_console("Note off");
+        println_to_console(note);
     }
     #endif
 }
@@ -83,5 +86,16 @@ void send_midi_cc(int cc, int value, int channel)
 //   message[1] = 7;
 //   message.push_back( 100 );
 //   midiout->sendMessage( &message );
+    #endif
+}
+
+void send_midi_pulse() 
+{
+    #if ARDUINO
+    MIDI.sendClock();
+    #else
+    std::vector<unsigned char> message;
+    message.push_back(0xF8);
+    midiout->sendMessage( &message );
     #endif
 }

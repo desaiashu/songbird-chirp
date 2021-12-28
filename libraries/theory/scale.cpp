@@ -44,41 +44,12 @@ Scale::Scale(string root_note, int octave, string mode, string type)
         } else {
             gen_scale();
         }
-        // int root = ;
-        // int offset;
-
-        // int* dissonants = ;
-        // int* scale;
 }
-
-// class Scale:
-//     def __init__(
-//         self,
-//         root_note="C",
-//         octave=4,
-//         mode="minor",
-//         type="wide",
-//     ):
-//         self.root_note = root_note
-//         self.root = number_from_note(root_note, octave)
-//         self.offset = root_offset[mode]
-//         self.dissonants = []
-//         self.mode = mode
-//         self.octave = octave
-//         self.type = type
-
-//         if type == "wide":
-//             self.gen_wide_scale(),
-//         else:
-//             self.gen_scale()
 
 string Scale::name() 
 {
     return root_note + " " + mode;
 }
-
-//     def name(self):
-//         return self.root_note + " " + self.mode
 
 void Scale::gen_scale(bool base) 
 {
@@ -94,15 +65,6 @@ void Scale::gen_scale(bool base)
             dissonants.push_back(base_dissonants[i]);
 }
 
-//     def gen_scale(self):
-//         self.notes = [self.root]
-//         distance = 0
-//         for x in range(7):
-//             distance += base_scale[(x+self.offset) % 7]
-//             self.notes.append(self.root + distance)
-//         self.dissonants = dissonants
-
-
 void Scale::gen_wide_scale() 
 {
     gen_scale(false);
@@ -113,19 +75,3 @@ void Scale::gen_wide_scale()
     for (size_t i = 0; i < base_dissonants_size; i++)
         dissonants.push_back(base_dissonants_wide[i]);
 }
-
-//     def gen_wide_scale(self):
-//         self.gen_scale()
-//         lower_root = self.root - 12
-//         lower_third_distance = self.notes[2]-self.notes[0]
-//         lower_fifth_distance = self.notes[4]-self.notes[0]
-//         self.notes = [lower_root-12, lower_root, lower_root+lower_third_distance, lower_root+lower_fifth_distance] + self.notes
-//         self.dissonants = dissonants_wide_scale
-
-
-
-
-
-
-
-

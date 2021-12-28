@@ -1,6 +1,8 @@
 # Songbird
 
-Songbird is a software platform and hardware device built to aid live electronic performance and music production. Songbird can be run on the FeatherS2 microcontroller to interface with hardware synths or on Mac OSX to interface with DAWs. See install.md for setup instructions.
+Songbird is a software platform and hardware device built to aid live electronic performance and music production. Songbird can be run on the FeatherS2 microcontroller to interface with hardware synths or on Mac OSX to interface with DAWs. 
+
+**See setup.md for setup instructions.**
 
 **Hardware Platform** (optional)
 - FeatherS2 board by Unexpected Maker
