@@ -190,7 +190,7 @@ void Clock::estimate_BPM(double delta_time)
         else
             estimated_BPM = 0.5 * (estimated_BPM + MS_PER_MIN/(time_since_pulse*PPQ));
         calc_miliseconds(estimated_BPM);
-        println_to_console(estimated_BPM);
+        // println_to_console(estimated_BPM);
     } 
 }
 

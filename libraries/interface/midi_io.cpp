@@ -118,8 +118,6 @@ void send_midi_pulse()
 #include "../clock/clock.h"
 #include "console.h"
 #include <cstdlib>
-RtMidiOut* midi_out;
-RtMidiIn* midi_in;
 
 static const int note_on=0x90;
 static const int note_off=0x80;
@@ -128,6 +126,10 @@ static const int clock_pulse=0xF8;
 static const int midi_start=0xFA;
 static const int midi_continue=0xFB;
 static const int midi_stop=0xFC;
+
+RtMidiOut* midi_out = new RtMidiOut();
+RtMidiIn* midi_in = new RtMidiIn();
+std::thread midi_thread;
 
 void handle_note_off(int note, int velocity, int channel){
     //Send to effects
@@ -144,7 +146,6 @@ void handle_clock(){
     //Send to clock if clock internal
      if (!midiclock->internal) {
         midiclock->pulse();
-        println_to_console("pulsing");
      }
 }
 
@@ -165,19 +166,17 @@ void handle_stop(){
 
 void midi_callback(double deltatime, std::vector< unsigned char > *message, void *userData)
 {
-    println_to_console("midi_callback");
     unsigned int nBytes = message->size();
     if (nBytes > 0) {
         int message_type = (int)message->at(0);
         int channel;
         int note;
         int velocity;
-        println_to_console(message_type);
         if (message_type <= channel_message) {
             channel = message_type % 0x0F;
             message_type = message_type - channel;
         }
-        switch((int)message->at(0) - channel) {
+        switch(message_type) {
             case clock_pulse:
                 handle_clock();
                 break;
@@ -204,12 +203,8 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
     }
 }
 
-
-void intialize_midi() 
+void midi_loop()
 {
-    print_to_console("initializing midi");
-    midi_out = new RtMidiOut();
-    midi_in = new RtMidiIn();
     try {
         midi_out->openVirtualPort("Songbird");
         println_to_console("opened outport");
@@ -228,6 +223,17 @@ void intialize_midi()
         error.printMessage();
         println_to_console("failed to create inport");
     }
+    while(true) {
+        
+    }
+}
+
+void intialize_midi() 
+{
+    print_to_console("initializing midi");
+
+    midi_thread = std::thread(midi_loop);
+    midi_thread.join();
     
 }
 
@@ -263,7 +269,7 @@ void send_midi_cc(int cc, int value, int channel)
 void send_midi_pulse() 
 {
     std::vector<unsigned char> message;
-    message.push_back(0xF8);
+    message.push_back(clock_pulse);
     midi_out->sendMessage( &message );
 }
 
