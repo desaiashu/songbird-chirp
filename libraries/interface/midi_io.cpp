@@ -211,7 +211,7 @@ void intialize_midi()
     midi_out = new RtMidiOut();
     midi_in = new RtMidiIn();
     try {
-        midi_out->openVirtualPort();
+        midi_out->openVirtualPort("Songbird");
         println_to_console("opened outport");
     }
     catch ( RtMidiError &error ) {
@@ -219,7 +219,7 @@ void intialize_midi()
         println_to_console("failed to create outport");
     }
     try {
-        midi_in->openVirtualPort();
+        midi_in->openVirtualPort("Songbird");
         midi_in->setCallback(&midi_callback);
         midi_in->ignoreTypes(false, false, false);
         println_to_console("opened inport");
