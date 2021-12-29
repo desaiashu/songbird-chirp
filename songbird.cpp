@@ -5,7 +5,7 @@
 #include "libraries/interface/midi_io.h"
 #include "tests.cpp"
 
-Clock* midiclock;
+// Clock* midiclock;
 
 int main()
 {
@@ -13,13 +13,10 @@ int main()
 
     test_scale();
 
+    midiclock->internal = false;
     intialize_midi();
+    // midiclock->start();
 
-    midiclock = &Clock::getInstance();
-    midiclock->start();
-    // test_transport();
-    // transport = new Transport();
-    
 }
 
 #endif

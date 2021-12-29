@@ -33,8 +33,8 @@ class Clock {
         int delta_ms;
         int ticks;
         inline void calc_miliseconds(double bpm=0.0);
-        inline void estimate_BPM();
-        std::thread t;
+        inline void estimate_BPM(double delta_time);
+        std::thread clock_thread;
         Clock();
 
     public:
@@ -64,10 +64,16 @@ class Clock {
         void register_sequencer(Sequencer sequencer);
         // void set_transport_callback(void func());
         inline double update_time();
-        inline void pulse();
+        void pulse();
         inline void tick();
         void start();
         void stop();
 };
+
+#ifndef MIDI_CLOCK
+#define MIDI_CLOCK
+static Clock* midiclock = &Clock::getInstance();
+#endif // !MIDI_CLOCK
+
 
 #endif // CLOCK_CLOCK

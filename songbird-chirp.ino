@@ -8,7 +8,6 @@
 #include <clock.h>
 
 Display* d;
-Clock* midiclock;
 
 void setup() {
   
@@ -25,10 +24,9 @@ void setup() {
   d = new Display();
   // d.setLabel1("foo");
 
+  midiclock->internal = false;
   intialize_midi();
-
-  midiclock = &Clock::getInstance();
-  midiclock->start();
+  // midiclock->start();
 
 }
 

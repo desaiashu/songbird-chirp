@@ -86,12 +86,18 @@ void Clock::pulse()
 {
     transport.pulse();
     time_since_pulse = 0.0;
-    if (internal)
+    if (internal) {
         send_midi_pulse();
+    } 
+    else {
+        double delta_time = update_time();
+        estimate_BPM(delta_time);
+    }
+        
     pulses+=1;
 }
 
-void Clock::tick() 
+inline void Clock::tick() 
 {
     transport.tick();
     time_since_tick = 0.0;
@@ -100,10 +106,10 @@ void Clock::tick()
     ticks++;
 }
 
-void timer_loop(Clock* midiclock) 
+void clock_loop() 
 {
     while (true) {    
-        int delta = midiclock->update_time();
+        double delta = midiclock->update_time();
         if (midiclock->internal) {
             if (midiclock->transport.playing)
                 if (midiclock->time_since_tick >= midiclock->ms_per_tick)
@@ -131,6 +137,7 @@ inline double Clock::update_time() {
     if (midi_time >= 0) { 
         midi_time += delta_time;
         time_since_tick += delta_time;
+        time_since_pulse += delta_time;
     } else { // If clock just started, set values to zero
         delta_time = 0.0;
         midi_time = 0.0;
@@ -148,8 +155,8 @@ void Clock::start()
         println_to_console("internal");
         println_to_console(ms_per_tick);
 
-        t = std::thread(timer_loop, this);
-        t.join();
+        clock_thread = std::thread(clock_loop);
+        clock_thread.join();
 
         tick();
 
@@ -160,7 +167,7 @@ void Clock::start()
 
 void Clock::stop() 
 {
-    t.~thread();
+    clock_thread.~thread();
     transport.stop();
     midi_time = -1.0; // Workaround to ensure 
     ticks = 0;
@@ -175,16 +182,16 @@ void Clock::calc_miliseconds(double bpm)
     ms_per_tick = ms_per_pulse / TICKS_PER_PULSE;
 }
 
-void Clock::estimate_BPM() 
+void Clock::estimate_BPM(double delta_time) 
 {
-    if (delta_ms > 0) {
+    if (delta_time > 0) {
         if (estimated_BPM == 0.0)
             estimated_BPM = MS_PER_MIN/(time_since_pulse)*PPQ;
         else
             estimated_BPM = 0.5 * (estimated_BPM + MS_PER_MIN/(time_since_pulse*PPQ));
         calc_miliseconds(estimated_BPM);
-    }
-
+        println_to_console(estimated_BPM);
+    } 
 }
 
 
