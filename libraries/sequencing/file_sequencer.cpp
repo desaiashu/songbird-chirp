@@ -1,3 +1,11 @@
+#include "file_sequencer.h"
+
+FileSequencer::FileSequencer(Scale scale,  int channel) : Sequencer(scale, channel)
+{
+
+}
+
+
 // from .sequencer import Sequencer
 // from songbird.clock.clock import TICKS_PER_BAR
 // from MIDIFile.events import MIDIEvent

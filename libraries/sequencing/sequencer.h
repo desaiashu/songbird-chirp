@@ -7,21 +7,25 @@
 #include "../theory/scale.h"
 #endif
 
-
 class Sequencer {
     private:
-        bool playing = false;
-        Scale *scale;
-        int note;
-        int root;
 
     public:
-        Sequencer();
-        void changeScale(Scale* scale);
+        Sequencer(Scale scale, int channel);
+        Scale scale;
+        int channel;
         void pulse();
         void tick();
         void start();
         void stop();
+        void change_scale(Scale new_scale);
 };
+
+// Includes for convenience of other classes
+#include "bass.h"
+#include "groove.h"
+#include "melody.h"
+#include "patterns.h"
+#include "file_sequencer.h"
 
 #endif // SEQUENCING_SEQUENCER

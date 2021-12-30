@@ -1,3 +1,29 @@
+#include "program.h"
+
+const int basic = 0;
+const int midi_file = 1;
+const int dance_loop = 2;
+const int electronica = 3;
+
+Program::Program(int program_index) :
+    program_index(program_index)
+{
+    switch(program_index) {
+        case basic:
+            composer = BasicComposer();
+            break;
+        case midi_file:
+            composer = FileComposer();
+            break;
+        case dance_loop:
+            composer = LoopComposer();
+            break;
+        case electronica:
+            composer = ElectronicaComposer();
+            break;
+    }
+}
+
 // from .display import Display
 // from .buttons import Buttons
 
@@ -24,3 +50,5 @@
 
 // def handler():
 //     buttons.checkClicks()
+
+

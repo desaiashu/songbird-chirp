@@ -1,3 +1,17 @@
+#include "basic_composer.h"
+
+BasicComposer::BasicComposer(Scale scale) : Composer(scale)
+{
+    int melody_channel = 0;
+    MelodicSequencer melody(scale, melody_channel);
+    sequencers.push_back(melody);
+
+    midiclock->register_sequencer(melody);
+}
+
+
+
+
 // # a composer that only composes for one instrument and a chorus, mostly for testing
 
 // from songbird.clock.clock import clock
@@ -29,3 +43,5 @@
 //         self.scale = Scale(new, 4, "minor", "wide")
 //         self.sequencer.change_scale(self.scale)
 //         return self.scale.name()
+
+

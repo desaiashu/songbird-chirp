@@ -1,4 +1,27 @@
 // #high level definition of an instrument which serves as a "voice" for the composition
+#include "instrument.h"
+
+#ifdef ARDUINO
+#include <midi_io.h>
+#else
+#include "../interface/midi_io.h"
+#endif // DEBUG
+
+Instrument::Instrument(int midi_channel) :
+    midi_channel(midi_channel)
+{
+    
+}
+
+void Instrument::start_note(int note, int velocity) 
+{
+    send_midi_note(true, note, velocity, midi_channel);
+}
+
+void Instrument::end_note(int note, int velocity) 
+{
+    send_midi_note(false, note, velocity, midi_channel);
+}
 
 // from .midi.midi_inst import Midi_instrument
 

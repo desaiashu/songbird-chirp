@@ -1,3 +1,36 @@
+#include "sequencer.h"
+
+Sequencer::Sequencer(Scale scale, int channel) :
+    scale(scale), channel(channel)
+{
+    
+}
+
+void Sequencer::pulse() 
+{
+    
+}
+
+void Sequencer::tick() 
+{
+    
+}
+
+void Sequencer::start() 
+{
+    
+}
+
+void Sequencer::stop() 
+{
+    
+}
+
+void Sequencer::change_scale(Scale new_scale) 
+{
+    scale = new_scale;
+}
+
 // import random
 // from songbird.theory.scale import Scale
 // from .patterns import e_pattern
@@ -28,35 +61,3 @@
 
 //     def stop(self):
 //         pass
-
-#include "sequencer.h"
-
-Sequencer::Sequencer() 
-{
-    
-}
-
-void Sequencer::changeScale(Scale* scale) 
-{
-    
-}
-
-void Sequencer::pulse() 
-{
-    
-}
-
-void Sequencer::tick() 
-{
-    
-}
-
-void Sequencer::start() 
-{
-    
-}
-
-void Sequencer::stop() 
-{
-    
-}

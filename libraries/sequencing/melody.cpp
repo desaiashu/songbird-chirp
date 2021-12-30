@@ -1,3 +1,11 @@
+#include "melody.h"
+
+MelodicSequencer::MelodicSequencer(Scale scale,  int channel) : Sequencer(scale, channel)
+{
+
+}
+
+
 // # Melodic sequencing
 // import random
 // from songbird.notes.note import note_from_number, number_from_note
