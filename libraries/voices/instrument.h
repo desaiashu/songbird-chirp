@@ -8,7 +8,7 @@ class Instrument {
     public:
         Instrument(int midi_channel=0);
         void start_note(int note, int velocity);
-        void end_note(int note, int velocity);
+        void end_note(int note);
 };
 
 #endif // VOICES_INSTRUMENT

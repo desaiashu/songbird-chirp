@@ -1,0 +1,1 @@
+const char* e_pattern[12] = {"A", "E", "B", "F#", "C#", "G#", "D#", "A#", "F", "C", "G", "D"};

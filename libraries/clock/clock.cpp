@@ -19,28 +19,29 @@ Transport::Transport()
 
 void Transport::pulse() 
 {
-    for (Sequencer s : sequencers)
-        s.pulse();
+    for (Sequencer* s : sequencers) {
+        s->pulse();
+    }
 }
 
 void Transport::tick() 
 {
-    for (Sequencer s : sequencers)
-        s.tick();
+    for (Sequencer* s : sequencers)
+        s->tick();
 }
 
 void Transport::start() 
 {
-    for (Sequencer s : sequencers)
-        s.start();
+    for (Sequencer* s : sequencers)
+        s->start();
     playing = true;
     println_to_console("Start");
 }
 
 void Transport::stop() 
 {
-    for (Sequencer s : sequencers)
-        s.stop();
+    for (Sequencer* s : sequencers)
+        s->stop();
     playing = false;
     println_to_console("Stop");
 }
@@ -77,7 +78,7 @@ Clock::Clock()
     time_since_tick = 0.0;
 }
 
-void Clock::register_sequencer(Sequencer sequencer) 
+void Clock::register_sequencer(Sequencer* sequencer) 
 {
     transport.sequencers.push_back(sequencer);
 }

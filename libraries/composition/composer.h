@@ -18,7 +18,7 @@ using std::vector;
 
 class Composer {
     protected:
-        vector<Sequencer> sequencers;
+        vector<Sequencer*> sequencers;
     public:
         Scale scale;
         Composer(Scale scale=Scale());

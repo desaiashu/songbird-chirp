@@ -1,24 +1,25 @@
 #include "program.h"
 
-const int basic = 0;
-const int midi_file = 1;
-const int dance_loop = 2;
-const int electronica = 3;
+#if ARDUINO
+#include <console.h>
+#else
+#include "../interface/console.h"
+#endif
 
 Program::Program(int program_index) :
     program_index(program_index)
 {
     switch(program_index) {
-        case basic:
+        case basic_program:
             composer = BasicComposer();
             break;
-        case midi_file:
+        case midi_file_program:
             composer = FileComposer();
             break;
-        case dance_loop:
+        case dance_loop_program:
             composer = LoopComposer();
             break;
-        case electronica:
+        case electronica_program:
             composer = ElectronicaComposer();
             break;
     }

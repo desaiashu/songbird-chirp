@@ -13,7 +13,7 @@ using std::vector;
 
 struct Transport {
         bool playing;
-        vector<Sequencer> sequencers;
+        vector<Sequencer*> sequencers;
 
         // Not sure how to implement callbacks...
         // std::function<void()> step_callback();
@@ -61,7 +61,7 @@ class Clock {
             return instance;
         }
         
-        void register_sequencer(Sequencer sequencer);
+        void register_sequencer(Sequencer* sequencer);
         // void set_transport_callback(void func());
         inline double update_time();
         void pulse();

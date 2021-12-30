@@ -3,8 +3,10 @@
 
 #ifdef ARDUINO
 #include <scale.h>
+#include <instrument.h>
 #else
 #include "../theory/scale.h"
+#include "../voices/instrument.h"
 #endif
 
 class Sequencer {
@@ -13,11 +15,11 @@ class Sequencer {
     public:
         Sequencer(Scale scale, int channel);
         Scale scale;
-        int channel;
-        void pulse();
-        void tick();
-        void start();
-        void stop();
+        Instrument instrument;
+        virtual void pulse();
+        virtual void tick();
+        virtual void start();
+        virtual void stop();
         void change_scale(Scale new_scale);
 };
 

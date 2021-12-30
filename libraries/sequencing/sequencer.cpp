@@ -1,14 +1,25 @@
 #include "sequencer.h"
 
+#if ARDUINO
+#include <console.h>
+#else
+#include "../interface/console.h"
+#endif
+
 Sequencer::Sequencer(Scale scale, int channel) :
-    scale(scale), channel(channel)
+    scale(scale)
 {
-    
+    instrument = Instrument(channel);
+}
+
+void Sequencer::change_scale(Scale new_scale) 
+{
+    scale = new_scale;
 }
 
 void Sequencer::pulse() 
 {
-    
+    println_to_console("Failed to override");
 }
 
 void Sequencer::tick() 
@@ -24,11 +35,6 @@ void Sequencer::start()
 void Sequencer::stop() 
 {
     
-}
-
-void Sequencer::change_scale(Scale new_scale) 
-{
-    scale = new_scale;
 }
 
 // import random

@@ -7,6 +7,11 @@
 #include "../composition/composer.h"
 #endif
 
+const int basic_program = 0;
+const int midi_file_program = 1;
+const int dance_loop_program = 2;
+const int electronica_program = 3;
+
 class Program {
     private:
         int program_index;

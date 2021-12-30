@@ -18,9 +18,9 @@ void Instrument::start_note(int note, int velocity)
     send_midi_note(true, note, velocity, midi_channel);
 }
 
-void Instrument::end_note(int note, int velocity) 
+void Instrument::end_note(int note) 
 {
-    send_midi_note(false, note, velocity, midi_channel);
+    send_midi_note(false, note, 0, midi_channel);
 }
 
 // from .midi.midi_inst import Midi_instrument

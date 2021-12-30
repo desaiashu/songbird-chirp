@@ -1,10 +1,18 @@
 #include "basic_composer.h"
 
+#if ARDUINO
+#include <console.h>
+#else
+#include "../../interface/console.h"
+#endif
+
 BasicComposer::BasicComposer(Scale scale) : Composer(scale)
 {
     int melody_channel = 0;
-    MelodicSequencer melody(scale, melody_channel);
+    MelodicSequencer* melody = new MelodicSequencer(scale, melody_channel);
     sequencers.push_back(melody);
+
+    println_to_console("Basic initiated");
 
     midiclock->register_sequencer(melody);
 }

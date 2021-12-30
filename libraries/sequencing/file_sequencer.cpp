@@ -5,12 +5,11 @@ FileSequencer::FileSequencer(Scale scale,  int channel) : Sequencer(scale, chann
 
 }
 
-
-// from .sequencer import Sequencer
+// from .FileSequencer import FileSequencer
 // from songbird.clock.clock import TICKS_PER_BAR
 // from MIDIFile.events import MIDIEvent
 
-// class FileSequencer(Sequencer):
+// class FileSequencer(FileSequencer):
 //     def __init__(
 //         self,
 //         track
