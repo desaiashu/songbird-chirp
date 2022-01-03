@@ -6,7 +6,7 @@
 class GrooveSequencer : public Sequencer {
     private:
     public:
-        GrooveSequencer(Scale scale=Scale(), int channel=0);
+        GrooveSequencer(Progression progression, int channel=0);
 };
 
 #endif // SEQUENCING_GROOVE

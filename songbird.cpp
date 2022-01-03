@@ -13,9 +13,9 @@ int main()
 {
     println_to_console("Chirp Chirp");
 
-    program = new Program(basic_program);
+    program = new Program(electronica_program);
 
-    test_progression();
+    // test_progression();
     // test_scale();
 
     midiclock->internal = false;

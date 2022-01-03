@@ -119,7 +119,7 @@ Chord chord_from_notation_and_scale(chord_notation chord, bool seventh, Scale sc
         return Chord(last_chord, degree, seventh, harmonic);
 }
 
-Progression::Progression(Scale scale, int length, bool seventh) {
+Progression::Progression(Scale scale, double cadence, int length, bool seventh) : scale(scale), cadence(cadence) {
     Chord chord = Chord();
     bool initial = true;
     while (length > 0) {

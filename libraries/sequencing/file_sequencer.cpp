@@ -1,6 +1,6 @@
 #include "file_sequencer.h"
 
-FileSequencer::FileSequencer(Scale scale,  int channel) : Sequencer(scale, channel)
+FileSequencer::FileSequencer(Progression progression,  int channel) : Sequencer(progression, channel)
 {
 
 }

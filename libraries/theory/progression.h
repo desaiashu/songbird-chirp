@@ -12,10 +12,13 @@ struct Progression {
         
         vector<Chord> chords;
         int length;
+        double cadence;
+        Scale scale;
 
         //Create chord
         //TODO: introduce different styles, eg. Jazz
-        Progression(Scale scale, int length, bool seventh=false);
+        //TODO: support multiple or varying progressions
+        Progression(Scale scale=Scale(), double cadence=1.0, int length=4, bool seventh=false);
 
 };
 

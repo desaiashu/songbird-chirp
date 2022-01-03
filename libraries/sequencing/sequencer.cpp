@@ -6,8 +6,8 @@
 #include "../interface/console.h"
 #endif
 
-Sequencer::Sequencer(Scale scale, int channel) :
-    scale(scale)
+Sequencer::Sequencer(Progression progression, int channel) :
+    progression(progression), scale(progression.scale)
 {
     instrument = Instrument(channel);
 }

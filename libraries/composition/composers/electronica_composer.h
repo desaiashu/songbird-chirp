@@ -5,6 +5,7 @@
 
 class ElectronicaComposer : public Composer {
     private:
+        Progression progression;
     public:
         ElectronicaComposer(Scale scale=Scale());
 

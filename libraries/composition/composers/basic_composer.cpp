@@ -8,13 +8,13 @@
 
 BasicComposer::BasicComposer(Scale scale) : Composer(scale)
 {
-    int melody_channel = 0;
-    MelodicSequencer* melody = new MelodicSequencer(scale, melody_channel);
-    sequencers.push_back(melody);
+    // int melody_channel = 0;
+    // MelodicSequencer* melody = new MelodicSequencer(scale, melody_channel);
+    // sequencers.push_back(melody);
 
-    println_to_console("Basic initiated");
+    // println_to_console("Basic initiated");
 
-    midiclock->register_sequencer(melody);
+    // midiclock->register_sequencer(melody);
 }
 
 
