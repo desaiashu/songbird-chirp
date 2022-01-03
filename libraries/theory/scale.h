@@ -6,6 +6,11 @@ using std::string;
 #include <vector>
 using std::vector;
 
+#define THIRD_DEGREE 2
+#define FIFTH_DEGREE 4
+#define SEVENTH_DEGREE 6
+#define OCTAVE_DEGREE 7
+
 struct Scale {
         
         int root;
@@ -21,6 +26,7 @@ struct Scale {
         string name();
         void gen_scale(bool base=true);
         void gen_wide_scale();
+        int note_degree(int note);
 
 };
 

@@ -15,13 +15,13 @@ int main()
 
     program = new Program(basic_program);
 
+    test_progression();
     // test_scale();
 
     midiclock->internal = false;
     intialize_midi();
     // midiclock->start();
 
-    
 }
 
 #endif
