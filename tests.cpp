@@ -1,7 +1,7 @@
 #ifndef ARDUINO
 
 #include "libraries/interface/console.h"
-#include "libraries/notes/note.h"
+#include "libraries/sequencing/utils/note.h"
 #include "libraries/clock/clock.h"
 #include "libraries/theory/scale.h"
 #include "libraries/theory/chord.h"

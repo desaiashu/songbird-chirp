@@ -13,7 +13,7 @@ using std::map;
 #ifdef ARDUINO
 #include <note.h>
 #else
-#include "../notes/note.h"
+#include "../sequencing/utils/note.h"
 #endif
 
 const int base_dissonants_size = 2;

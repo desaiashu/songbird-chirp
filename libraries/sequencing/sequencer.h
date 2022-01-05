@@ -1,6 +1,8 @@
 #ifndef SEQUENCING_SEQUENCER
 #define SEQUENCING_SEQUENCER
 
+#include "utils/note.h"
+
 #ifdef ARDUINO
 #include <scale.h>
 #include <instrument.h>
@@ -16,8 +18,9 @@ enum sequencer_style {
 };
 
 class Sequencer {
-    private:
-
+    protected:
+        vector<Note> notes;
+        int sequence_tick_length;
     public:
         Sequencer(Progression progression, int channel);
         Scale scale;
@@ -31,12 +34,13 @@ class Sequencer {
 };
 
 // Includes for convenience of other classes
-#include "bass.h"
-#include "groove.h"
-#include "melody.h"
-#include "patterns.h"
-#include "file_sequencer.h"
-#include "chord_sequencer.h"
-#include "harmony.h"
+#include "sequencers/bass.h"
+#include "sequencers/groove.h"
+#include "sequencers/melody.h"
+#include "sequencers/file_sequencer.h"
+#include "sequencers/chord_sequencer.h"
+#include "sequencers/harmony.h"
+#include "utils/patterns.h"
+#include "utils/arpeggiator.h"
 
 #endif // SEQUENCING_SEQUENCER

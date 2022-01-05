@@ -4,6 +4,22 @@
 
 const string notes[12] = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
+Note::Note(int note, bool on, int velocity, int tick) 
+    : note(note), on(on), velocity(velocity), tick(tick)
+{
+    
+}
+
+Note noteOn(int note, int velocity, int tick) 
+{
+    return Note(note, true, velocity, tick);
+}
+
+Note noteOff(int note, int tick) 
+{
+    return Note(note, false, 0, tick);
+}
+
 const int number_from_note(const string note, const int octave) 
 {
     int index = std::distance(notes,

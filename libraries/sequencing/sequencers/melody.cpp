@@ -6,7 +6,7 @@
 #include "../interface/console.h"
 #endif
 
-MelodicSequencer::MelodicSequencer(Scale scale,  int channel) : Sequencer(scale, channel)
+MelodicSequencer::MelodicSequencer(Progression progression,  int channel) : Sequencer(progression, channel)
 {
     pattern = e_pattern;
     pattern_index = 0;
