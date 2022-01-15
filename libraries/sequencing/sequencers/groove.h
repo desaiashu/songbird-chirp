@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_GROOVE
 #define SEQUENCING_GROOVE
 
-#include "../composition/composer.h"
+#include "../../composition/composer.h"
 
 class GrooveSequencer : public Sequencer {
     private:

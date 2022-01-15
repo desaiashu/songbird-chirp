@@ -1,11 +1,5 @@
 #include "melody.h"
 
-#if ARDUINO
-#include <console.h>
-#else
-#include "../interface/console.h"
-#endif
-
 MelodicSequencer::MelodicSequencer(Progression progression,  int channel) : Sequencer(progression, channel)
 {
     pattern = e_pattern;
@@ -47,7 +41,7 @@ void MelodicSequencer::pulse()
         }
         int next_note = get_next_note();
         if (next_note > 0) {
-            int velocity = (rand() % 3)*35+65;
+            int velocity = (rand() % 3)*20+20;
             instrument.start_note(next_note, velocity);
         }
     }

@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_HARMONY
 #define SEQUENCING_HARMONY
 
-#include "../composition/composer.h"
+#include "../../composition/composer.h"
 
 class HarmonySequencer : public Sequencer {
     private:

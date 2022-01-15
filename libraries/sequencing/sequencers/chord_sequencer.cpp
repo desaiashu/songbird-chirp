@@ -1,11 +1,5 @@
 #include "chord_sequencer.h"
 
-#if ARDUINO
-#include <console.h>
-#else
-#include "../interface/console.h"
-#endif
-
 ChordSequencer::ChordSequencer(Progression progression, int channel) : Sequencer(progression, channel)
 {
     pulses = -1;
@@ -28,7 +22,7 @@ void ChordSequencer::pulse()
         
         Chord next_chord = progression.chords[step];
         for (int note : next_chord.notes) {
-            instrument.start_note(note, 100);
+            instrument.start_note(note, 30);
         }
         step = (step + 1) % progression.chords.size();
     }

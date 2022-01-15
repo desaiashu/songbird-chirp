@@ -8,7 +8,7 @@
 #ifdef ARDUINO
 #include <note.h>
 #else
-#include "../notes/note.h"
+#include "../sequencing/utils/note.h"
 #endif
 
 vector<int> invert(int root, int third, int fifth, int seventh, int inversion) {

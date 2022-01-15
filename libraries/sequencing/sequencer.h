@@ -7,10 +7,12 @@
 #include <scale.h>
 #include <instrument.h>
 #include <progression.h>
+#include <console.h>
 #else
 #include "../theory/scale.h"
 #include "../theory/progression.h"
 #include "../voices/instrument.h"
+#include "../interface/console.h"
 #endif
 
 enum sequencer_style {

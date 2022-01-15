@@ -9,7 +9,6 @@ libs=(
     effects
     interface
     midifile
-    notes
     sequencing
     theory
     voices

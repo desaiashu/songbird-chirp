@@ -1,13 +1,7 @@
 #ifndef SEQUENCING_MELODY
 #define SEQUENCING_MELODY
 
-#include "../composition/composer.h"
-
-#ifdef ARDUINO
-#include <instrument.h>
-#else
-#include "../voices/instrument.h"
-#endif
+#include "../../composition/composer.h"
 
 class MelodicSequencer : public Sequencer {
     private:

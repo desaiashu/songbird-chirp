@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_FILE
 #define SEQUENCING_FILE
 
-#include "../composition/composer.h"
+#include "../../composition/composer.h"
 
 class FileSequencer : public Sequencer {
     private:

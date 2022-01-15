@@ -1,11 +1,5 @@
 #include "sequencer.h"
 
-#if ARDUINO
-#include <console.h>
-#else
-#include "../interface/console.h"
-#endif
-
 Sequencer::Sequencer(Progression progression, int channel) :
     progression(progression), scale(progression.scale)
 {

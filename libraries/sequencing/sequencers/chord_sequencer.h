@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_CHORD
 #define SEQUENCING_CHORD
 
-#include "../composition/composer.h"
+#include "../../composition/composer.h"
 
 class ChordSequencer : public Sequencer {
     private: 
