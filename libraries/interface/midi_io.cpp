@@ -74,8 +74,8 @@ void handle_stop(void){
 void intialize_midi() 
 {
     MIDI.begin(MIDI_CHANNEL_OMNI);
-    MIDI.sethandleNoteOn(handle_note_on);
-    MIDI.sethandleNoteOff(handle_note_off);
+    MIDI.setHandleNoteOn(handle_note_on);
+    MIDI.setHandleNoteOff(handle_note_off);
     MIDI.setHandleClock(handle_clock);
     MIDI.setHandleStart(handle_start);
     MIDI.setHandleStop(handle_stop);

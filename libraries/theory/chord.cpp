@@ -6,7 +6,7 @@
 #include <cmath>
 
 #ifdef ARDUINO
-#include <note.h>
+#include <utils.h>
 #else
 #include "../sequencing/utils/note.h"
 #endif
