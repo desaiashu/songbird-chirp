@@ -6,10 +6,12 @@ using std::string;
 #include <vector>
 using std::vector;
 
-#define THIRD_DEGREE 2
-#define FIFTH_DEGREE 4
-#define SEVENTH_DEGREE 6
-#define OCTAVE_DEGREE 7
+enum scale_degrees {
+        THIRD_DEGREE = 2,
+        FIFTH_DEGREE = 4,
+        SEVENTH_DEGREE = 6,
+        OCTAVE_DEGREE = 7,
+};
 
 struct Scale {
         

@@ -23,6 +23,11 @@ void Instrument::end_note(int note)
     send_midi_note(false, note, 0, midi_channel);
 }
 
+void Instrument::send_note(Note note) 
+{
+    send_midi_note(note, midi_channel);
+}
+
 // from .midi.midi_inst import Midi_instrument
 
 // class Instrument:

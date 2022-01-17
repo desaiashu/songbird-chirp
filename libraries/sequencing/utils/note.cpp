@@ -10,16 +10,6 @@ Note::Note(int note, bool on, int velocity, int tick)
     
 }
 
-Note noteOn(int note, int velocity, int tick) 
-{
-    return Note(note, true, velocity, tick);
-}
-
-Note noteOff(int note, int tick) 
-{
-    return Note(note, false, 0, tick);
-}
-
 const int number_from_note(const string note, const int octave) 
 {
     int index = std::distance(notes,

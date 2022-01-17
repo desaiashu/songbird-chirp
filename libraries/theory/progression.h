@@ -18,7 +18,7 @@ struct Progression {
         //Create chord
         //TODO: introduce different styles, eg. Jazz
         //TODO: support multiple or varying progressions
-        Progression(Scale scale=Scale(), double cadence=1.0, int length=4, bool seventh=false);
+        Progression(Scale scale=Scale(), int length=4, bool seventh=false);
 
 };
 

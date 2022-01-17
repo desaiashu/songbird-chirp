@@ -3,7 +3,7 @@
 
 #include "drum_machine.h"
 
-class OrchestralRack : DrumMachine {
+class OrchestralRack : public DrumMachine {
 
     public:
         OrchestralRack(int midi_channel=0);

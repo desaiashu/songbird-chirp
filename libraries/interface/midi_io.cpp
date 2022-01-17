@@ -245,15 +245,15 @@ void send_midi_note(bool on, int note, int velocity, int channel)
         message.push_back(note);
         message.push_back(velocity);
         midi_out->sendMessage( &message );
-        print_to_console("Sent note");
-        println_to_console(note);
+        // print_to_console("Sent note");
+        // println_to_console(note);
     } else {
         message.push_back(note_off+channel);
         message.push_back(note);
         message.push_back(velocity);
         midi_out->sendMessage( &message );
-        print_to_console("Note off");
-        println_to_console(note);
+        // print_to_console("Note off");
+        // println_to_console(note);
     }
 }
 

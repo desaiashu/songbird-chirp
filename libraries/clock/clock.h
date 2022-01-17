@@ -1,6 +1,8 @@
 #ifndef CLOCK_CLOCK
 #define CLOCK_CLOCK
 
+#include "time_constants.h"
+
 #ifdef ARDUINO
 #include <sequencer.h>
 #else

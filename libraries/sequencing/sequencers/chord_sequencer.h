@@ -5,13 +5,9 @@
 
 class ChordSequencer : public Sequencer {
     private: 
-        int pulses;  
-        int step;
-        int pulses_per_step;
     public:
-        ChordSequencer(Progression progression, int channel=0);
-        void pulse() override;
-        void stop() override;
+        ChordSequencer(Progression progression, int bar_length, int channel=0);
+        void chord_pattern();
 };
 
 #endif // SEQUENCING_CHORD

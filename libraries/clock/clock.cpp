@@ -53,13 +53,6 @@ void Transport::stop()
 // Implement RTC once it part arrives
 // Implement function for clock retrieval
 
-// PPQ = Pulses per quarter note (1 quarter note = 1 beat)
-static int PPQ = 24;
-static int MS_PER_MIN = 60000;
-static int QUARTER_NOTE_PER_BAR = 4; // This may change later
-static int TICKS_PER_PULSE = 4; // Assumes 24ppq clock and 96ppq midi files
-static int TICKS_PER_BAR = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_BAR;
-
 Clock::Clock()
 {
     internal = true;
@@ -85,12 +78,13 @@ void Clock::register_sequencer(Sequencer* sequencer)
 
 void Clock::pulse() 
 {
-    transport.pulse();
     time_since_pulse = 0.0;
     if (internal) {
         send_midi_pulse();
     } 
     else {
+        //Only pulse if not ticking
+        transport.pulse();
         double delta_time = update_time();
         estimate_BPM(delta_time);
     }

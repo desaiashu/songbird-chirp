@@ -1,34 +1,24 @@
 // #plucky, driving, full, low
 #include "bass.h"
 
-BassSequencer::BassSequencer(Progression progression, int channel, sequencer_style style) : Sequencer(progression, channel), style(style)
+BassSequencer::BassSequencer(Progression progression, int bar_length, int channel, sequencer_style style) : Sequencer(progression, bar_length, channel), style(style)
 {
-    pulses = -1;
-    step = 0;
-    progression_step = 0;
-    pulses_per_step = 6*progression.cadence;
-    pulses_per_progression_step = 96*progression.cadence;
+    bass_pattern();
 }
 
-void BassSequencer::pulse()
+void BassSequencer::bass_pattern()
 {
-    pulses += 1;
-    if (pulses % pulses_per_step == 0) {
-
-        if (pulses % pulses_per_progression_step == 0)
-            progression_step = (progression_step + 1) % progression.chords.size();
+    for (size_t i = 0; i < bar_length; i++)
+    {
+        int ticks = i*TICKS_PER_BAR;
+        Chord chord = progression.chords[i];
         
-        int note = progression.chords[progression_step].bass;
+        for (size_t j = 0; j < 8; j++) {
 
-        instrument.start_note(note, 100);
-        last_note = note;
-
-    } else if (pulses % pulses_per_step == 3) {
-        instrument.end_note(last_note);
+            pair<Note, Note> note_pair = sixteenth_note(chord.bass, 100, ticks);
+            ticks = append_note(note_pair);
+            
+            ticks += sixteenth_rest();
+        }
     }
-}
-
-void BassSequencer::stop() 
-{
-    step = -1;
 }

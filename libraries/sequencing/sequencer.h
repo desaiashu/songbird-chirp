@@ -22,13 +22,18 @@ enum sequencer_style {
 class Sequencer {
     protected:
         vector<Note> notes;
-        int sequence_tick_length;
+        vector<Note>::iterator itr;
+        int tick_length;
+        int bar_length;
+        int ticks;
+        int append_note(pair<Note, Note> note_pair);
     public:
-        Sequencer(Progression progression, int channel);
+        Sequencer(Progression progression, int bar_length, int channel);
+        Sequencer(Progression progression, int channel) : Sequencer(progression, 4, channel) {};
         Scale scale;
         Progression progression;
         Instrument instrument;
-        virtual void pulse();
+        virtual void pulse(); //Pulse is only called if using an external clock
         virtual void tick();
         virtual void start();
         virtual void stop();
