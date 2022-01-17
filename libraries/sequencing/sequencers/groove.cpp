@@ -44,7 +44,7 @@ void GrooveSequencer::hh_pattern(int note)
 
             ticks += eighth_rest();
 
-            pair<Note, Note> note_pair = eighth_note(note, 100, ticks);
+            pair<Note, Note> note_pair = eighth_note(note, 70, ticks);
             ticks = append_note(note_pair);
         }
     }
@@ -59,7 +59,7 @@ void GrooveSequencer::clap_pattern(int note)
 
             ticks += quarter_rest();
 
-            pair<Note, Note> note_pair = eighth_note(note, 100, ticks);
+            pair<Note, Note> note_pair = eighth_note(note, 60, ticks);
             ticks = append_note(note_pair);
         }
     }
