@@ -30,6 +30,8 @@ chord_notation get_minor_classical_triad_for_step(int step) {
             return VII;
         case 6:
             return iv;
+        default:
+            return i;
     }
 }
 
@@ -57,6 +59,8 @@ chord_notation get_major_classical_triad_for_step(int step) {
             return viio;
         case 6:
             return IV;
+        default:
+            return I;
     }
 }
 

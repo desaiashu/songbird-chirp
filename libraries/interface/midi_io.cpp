@@ -119,13 +119,13 @@ void send_midi_pulse()
 #include "console.h"
 #include <cstdlib>
 
-static const int note_on=0x90;
-static const int note_off=0x80;
-static const int channel_message=0xEF;
-static const int clock_pulse=0xF8;
-static const int midi_start=0xFA;
-static const int midi_continue=0xFB;
-static const int midi_stop=0xFC;
+static const int NOTE_ON=0x90;
+static const int NOTE_OFF=0x80;
+static const int CHANNEL_MESSAGE=0xEF;
+static const int CLOCK_PULSE=0xF8;
+static const int MIDI_START=0xFA;
+static const int MIDI_CONTINUE=0xFB;
+static const int MIDI_STOP=0xFC;
 
 RtMidiOut* midi_out = new RtMidiOut();
 RtMidiIn* midi_in = new RtMidiIn();
@@ -172,31 +172,31 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
         int channel;
         int note;
         int velocity;
-        if (message_type <= channel_message) {
+        if (message_type <= CHANNEL_MESSAGE) {
             channel = message_type % 0x0F;
             message_type = message_type - channel;
         }
         switch(message_type) {
-            case clock_pulse:
+            case CLOCK_PULSE:
                 handle_clock();
                 break;
-            case note_off:
+            case NOTE_OFF:
                 note = (int)message->at(1);
                 velocity = (int)message->at(2);
                 handle_note_on(note, velocity, channel);
                 break;
-            case note_on:
+            case NOTE_ON:
                 note = (int)message->at(1);
                 velocity = (int)message->at(2);
                 handle_note_on(note, velocity, channel);
                 break;
-            case midi_start:
+            case MIDI_START:
                 handle_start();
                 break;
-            case midi_continue:
+            case MIDI_CONTINUE:
                 handle_continue();
                 break;
-            case midi_stop:
+            case MIDI_STOP:
                 handle_stop(); 
                 break; 
         }
@@ -241,14 +241,14 @@ void send_midi_note(bool on, int note, int velocity, int channel)
 {
     std::vector<unsigned char> message;
     if (on) {
-        message.push_back(note_on+channel);
+        message.push_back(NOTE_ON+channel);
         message.push_back(note);
         message.push_back(velocity);
         midi_out->sendMessage( &message );
         // print_to_console("Sent note");
         // println_to_console(note);
     } else {
-        message.push_back(note_off+channel);
+        message.push_back(NOTE_OFF+channel);
         message.push_back(note);
         message.push_back(velocity);
         midi_out->sendMessage( &message );
@@ -269,7 +269,7 @@ void send_midi_cc(int cc, int value, int channel)
 void send_midi_pulse() 
 {
     std::vector<unsigned char> message;
-    message.push_back(clock_pulse);
+    message.push_back(CLOCK_PULSE);
     midi_out->sendMessage( &message );
 }
 

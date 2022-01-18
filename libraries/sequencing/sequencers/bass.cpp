@@ -15,10 +15,10 @@ void BassSequencer::bass_pattern()
         
         for (size_t j = 0; j < 8; j++) {
 
-            pair<Note, Note> note_pair = sixteenth_note(chord.bass, 100, ticks);
+            pair<Note, Note> note_pair = gen_note(chord.bass, dur::x, 100, ticks);
             ticks = append_note(note_pair);
             
-            ticks += sixteenth_rest();
+            ticks += rest(dur::x);
         }
     }
 }

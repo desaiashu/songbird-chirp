@@ -13,13 +13,43 @@ using std::pair;
 #endif
 
 static const int NOTES_PER_OCTAVE = 12;
-enum ticks {
-        DOUBLE_NOTE_TICKS = TICKS_PER_BAR*2,
-        WHOLE_NOTE_TICKS = TICKS_PER_BAR,
-        HALF_NOTE_TICKS = TICKS_PER_BAR/2,
-        QUARTER_NOTE_TICKS = TICKS_PER_BAR/4,
-        EIGHTH_NOTE_TICKS = TICKS_PER_BAR/8,
-        SIXTEETH_NOTE_TICKS = TICKS_PER_BAR/16
+enum dur {
+        ww = TICKS_PER_WHOLE_NOTE*2,
+        w = TICKS_PER_WHOLE_NOTE,
+        qq = TICKS_PER_WHOLE_NOTE/2,
+        q = TICKS_PER_WHOLE_NOTE/4,
+        xx = TICKS_PER_WHOLE_NOTE/8,
+        x = TICKS_PER_WHOLE_NOTE/16,
+        wwd = TICKS_PER_WHOLE_NOTE*2 *3/2,
+        wd = TICKS_PER_WHOLE_NOTE *3/2,
+        qqd = TICKS_PER_WHOLE_NOTE/2 *3/2,
+        qd = TICKS_PER_WHOLE_NOTE/4 *3/2,
+        xxd = TICKS_PER_WHOLE_NOTE/8 *3/2,
+        xd = TICKS_PER_WHOLE_NOTE/16 *3/2,
+        wwt = TICKS_PER_WHOLE_NOTE*2 *2/3,
+        wt = TICKS_PER_WHOLE_NOTE *2/3,
+        qqt = TICKS_PER_WHOLE_NOTE/2 *2/3,
+        qt = TICKS_PER_WHOLE_NOTE/4 *2/3,
+        xxt = TICKS_PER_WHOLE_NOTE/8 *2/3,
+        xt = TICKS_PER_WHOLE_NOTE/16 *2/3,
+        _ww = -TICKS_PER_WHOLE_NOTE*2,
+        _w = -TICKS_PER_WHOLE_NOTE,
+        _qq = -TICKS_PER_WHOLE_NOTE/2,
+        _q = -TICKS_PER_WHOLE_NOTE/4,
+        _xx = -TICKS_PER_WHOLE_NOTE/8,
+        _x = -TICKS_PER_WHOLE_NOTE/16,
+        _wwd = -TICKS_PER_WHOLE_NOTE*2 *3/2,
+        _wd = -TICKS_PER_WHOLE_NOTE *3/2,
+        _qqd = -TICKS_PER_WHOLE_NOTE/2 *3/2,
+        _qd = -TICKS_PER_WHOLE_NOTE/4 *3/2,
+        _xxd = -TICKS_PER_WHOLE_NOTE/8 *3/2,
+        _xd = -TICKS_PER_WHOLE_NOTE/16 *3/2,
+        _wwt = -TICKS_PER_WHOLE_NOTE*2 *2/3,
+        _wt = -TICKS_PER_WHOLE_NOTE *2/3,
+        _qqt = -TICKS_PER_WHOLE_NOTE/2 *2/3,
+        _qt = -TICKS_PER_WHOLE_NOTE/4 *2/3,
+        _xxt = -TICKS_PER_WHOLE_NOTE/8 *2/3,
+        _xt = -TICKS_PER_WHOLE_NOTE/16 *2/3,
 };
 
 struct Note {
@@ -36,22 +66,11 @@ struct Note {
 
 };
 
-static Note noteOn(int note, int velocity, int tick) { return Note(note, true, velocity, tick); };
-static Note noteOff(int note, int tick) { return Note(note, false, 0, tick); };
+static Note note_on(int note, int velocity, int tick) { return Note(note, true, velocity, tick); };
+static Note note_off(int note, int tick) { return Note(note, false, 0, tick); };
 
-static pair<Note, Note> double_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+DOUBLE_NOTE_TICKS)}; };
-static pair<Note, Note> whole_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+WHOLE_NOTE_TICKS)}; };
-static pair<Note, Note> half_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+HALF_NOTE_TICKS)}; };
-static pair<Note, Note> quarter_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+QUARTER_NOTE_TICKS)}; };
-static pair<Note, Note> eighth_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+EIGHTH_NOTE_TICKS)}; };
-static pair<Note, Note> sixteenth_note(int note, int velocity, int tick) { return {noteOn(note, velocity, tick), noteOff(note, tick+SIXTEETH_NOTE_TICKS)}; };
-
-static int double_rest() { return DOUBLE_NOTE_TICKS; };
-static int whole_rest() { return WHOLE_NOTE_TICKS; };
-static int half_rest() { return HALF_NOTE_TICKS; };
-static int quarter_rest() { return QUARTER_NOTE_TICKS; };
-static int eighth_rest() { return EIGHTH_NOTE_TICKS; };
-static int sixteenth_rest() { return SIXTEETH_NOTE_TICKS; };
+static pair<Note, Note> gen_note(int note, int note_length, int velocity, int tick) { return {note_on(note, velocity, tick), note_off(note, tick+note_length)}; };
+static int rest(int note_length) { return note_length; };
 
 const int number_from_note(const string note, const int octave);
 const string note_from_number(const int num);

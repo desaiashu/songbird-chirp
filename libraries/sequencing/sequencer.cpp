@@ -8,6 +8,23 @@ Sequencer::Sequencer(Progression progression, int bar_length, int channel) :
     itr = notes.begin();
 }
 
+void Sequencer::gen_sequence(int note, int velocity, vector<int> pattern) 
+{
+    int ticks = 0;
+    vector<int>::iterator pitr = pattern.begin();
+    while (ticks < bar_length*TICKS_PER_BAR) {
+        if (*pitr > 0) {
+            pair<Note, Note> note_pair = gen_note(note, *pitr, 70, ticks);
+            append_note(note_pair);   
+        }
+        
+        ticks += abs(*pitr);
+        pitr++;
+        if (pitr == pattern.end())
+            pitr = pattern.begin();
+    }
+}
+
 int Sequencer::append_note(pair<Note, Note> note_pair) {
     notes.push_back(note_pair.first);
     notes.push_back(note_pair.second);

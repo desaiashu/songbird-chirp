@@ -15,7 +15,7 @@ void ChordSequencer::chord_pattern()
         Chord chord = progression.chords[i];
 
         for (int note : chord.notes) {
-            pair<Note, Note> note_pair = whole_note(note, 100, ticks);
+            pair<Note, Note> note_pair = gen_note(note, dur::w, 100, ticks);
             append_note(note_pair);
         }
     }

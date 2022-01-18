@@ -7,73 +7,27 @@ GrooveSequencer::GrooveSequencer(Progression progression, int bar_length, int ch
     drum_machine = OrchestralRack(channel);
     instrument = drum_machine;
 
-    kick_pattern(drum_machine.bass_drum);
-    hh_pattern(drum_machine.open_hat);
-    clap_pattern(drum_machine.snare_drum);
-    shaker_pattern(drum_machine.shaker);
+    gen_sequence(drum_machine.bass_drum, 100, four_on_floor);
+    gen_sequence(drum_machine.open_hat, 70, off_beat_hat);
+    gen_sequence(drum_machine.snare_drum, 60, two_four_clap);
+    gen_sequence(drum_machine.shaker, 40, sixteenth_shaker);
 
     sort(notes.begin(), notes.end());
 }
 
-void GrooveSequencer::kick_pattern(int note) 
-{
-    for (size_t i = 0; i < bar_length; i++)
-    {
-        int ticks = i*TICKS_PER_BAR;
-        for (size_t j = 0; j < 4; j++) {
 
-            pair<Note, Note> note_pair = eighth_note(note, 127, ticks);
-            ticks = append_note(note_pair);
-            
-            ticks += eighth_rest();
-        }
-    }
-}
 
-void GrooveSequencer::tom_pattern(int note) 
-{
-    
-}
+// void GrooveSequencer::tom_pattern(int note, vector<int> pattern) 
+// {
+//     for (size_t i = 0; i < bar_length; i++)
+//     {
+//         int ticks = i*TICKS_PER_BAR;
+//         for (size_t j = 0; j < 4; j++) {
 
-void GrooveSequencer::hh_pattern(int note) 
-{
-    for (size_t i = 0; i < bar_length; i++)
-    {
-        int ticks = i*TICKS_PER_BAR;
-        for (size_t j = 0; j < 4; j++) {
+//             ticks += rest(duration::xx);
 
-            ticks += eighth_rest();
-
-            pair<Note, Note> note_pair = eighth_note(note, 70, ticks);
-            ticks = append_note(note_pair);
-        }
-    }
-}
-
-void GrooveSequencer::clap_pattern(int note) 
-{
-    for (size_t i = 0; i < bar_length; i++)
-    {
-        int ticks = i*TICKS_PER_BAR;
-        for (size_t j = 0; j < 2; j++) {
-
-            ticks += quarter_rest();
-
-            pair<Note, Note> note_pair = eighth_note(note, 60, ticks);
-            ticks = append_note(note_pair);
-        }
-    }
-}
-
-void GrooveSequencer::shaker_pattern(int note) 
-{
-    for (size_t i = 0; i < bar_length; i++)
-    {
-        int ticks = i*TICKS_PER_BAR;
-        for (size_t j = 0; j < 16; j++) {
-            pair<Note, Note> note_pair = sixteenth_note(note, 50, ticks);
-            ticks = append_note(note_pair);
-        }
-    }
-}
-
+//             pair<Note, Note> note_pair = gen_note(note, duration::xx, 70, ticks);
+//             ticks = append_note(note_pair);
+//         }
+//     }
+// }
