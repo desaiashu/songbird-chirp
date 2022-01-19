@@ -8,13 +8,20 @@ Sequencer::Sequencer(Progression progression, int bar_length, int channel) :
     itr = notes.begin();
 }
 
+int Sequencer::adjusted(int ticks, Swing swing) {
+    int adjusted = swing.adjust(ticks);
+    if (adjusted > tick_length) // make sure adjustment doesn't push beyond tick length
+        adjusted = tick_length;
+    return adjusted;
+}
+
 void Sequencer::gen_sequence(int note, int velocity, vector<int> pattern, Swing swing) 
 {
     int ticks = 0;
     vector<int>::iterator pitr = pattern.begin();
-    while (ticks < bar_length*TICKS_PER_BAR) {
+    while (ticks < tick_length) {
         if (*pitr > 0) {
-            pair<Note, Note> note_pair = gen_note(note, *pitr, 70, swing.adjust(ticks));
+            pair<Note, Note> note_pair = gen_note(note, *pitr, 70, adjusted(ticks, swing));
             append_note(note_pair);   
         }
         
@@ -48,13 +55,17 @@ void Sequencer::tick()
         instrument.send_note(*itr);
         itr++;
     }
-    
-    ticks++;
-    if (ticks == tick_length) {
+
+    if (ticks == tick_length) { // Handle wrapping. Need to fire notes for both tick_length and 0
         ticks = 0;
         itr = notes.begin(); //reset to start of sequence
+        while (itr != notes.end() && itr->tick <= ticks) {
+            instrument.send_note(*itr);
+            itr++;
+        }
     }
-        
+    
+    ticks++;
 }
 
 

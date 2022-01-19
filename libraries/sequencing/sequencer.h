@@ -28,6 +28,7 @@ class Sequencer {
         int bar_length;
         int ticks;
         int append_note(pair<Note, Note> note_pair);
+        int adjusted(int ticks, Swing swing);
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
         void gen_sequence(int note, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT));
         void gen_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
