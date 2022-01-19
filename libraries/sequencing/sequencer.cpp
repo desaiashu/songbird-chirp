@@ -8,13 +8,13 @@ Sequencer::Sequencer(Progression progression, int bar_length, int channel) :
     itr = notes.begin();
 }
 
-void Sequencer::gen_sequence(int note, int velocity, vector<int> pattern) 
+void Sequencer::gen_sequence(int note, int velocity, vector<int> pattern, Swing swing) 
 {
     int ticks = 0;
     vector<int>::iterator pitr = pattern.begin();
     while (ticks < bar_length*TICKS_PER_BAR) {
         if (*pitr > 0) {
-            pair<Note, Note> note_pair = gen_note(note, *pitr, 70, ticks);
+            pair<Note, Note> note_pair = gen_note(note, *pitr, 70, swing.adjust(ticks));
             append_note(note_pair);   
         }
         

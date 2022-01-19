@@ -2,6 +2,7 @@
 #define SEQUENCING_SEQUENCER
 
 #include "note.h"
+#include "utils/swing.h"
 
 #ifdef ARDUINO
 #include <scale.h>
@@ -28,8 +29,8 @@ class Sequencer {
         int ticks;
         int append_note(pair<Note, Note> note_pair);
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
-        void gen_sequence(int note, int velocity, vector<int> pattern);
-        void gen_sequence(Progression progression, int velocity, vector<int> pattern, bool bass=false);
+        void gen_sequence(int note, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT));
+        void gen_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
     public:
         Sequencer(Progression progression, int bar_length, int channel);
         Sequencer(Progression progression, int channel) : Sequencer(progression, 4, channel) {};
