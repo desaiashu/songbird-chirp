@@ -114,7 +114,7 @@ void send_midi_pulse()
 #else // macOS
 
 
-#include "../rtmidi/RtMidi.h"
+#include "rtmidi/RtMidi.h"
 #include "../sequencing/clock.h"
 #include "console.h"
 #include <cstdlib>
