@@ -5,6 +5,7 @@
 #include "libraries/interface/midi_io.h"
 #include "libraries/interface/program.h"
 #include "tests.cpp"
+#include <unistd.h>
 
 // Clock* midiclock;
 Program* program;
@@ -21,6 +22,11 @@ int main()
     midiclock->internal = true;
     intialize_midi();
     midiclock->start();
+
+    // Keep program alive
+    while(true) {
+        sleep(1000);
+    }
 
 }
 

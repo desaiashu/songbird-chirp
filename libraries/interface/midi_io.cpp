@@ -127,9 +127,8 @@ static const int MIDI_START=0xFA;
 static const int MIDI_CONTINUE=0xFB;
 static const int MIDI_STOP=0xFC;
 
-RtMidiOut* midi_out = new RtMidiOut();
-RtMidiIn* midi_in = new RtMidiIn();
-std::thread midi_thread;
+static RtMidiOut* midi_out = new RtMidiOut();
+static RtMidiIn* midi_in = new RtMidiIn();
 
 void handle_note_off(int note, int velocity, int channel){
     //Send to effects
@@ -203,7 +202,7 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
     }
 }
 
-void midi_loop()
+void intialize_midi() 
 {
     try {
         midi_out->openVirtualPort("Songbird");
@@ -223,18 +222,6 @@ void midi_loop()
         error.printMessage();
         println_to_console("failed to create inport");
     }
-    while(true) {
-        
-    }
-}
-
-void intialize_midi() 
-{
-    print_to_console("initializing midi");
-
-    midi_thread = std::thread(midi_loop);
-    midi_thread.join();
-    
 }
 
 void send_midi_note(bool on, int note, int velocity, int channel) 

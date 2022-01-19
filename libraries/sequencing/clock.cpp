@@ -151,7 +151,7 @@ void Clock::start()
         println_to_console(ms_per_tick);
 
         clock_thread = std::thread(clock_loop);
-        clock_thread.join();
+        clock_thread.detach();
 
         tick();
 
