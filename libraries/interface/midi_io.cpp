@@ -115,7 +115,7 @@ void send_midi_pulse()
 
 
 #include "../rtmidi/RtMidi.h"
-#include "../clock/clock.h"
+#include "../sequencing/clock.h"
 #include "console.h"
 #include <cstdlib>
 

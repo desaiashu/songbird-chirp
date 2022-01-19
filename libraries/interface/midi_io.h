@@ -4,9 +4,9 @@
 #include <string>
 
 #ifdef ARDUINO
-#include <utils.h>
+#include <note.h>
 #else
-#include "../sequencing/utils/note.h"
+#include "../sequencing/note.h"
 #endif
 
 void intialize_midi();

@@ -6,9 +6,9 @@
 #include <cmath>
 
 #ifdef ARDUINO
-#include <utils.h>
+#include <note.h>
 #else
-#include "../sequencing/utils/note.h"
+#include "../sequencing/note.h"
 #endif
 
 vector<int> invert(int root, int third, int fifth, int seventh, int inversion) {

@@ -1,13 +1,8 @@
-#ifndef CLOCK_CLOCK
-#define CLOCK_CLOCK
+#ifndef SEQUENCING_CLOCK
+#define SEQUENCING_CLOCK
 
-#include "time_constants.h"
-
-#ifdef ARDUINO
-#include <sequencer.h>
-#else
-#include "../sequencing/sequencer.h"
-#endif
+#include "utils/time_constants.h"
+#include "sequencer.h"
 
 #include <thread>
 #include <vector>
@@ -78,4 +73,4 @@ static Clock* midiclock = &Clock::getInstance();
 #endif // !MIDI_CLOCK
 
 
-#endif // CLOCK_CLOCK
+#endif // SEQUENCING_CLOCK

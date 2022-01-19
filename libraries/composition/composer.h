@@ -10,7 +10,7 @@
 #include "../theory/scale.h"
 #include "../sequencing/sequencer.h"
 #include "../voices/instrument.h"
-#include "../clock/clock.h"
+#include "../sequencing/clock.h"
 #endif
 
 #include <vector>

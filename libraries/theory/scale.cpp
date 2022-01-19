@@ -11,9 +11,9 @@ using std::map;
 #include <list>
 
 #ifdef ARDUINO
-#include <utils.h>
+#include <note.h>
 #else
-#include "../sequencing/utils/note.h"
+#include "../sequencing/note.h"
 #endif
 
 const int base_dissonants_size = 2;

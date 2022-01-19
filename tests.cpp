@@ -1,8 +1,8 @@
 #ifndef ARDUINO
 
 #include "libraries/interface/console.h"
-#include "libraries/sequencing/utils/note.h"
-#include "libraries/clock/clock.h"
+#include "libraries/sequencing/note.h"
+#include "libraries/sequencing/clock.h"
 #include "libraries/theory/scale.h"
 #include "libraries/theory/chord.h"
 #include "libraries/theory/progression.h"

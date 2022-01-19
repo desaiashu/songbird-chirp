@@ -1,18 +1,15 @@
-#ifndef NOTES_NOTE
-#define NOTES_NOTE
+#ifndef TIME_CONSTANTS
+#define TIME_CONSTANTS
 
-#include <string> 
-using std::string;
-#include <utility>
-using std::pair;
+// PPQ = Pulses per quarter note (1 quarter note = 1 beat)
+static const int PPQ = 24;
+static const int MS_PER_MIN = 60000;
+static const int QUARTER_NOTE_PER_WHOLE_NOTE = 4; 
+static const int TICKS_PER_PULSE = 4; // Assumes 24ppq clock and 96ppq midi files
+static const int TICKS_PER_WHOLE_NOTE = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_WHOLE_NOTE;
 
-#ifdef ARDUINO
-#include <time_constants.h>
-#else
-#include "../../clock/time_constants.h"
-#endif
+static const int TICKS_PER_BAR = TICKS_PER_WHOLE_NOTE; // This may change later w/ diff time signatures
 
-static const int NOTES_PER_OCTAVE = 12;
 enum dur {
         ww = TICKS_PER_WHOLE_NOTE*2,
         w = TICKS_PER_WHOLE_NOTE,
@@ -52,27 +49,4 @@ enum dur {
         _xt = -TICKS_PER_WHOLE_NOTE/16 *2/3,
 };
 
-struct Note {
-
-        int note;
-        int velocity;
-        int tick;
-        bool on;
-    
-        Note(int note, bool on, int velocity, int tick);
-
-        bool operator< (const Note &other) const { return tick < other.tick; }   
-        string name() { return "Note: " + std::to_string(note) + " On: " + std::to_string(on) + " Vel: " + std::to_string(velocity); };
-
-};
-
-static Note note_on(int note, int velocity, int tick) { return Note(note, true, velocity, tick); };
-static Note note_off(int note, int tick) { return Note(note, false, 0, tick); };
-
-static pair<Note, Note> gen_note(int note, int note_length, int velocity, int tick) { return {note_on(note, velocity, tick), note_off(note, tick+note_length)}; };
-static int rest(int note_length) { return note_length; };
-
-const int number_from_note(const string note, const int octave);
-const string note_from_number(const int num);
-
-#endif // NOTES_NOTE
+#endif // TIME_CONSTANTS
