@@ -40,7 +40,7 @@
 #include "RtMidi.h"
 #include <sstream>
 
-#if (TARGET_OS_IPHONE == 1)
+#if defined(TARGET_OS_IPHONE) && (TARGET_OS_IPHONE == 1)
 
     #define AudioGetCurrentHostTime CAHostTimeBase::GetCurrentTime
     #define AudioConvertHostTimeToNanos CAHostTimeBase::ConvertToNanos
