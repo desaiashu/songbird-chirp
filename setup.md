@@ -27,6 +27,11 @@ This install script auto installs:
 
 Add keyboard shortcuts from ```utils/build_bindings.json``` to VSCode's ```keybindings.json```. 
 
+On a Mac the file may be at:
+```
+~/Library/Application Support/Code/User/keybindings.json
+```
+
 *VSCode shortcuts are saved on a user basis not project basis, so you can customize shortcuts for build tasks.*
 
 ## Build instructions
