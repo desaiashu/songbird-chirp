@@ -35,7 +35,7 @@ class Sequencer {
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
         void gen_sequence(int note, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT));
         void gen_chord_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
-        //void gen_arp_sequence(Progression progression, int velocity, Arpeggiator arp, Swing swing=Swing(STRAIGHT), bool bass=false);
+        void gen_arp_sequence(Progression progression, int velocity, Arpeggiator arp, Swing swing=Swing(STRAIGHT));
     public:
         Sequencer(Progression progression, int bar_length, int channel);
         Sequencer(Progression progression, int channel) : Sequencer(progression, 4, channel) {};
