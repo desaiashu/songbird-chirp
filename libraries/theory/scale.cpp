@@ -16,11 +16,8 @@ using std::map;
 #include "../sequencing/note.h"
 #endif
 
-const int base_dissonants_size = 2;
+//Scale definition
 const int base_scale[OCTAVE_DEGREE] = {2,2,1,2,2,2,1};
-const int base_dissonants[base_dissonants_size] = {1, 5};
-const int base_dissonants_wide[base_dissonants_size] = {5, 9};
-const int wide_scale_root = 4;
 const map<string, int> root_offset = { 
     { "major", 0 }, 
     { "dorian", 1 }, 
@@ -30,6 +27,12 @@ const map<string, int> root_offset = {
     { "minor", 5 }, 
     { "locrian", 6 } 
 };
+
+//Dissonants
+const int base_dissonants_size = 2;
+const int base_dissonants[base_dissonants_size] = {1, 5};
+const int base_dissonants_wide[base_dissonants_size] = {5, 9};
+const int wide_scale_root = 4;
 
 Scale::Scale(string root_note, int octave, string mode, string type) 
     : root_note(root_note), octave(octave), mode(mode), type(type)

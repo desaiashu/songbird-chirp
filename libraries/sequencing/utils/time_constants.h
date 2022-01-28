@@ -10,6 +10,20 @@ static const int TICKS_PER_WHOLE_NOTE = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_WHO
 
 static const int TICKS_PER_BAR = TICKS_PER_WHOLE_NOTE; // This may change later w/ diff time signatures
 
+enum swing_amount {
+    STRAIGHT = 0,
+    DRAG_10 = 10,
+    DRAG_20 = 20,
+    DRAG_25 = 25,
+    DRAG_33 = 33,
+    DRAG_40 = 40,
+    RUSH_10 = -10,
+    RUSH_20 = -20,
+    RUSH_25 = -25,
+    RUSH_TRIPLET = -33,
+    RUSH_40 = -40,
+};
+
 enum dur {
         ww = TICKS_PER_WHOLE_NOTE*2,
         w = TICKS_PER_WHOLE_NOTE,
@@ -47,6 +61,7 @@ enum dur {
         _qt = -TICKS_PER_WHOLE_NOTE/4 *2/3,
         _xxt = -TICKS_PER_WHOLE_NOTE/8 *2/3,
         _xt = -TICKS_PER_WHOLE_NOTE/16 *2/3,
+        _c = 0,
 };
 
 #endif // TIME_CONSTANTS

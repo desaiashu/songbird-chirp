@@ -8,9 +8,9 @@ GrooveSequencer::GrooveSequencer(Progression progression, int bar_length, int ch
     instrument = drum_machine;
 
     gen_sequence(drum_machine.bass_drum, 100, four_on_floor);
-    gen_sequence(drum_machine.open_hat, 70, off_beat_hat);
-    gen_sequence(drum_machine.snare_drum, 60, two_four_clap);
-    gen_sequence(drum_machine.shaker, 40, sixteenth_shaker);
+    gen_sequence(drum_machine.open_hat, 70, off_beat_hat, Swing(DRAG_20, dur::x, true));
+    gen_sequence(drum_machine.snare_drum, 60, two_four_clap, Swing(STRAIGHT, dur::q, true));
+    gen_sequence(drum_machine.shaker, 40, sixteenth_shaker, Swing(DRAG_20, dur::x));
 
     sort(notes.begin(), notes.end());
 }

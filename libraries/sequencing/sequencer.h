@@ -3,6 +3,9 @@
 
 #include "note.h"
 #include "utils/swing.h"
+#include "utils/time_constants.h"
+#include "utils/patterns.h"
+#include "utils/arpeggiator.h"
 
 #ifdef ARDUINO
 #include <scale.h>
@@ -31,7 +34,8 @@ class Sequencer {
         int adjusted(int ticks, Swing swing);
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
         void gen_sequence(int note, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT));
-        void gen_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
+        void gen_chord_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
+        //void gen_arp_sequence(Progression progression, int velocity, Arpeggiator arp, Swing swing=Swing(STRAIGHT), bool bass=false);
     public:
         Sequencer(Progression progression, int bar_length, int channel);
         Sequencer(Progression progression, int channel) : Sequencer(progression, 4, channel) {};
@@ -52,7 +56,5 @@ class Sequencer {
 #include "sequencers/file_sequencer.h"
 #include "sequencers/chord_sequencer.h"
 #include "sequencers/harmony.h"
-#include "utils/patterns.h"
-#include "utils/arpeggiator.h"
 
 #endif // SEQUENCING_SEQUENCER
