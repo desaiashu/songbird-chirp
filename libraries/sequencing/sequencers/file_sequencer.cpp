@@ -1,8 +1,8 @@
 #include "file_sequencer.h"
 
-FileSequencer::FileSequencer(Progression progression,  int channel) : Sequencer(progression, channel)
+FileSequencer::FileSequencer(int channel) : Sequencer(channel)
 {
-
+    //Set sequence_length based on file data
 }
 
 // from .FileSequencer import FileSequencer

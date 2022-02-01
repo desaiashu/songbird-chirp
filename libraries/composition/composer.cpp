@@ -8,9 +8,9 @@ Composer::Composer(Scale scale) :
 
 void Composer::change_scale(Scale new_scale) 
 {
-    for (Sequencer* s : sequencers) {
-        s->change_scale(new_scale);
-    }
+    // for (Sequencer* s : sequencers) {
+    //     s->change_scale(new_scale);
+    // }
 }
 
 // from songbird.theory.scale import Scale

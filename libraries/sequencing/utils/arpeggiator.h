@@ -9,22 +9,24 @@ using std::pair;
 #include "../../theory/chord.h"
 #endif
 
+enum arp_type {
+    NOTE,
+    UP,
+    DOWN,
+    UP_DOWN,
+    POLY_RANDOM,
+};
+
 struct Arpeggiator {
 
         Chord chord;
         arp_type type;
         int octaves;
     
-        Arpeggiator(Chord chord, arp_type type, int octaves=0);
+        Arpeggiator(Chord chord, arp_type type=NOTE, int octaves=0);
+        Arpeggiator(int note=0, int octaves=0) : Arpeggiator(Chord(Scale(note)), NOTE, octaves) {};
         pair<int, double> note_for_step(int step);
 
-};
-
-enum arp_type {
-    up,
-    down,
-    up_down,
-    poly_random,
 };
 
 #endif // ARPEGGIATIONS

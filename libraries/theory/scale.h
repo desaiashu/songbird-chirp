@@ -25,6 +25,7 @@ struct Scale {
         string root_note;
 
         Scale(string root_note="C", int octave=4, string mode="minor", string type="base");
+        Scale(int root, string mode="minor", string type="base");
         string name();
         void gen_scale(bool base=true);
         void gen_wide_scale();

@@ -7,7 +7,7 @@ class BassSequencer : public Sequencer {
     private:
         sequencer_style style;
     public:
-        BassSequencer(Progression progression, int bar_length, int channel=0, sequencer_style style=proggy);
+        BassSequencer(Progression p, int sequence_length, int channel=0, sequencer_style style=proggy);
         void bass_pattern();
 };
 

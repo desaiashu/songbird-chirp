@@ -6,7 +6,7 @@
 class FileSequencer : public Sequencer {
     private:
     public:
-        FileSequencer(Progression progression, int channel=0);
+        FileSequencer(int channel=0);
 };
 
 #endif // SEQUENCING_FILE

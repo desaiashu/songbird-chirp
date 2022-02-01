@@ -1,6 +1,9 @@
 #include "chord_sequencer.h"
 
-ChordSequencer::ChordSequencer(Progression progression, int bar_length, int channel) : Sequencer(progression, bar_length, channel)
+ChordSequencer::ChordSequencer(Progression p, int sequence_length, int channel) 
+            : Sequencer(sequence_length, channel)
 {
-    gen_chord_sequence(progression, 100, one_bar_chords);
+    progression = p;
+    pattern = one_bar_chords;
+    gen_chord_sequence(100);
 }

@@ -6,8 +6,7 @@
 class ChordSequencer : public Sequencer {
     private: 
     public:
-        ChordSequencer(Progression progression, int bar_length, int channel=0);
-        void chord_pattern();
+        ChordSequencer(Progression p, int sequence_length, int channel=0);
 };
 
 #endif // SEQUENCING_CHORD

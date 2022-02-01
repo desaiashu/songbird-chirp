@@ -13,7 +13,7 @@ class GrooveSequencer : public Sequencer {
     private:
         DrumMachine drum_machine;
     public:
-        GrooveSequencer(Progression progression, int bar_length=4, int channel=0);
+        GrooveSequencer(int sequence_length, int channel=0);
         
         // void kick_pattern(int note, vector<int> pattern);
         // void tom_pattern(int note, vector<int> pattern);

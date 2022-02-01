@@ -37,13 +37,26 @@ const int wide_scale_root = 4;
 Scale::Scale(string root_note, int octave, string mode, string type) 
     : root_note(root_note), octave(octave), mode(mode), type(type)
 {
-        root = number_from_note(root_note, octave);
-        offset = root_offset.at(mode);
-        if (type == "wide") {
-            gen_wide_scale();
-        } else {
-            gen_scale();
-        }
+    root = number_from_note(root_note, octave);
+    offset = root_offset.at(mode);
+    if (type == "wide") {
+        gen_wide_scale();
+    } else {
+        gen_scale();
+    }
+}
+
+Scale::Scale(int root, string mode, string type) 
+    : root(root), mode(mode), type(type)
+{
+    root_note = note_from_number(root);
+    octave = root % NOTES_PER_OCTAVE;
+    offset = root_offset.at(mode);
+    if (type == "wide") {
+        gen_wide_scale();
+    } else {
+        gen_scale();
+    }
 }
 
 string Scale::name() 

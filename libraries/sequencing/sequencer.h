@@ -6,6 +6,7 @@
 #include "utils/time_constants.h"
 #include "utils/patterns.h"
 #include "utils/arpeggiator.h"
+#include "utils/modulator.h"
 
 #ifdef ARDUINO
 #include <scale.h>
@@ -27,20 +28,24 @@ class Sequencer {
     protected:
         vector<Note> notes;
         vector<Note>::iterator itr;
-        int tick_length;
-        int bar_length;
+        int sequence_length;
         int ticks;
-        int append_note(pair<Note, Note> note_pair);
-        int adjusted(int ticks, Swing swing);
+        void append_note(int note, int length, int velocity, int ticks, int step);
+        int adjusted_time(int ticks);
+        int adjusted_velocity(int velocity, int ticks, int step);
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
-        void gen_sequence(int note, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT));
-        void gen_chord_sequence(Progression progression, int velocity, vector<int> pattern, Swing swing=Swing(STRAIGHT), bool bass=false);
-        void gen_arp_sequence(Progression progression, int velocity, Arpeggiator arp, Swing swing=Swing(STRAIGHT));
+        void gen_sequence(int note, int velocity);
+        void gen_drum_sequence(int note, int velocity, vector<int> p, Modulator m=NO_MOD, Swing s=Swing());
+        void gen_chord_sequence(int velocity, bool bass=false);
+        void gen_arp_sequence(int velocity);
     public:
-        Sequencer(Progression progression, int bar_length, int channel);
-        Sequencer(Progression progression, int channel) : Sequencer(progression, 4, channel) {};
-        Scale scale;
+        Sequencer(int sequence_length, int channel);
+        Sequencer(int channel) : Sequencer(4, channel) {};
         Progression progression;
+        vector<int> pattern;
+        Arpeggiator arp;
+        Modulator mod;
+        Swing swing;
         Instrument instrument;
         virtual void pulse(); //Pulse is only called if using an external clock
         virtual void tick();

@@ -1,7 +1,8 @@
 #include "melody.h"
 
-MelodicSequencer::MelodicSequencer(Progression progression,  int channel) : Sequencer(progression, channel)
+MelodicSequencer::MelodicSequencer(Progression p, int sequence_length, int channel) : Sequencer(sequence_length, channel)
 {
+    progression = p;
     pattern = e_pattern;
     pattern_index = 0;
     step = -1;
@@ -14,6 +15,7 @@ int MelodicSequencer::get_last_note()
 
 int MelodicSequencer::get_next_note() 
 {
+    Scale scale = progression.scale;
     int note_index = std::find(scale.notes.begin(), scale.notes.end(), note) - scale.notes.begin();
     if (scale.dissonants.end() == std::find(scale.dissonants.begin(), scale.dissonants.end(), note_index) ) {
         note = scale.notes[note_index-1];

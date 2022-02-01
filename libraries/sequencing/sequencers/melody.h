@@ -11,9 +11,8 @@ class MelodicSequencer : public Sequencer {
         const int* pattern;
         int get_last_note();
         int get_next_note();
-        Progression progression;
     public:
-        MelodicSequencer(Progression progression, int channel=0);
+        MelodicSequencer(Progression p, int sequence_length, int channel=0);
         void pulse() override;
         void stop() override;
 };
