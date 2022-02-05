@@ -5,6 +5,6 @@ BassSequencer::BassSequencer(Progression p, int sequence_length, int channel, se
 {
     progression = p;
     pattern = rolling_bar_bass;
-    swing = Swing(DRAG_10, dur::xx, true);
-    gen_chord_sequence(100, true);
+    swing = Swing(STRAIGHT, dur::xx, true);
+    gen_chord_sequence(30, true);
 }

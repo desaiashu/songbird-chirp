@@ -39,8 +39,8 @@ void loop() {
   //   setup();
   //   stp = 1;
   // }
-  // print_to_console("foo");
-  // delay(400);
+  print_to_console("foo");
+  delay(400);
 }
 
 #endif

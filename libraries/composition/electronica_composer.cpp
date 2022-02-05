@@ -16,12 +16,12 @@ ElectronicaComposer::ElectronicaComposer(Scale scale) : Composer(scale)
     BassSequencer* bass = new BassSequencer(progression, 8*dur::w, 3);
     sequencers.push_back(bass);
 
-    GrooveSequencer* drums = new GrooveSequencer(4*dur::w, 1);
-    sequencers.push_back(drums);
+    // GrooveSequencer* drums = new GrooveSequencer(4*dur::w, 1);
+    // sequencers.push_back(drums);
 
     midiclock->register_sequencer(chords);
     midiclock->register_sequencer(bass);
-    midiclock->register_sequencer(drums);
+    // midiclock->register_sequencer(drums);
 
     println_to_console("Electronica initiated");
 }

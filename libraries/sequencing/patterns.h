@@ -1,7 +1,7 @@
 #ifndef PATTERNS
 #define PATTERNS
 
-#include "../note.h"
+#include "note.h"
 #include <vector>
 using std::vector;
 

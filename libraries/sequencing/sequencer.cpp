@@ -72,7 +72,7 @@ void Sequencer::gen_chord_sequence(int velocity, bool bass)
         */
         if (*pitr > 0) {
             if (bass) {
-                append_note(citr->bass, *pitr, velocity, ticks, step);
+                append_note(citr->bass-12, *pitr, velocity, ticks, step);
             } else {
                 vector<int>::iterator nitr = citr->notes.begin();
                 while (nitr != citr->notes.end()) {

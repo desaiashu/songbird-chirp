@@ -1,7 +1,7 @@
 #ifndef VOICES_DRUM_MACHINE
 #define VOICES_DRUM_MACHINE
 
-#include "../instrument.h"
+#include "instrument.h"
 
 class DrumMachine : public Instrument {
 
@@ -30,9 +30,9 @@ class DrumMachine : public Instrument {
         DrumMachine(int midi_channel=0);
 };
 
-#include "ableton_drum_rack.h"
-#include "nord_drum.h"
+// #include "ableton_drum_rack.h"
+// #include "nord_drum.h"
 #include "orchestral_rack.h"
-#include "tr8s.h"
+// #include "tr8s.h"
 
 #endif // VOICES_DRUM_MACHINE

@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_BASS
 #define SEQUENCING_BASS
 
-#include "../../composition/composer.h"
+#include "sequencer.h"
 
 class BassSequencer : public Sequencer {
     private:

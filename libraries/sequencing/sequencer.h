@@ -2,11 +2,11 @@
 #define SEQUENCING_SEQUENCER
 
 #include "note.h"
-#include "utils/swing.h"
-#include "utils/time_constants.h"
-#include "utils/patterns.h"
-#include "utils/arpeggiator.h"
-#include "utils/modulator.h"
+#include "swing.h"
+#include "time_constants.h"
+#include "patterns.h"
+#include "arpeggiator.h"
+#include "modulator.h"
 
 #ifdef ARDUINO
 #include <scale.h>
@@ -54,6 +54,14 @@ class Sequencer {
         void change_scale(Scale new_scale);
 };
 
+#ifdef ARDUINO
+#include "bass.h"
+// #include "groove.h"
+// #include "melody.h"
+// #include "file_sequencer.h"
+#include "chord_sequencer.h"
+#include "harmony.h"
+#else
 // Includes for convenience of other classes
 #include "sequencers/bass.h"
 #include "sequencers/groove.h"
@@ -61,5 +69,7 @@ class Sequencer {
 #include "sequencers/file_sequencer.h"
 #include "sequencers/chord_sequencer.h"
 #include "sequencers/harmony.h"
+#endif
+
 
 #endif // SEQUENCING_SEQUENCER

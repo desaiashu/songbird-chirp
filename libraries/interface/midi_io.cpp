@@ -25,7 +25,7 @@
 #include <clock.h>
 #include <thread>
 
-MIDI_CREATE_INSTANCE(HardwareSerial, Serial0,  MIDI);
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial0, MIDI);
 std::thread midi_thread;
 
 // Midi input handlers
@@ -73,6 +73,7 @@ void handle_stop(void){
 
 void intialize_midi() 
 {
+
     MIDI.begin(MIDI_CHANNEL_OMNI);
     MIDI.setHandleNoteOn(handle_note_on);
     MIDI.setHandleNoteOff(handle_note_off);
@@ -81,10 +82,12 @@ void intialize_midi()
     MIDI.setHandleStop(handle_stop);
     MIDI.setHandleContinue(handle_continue);
 
-    // midiclock = &Clock::getInstance();
+    //// midiclock = &Clock::getInstance();
 
-    midi_thread = std::thread(midi_loop);
-    midi_thread.join();
+    // Loop to read midi
+    // Not working for some reason
+    // midi_thread = std::thread(midi_loop);
+    // midi_thread.detach();
 
     println_to_console("initialized midi");
 }

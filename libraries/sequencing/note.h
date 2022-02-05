@@ -6,7 +6,7 @@ using std::string;
 #include <utility>
 using std::pair;
 
-#include "utils/time_constants.h"
+#include "time_constants.h"
 
 static const int NOTES_PER_OCTAVE = 12;
 

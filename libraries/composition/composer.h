@@ -26,9 +26,6 @@ class Composer {
 };
 
 // Includes for convenience of other classes
-#include "composers/basic_composer.h"
-#include "composers/file_composer.h"
-#include "composers/loop_composer.h"
-#include "composers/electronica_composer.h"
+#include "electronica_composer.h"
 
 #endif // COMPOSITION_COMPOSER

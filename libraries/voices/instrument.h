@@ -18,6 +18,6 @@ class Instrument {
         void send_note(Note note);
 };
 
-#include "drum_machines/drum_machine.h"
+// #include "drum_machine.h"
 
 #endif // VOICES_INSTRUMENT

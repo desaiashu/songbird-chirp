@@ -5,5 +5,5 @@ ChordSequencer::ChordSequencer(Progression p, int sequence_length, int channel)
 {
     progression = p;
     pattern = one_bar_chords;
-    gen_chord_sequence(100);
+    gen_chord_sequence(30);
 }

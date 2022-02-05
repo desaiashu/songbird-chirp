@@ -10,15 +10,15 @@ Program::Program(int program_index) :
     program_index(program_index)
 {
     switch(program_index) {
-        case basic_program:
-            composer = BasicComposer();
-            break;
-        case midi_file_program:
-            composer = FileComposer();
-            break;
-        case dance_loop_program:
-            composer = LoopComposer();
-            break;
+        // case basic_program:
+        //     composer = BasicComposer();
+        //     break;
+        // case midi_file_program:
+        //     composer = FileComposer();
+        //     break;
+        // case dance_loop_program:
+        //     composer = LoopComposer();
+        //     break;
         case electronica_program:
             composer = ElectronicaComposer();
             break;

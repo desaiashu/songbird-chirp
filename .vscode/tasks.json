@@ -9,8 +9,8 @@
             "command": "./utils/flash.sh",
             "args": [
                 "esp32:esp32:feathers2",
-                "/dev/cu.usbmodem14201",
-                "/dev/cu.usbmodem14201"
+                "/dev/cu.usbmodem14101",
+                "/dev/cu.usbmodem14101"
             ],
             "problemMatcher": [],
             "group": "build",
@@ -25,7 +25,7 @@
             "args": [
                 "esp32:esp32:feathers2",
                 "/dev/cu.usbmodem01",
-                "/dev/cu.usbmodem14201"
+                "/dev/cu.usbmodem14101"
             ],
             "problemMatcher": [],
             "group": "build",

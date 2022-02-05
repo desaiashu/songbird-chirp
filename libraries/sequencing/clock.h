@@ -1,7 +1,7 @@
 #ifndef SEQUENCING_CLOCK
 #define SEQUENCING_CLOCK
 
-#include "utils/time_constants.h"
+#include "time_constants.h"
 #include "sequencer.h"
 
 #include <thread>

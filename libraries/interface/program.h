@@ -3,6 +3,7 @@
 
 #ifdef ARDUINO
 #include <composer.h>
+#include <electronica_composer.h>
 #else
 #include "../composition/composer.h"
 #endif
