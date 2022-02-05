@@ -4,7 +4,7 @@
 #include "../../composition/composer.h"
 
 #ifdef ARDUINO
-#include <drum_machine.h>
+#include <instrument.h>
 #else
 #include "../../voices/drum_machines/drum_machine.h"
 #endif

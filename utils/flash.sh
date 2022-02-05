@@ -3,12 +3,9 @@ set -e #exit if any command fails
 T="$(date +%s)"
 
 libs=(
-    arrangement
-    clock
     composition
     effects
     interface
-    midifile
     sequencing
     theory
     voices

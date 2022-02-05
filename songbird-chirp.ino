@@ -5,9 +5,11 @@
 #include <display.h>
 #include <console.h>
 #include <midi_io.h>
+#include <program.h>
 #include <clock.h>
 
 Display* d;
+Program* program;
 
 void setup() {
   
@@ -24,9 +26,10 @@ void setup() {
   d = new Display();
   // d.setLabel1("foo");
 
-  midiclock->internal = false;
+  program = new Program(electronica_program);
+  midiclock->internal = true;
   intialize_midi();
-  // midiclock->start();
+  midiclock->start();
 
 }
 

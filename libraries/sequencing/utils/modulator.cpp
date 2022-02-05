@@ -1,8 +1,8 @@
 // #LFOs // polyrythmic patterns to modulate parameters on synths
 #include "modulator.h"
 
-Modulator::Modulator(mod_type type, int cycle_length, bool step_based) :
-                    type(type), cycle_length(cycle_length), step_based(step_based)
+Modulator::Modulator(mod_type type, int cycle_length, double max_mod, bool step_based) :
+                    type(type), cycle_length(cycle_length), max_mod(max_mod), step_based(step_based)
 {
     
 }
