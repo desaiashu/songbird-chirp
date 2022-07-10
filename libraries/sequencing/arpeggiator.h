@@ -19,13 +19,13 @@ enum arp_type {
 
 struct Arpeggiator {
 
-        Chord chord;
         arp_type type;
         int octaves;
     
-        Arpeggiator(Chord chord, arp_type type=NOTE, int octaves=0);
-        Arpeggiator(int note=0, int octaves=0) : Arpeggiator(Chord(Scale(note)), NOTE, octaves) {};
-        pair<int, double> note_for_step(int step);
+        Arpeggiator(arp_type type=NOTE, int octaves=0);
+        //Need a way to set single note for arpeggiator?
+        // Arpeggiator(int note=0, int octaves=0) : Arpeggiator(NOTE, octaves) {};
+        pair<int, double> note_for_step(Chord chord, int step);
 
 };
 

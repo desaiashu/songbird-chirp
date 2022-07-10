@@ -97,6 +97,33 @@ void Sequencer::gen_chord_sequence(int velocity, bool bass)
         sort(notes.begin(), notes.end());
 }
 
+void Sequencer::gen_arp_sequence(int velocity) 
+{
+    int ticks = 0;
+    int step = 0;
+    vector<int>::iterator pitr = pattern.begin();
+    vector<Chord>::iterator citr = progression.chords.begin();
+    while (ticks < sequence_length) {
+        /*
+        It generates a note and appends it to the note list.
+        */
+        if (*pitr > 0) {
+            pair<int, double> arp_note = arp.note_for_step(*citr, step);
+            append_note(arp_note.first, *pitr, velocity*arp_note.second, ticks, step);
+            step++;
+        } else if (*pitr == 0) {
+            citr++;
+            if (citr == progression.chords.end())
+                citr = progression.chords.begin();
+        }
+        
+        ticks += abs(*pitr);
+        pitr++;
+        if (pitr == pattern.end())
+            pitr = pattern.begin();
+    }
+}
+
 // void Sequencer::change_scale(Scale new_scale) 
 // {
 //     scale = new_scale;

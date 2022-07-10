@@ -10,10 +10,13 @@ ElectronicaComposer::ElectronicaComposer(Scale scale) : Composer(scale)
 {
     progression = Progression(Scale(), 8, true);
 
-    ChordSequencer* chords = new ChordSequencer(progression, 8*dur::w, 5);
+    ChordSequencer* chords = new ChordSequencer(progression, 8*dur::w, 1);
     sequencers.push_back(chords);
 
-    BassSequencer* bass = new BassSequencer(progression, 8*dur::w, 3);
+    HarmonySequencer* harmony = new HarmonySequencer(progression, 8*dur::w, 1);
+    sequencers.push_back(harmony);
+
+    BassSequencer* bass = new BassSequencer(progression, 8*dur::w, 1);
     sequencers.push_back(bass);
 
     // GrooveSequencer* drums = new GrooveSequencer(4*dur::w, 1);
@@ -21,6 +24,7 @@ ElectronicaComposer::ElectronicaComposer(Scale scale) : Composer(scale)
 
     midiclock->register_sequencer(chords);
     midiclock->register_sequencer(bass);
+    midiclock->register_sequencer(harmony);
     // midiclock->register_sequencer(drums);
 
     println_to_console("Electronica initiated");

@@ -9,7 +9,8 @@ const int e_pattern[32] = {2,7,1,8,2,8,1,8,2,8,4,5,9,0,4,5,2,3,5,3,6,0,2,8,7,4,7
 
 //Common patterns
 static vector<int> whole_notes {w};
-static vector<int> triplet_quarter {qt,qt,qt};
+static vector<int> half_notes {qq, qq, _c};
+static vector<int> triplet_quarter {qt, qt, qt, _c};
 static vector<int> rolling_bar_bass {x, _x, x, _x, x, _x, x, _x, x, _x, x, _x, x, _x, x, _x, _c};
 //Might want to allow custom timing for this
 //Need to deal with variable timing, but also deal with chord patterns with changes at diff points
