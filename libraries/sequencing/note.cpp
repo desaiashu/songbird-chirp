@@ -21,3 +21,8 @@ const string note_from_number(const int num)
 {
     return notes[num%NOTES_PER_OCTAVE] + std::to_string(num/NOTES_PER_OCTAVE - 1);
 }
+
+const int octave_from_number(const int num) 
+{
+    return num/NOTES_PER_OCTAVE-1;
+}

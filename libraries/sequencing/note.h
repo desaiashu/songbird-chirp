@@ -36,5 +36,6 @@ static int rest(int note_length) { return note_length; };
 
 const int number_from_note(const string note, const int octave);
 const string note_from_number(const int num);
+const int octave_from_number(const int num);
 
 #endif // UTILS_NOTE

@@ -8,7 +8,7 @@
 #endif
 
 #ifdef ARDUINO
-#include <drum_machine.h.h>
+#include <drum_machine.h>
 #else
 #include "../../voices/drum_machine.h"
 #endif

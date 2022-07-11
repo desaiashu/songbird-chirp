@@ -38,12 +38,12 @@ void midi_loop()
 }
 
 void handle_note_off(byte channel, byte note, byte velocity){
-    //conversion might need to be fixed
+    //conversion might need to be fixeda
     midieffects->note_off((int)note, (int)velocity, (int)channel);
 }
 void handle_note_on(byte channel, byte note, byte velocity){
     //conversion might need to be fixed
-    midieffects->note_off((int)note, (int)velocity, (int)channel);
+    midieffects->note_on((int)note, (int)velocity, (int)channel);
 }
 
 void handleSongPosition(unsigned int beats){
@@ -77,13 +77,15 @@ void handle_stop(void){
 void intialize_midi() 
 {
 
-    MIDI.begin(MIDI_CHANNEL_OMNI);
     MIDI.setHandleNoteOn(handle_note_on);
     MIDI.setHandleNoteOff(handle_note_off);
     MIDI.setHandleClock(handle_clock);
     MIDI.setHandleStart(handle_start);
     MIDI.setHandleStop(handle_stop);
     MIDI.setHandleContinue(handle_continue);
+
+    MIDI.begin(MIDI_CHANNEL_OMNI);
+    MIDI.turnThruOff();
 
     //// midiclock = &Clock::getInstance();
 
@@ -93,6 +95,11 @@ void intialize_midi()
     // midi_thread.detach();
 
     println_to_console("initialized midi");
+}
+
+void read_midi()
+{
+    MIDI.read();
 }
 
 // Output methods

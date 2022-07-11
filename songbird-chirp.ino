@@ -26,21 +26,24 @@ void setup() {
   d = new Display();
   // d.setLabel1("foo");
 
-  program = new Program(electronica_program);
+  // program = new Program(electronica_program);
+  program = new Program(effects_program);
   midiclock->internal = true;
   intialize_midi();
-  midiclock->start();
+  // midiclock->start();
 
 }
 
 void loop() {
+
+  read_midi();
   // Serial.print(stp);
   // if (stp == 0) {
   //   setup();
   //   stp = 1;
   // }
-  print_to_console("foo");
-  delay(400);
+  // print_to_console("foo");
+  // delay(400);
 }
 
 #endif

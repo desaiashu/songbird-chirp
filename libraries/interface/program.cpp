@@ -7,7 +7,7 @@
 #endif
 
 void initialize_effects() {
-    ChordVoicing* chords = new ChordVoicing(0);
+    ChordVoicing* chords = new ChordVoicing(8, Scale("C", -1));
     midieffects->register_effect(chords);
 }
 

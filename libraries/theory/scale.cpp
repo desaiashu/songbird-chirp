@@ -109,5 +109,5 @@ int Scale::note_degree(int note)
         return x+offset*OCTAVE_DEGREE;
     }
 
-    return 0;
+    return -1;
 }

@@ -1,7 +1,7 @@
 #ifndef VOICES_ORCHESTRAL_RACK
 #define VOICES_ORCHESTRAL_RACK
 
-#ifdef ARDUNIO
+#ifdef ARDUINO
 #include <drum_machine.h>
 #else
 #include "../drum_machine.h"

@@ -9,8 +9,10 @@
 
 class ChordVoicing : public Effect {
     private:
+        void handle_note(int note, int velocity, bool on);
     public:
-        ChordVoicing(int channel=0);
+        ChordVoicing(int channel=0, Scale scale=Scale());
+        Scale scale;
         void note_on(int note, int velocity) override;
         void note_off(int note, int velocity) override;
 };
