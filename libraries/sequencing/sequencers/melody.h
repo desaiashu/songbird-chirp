@@ -1,7 +1,11 @@
 #ifndef SEQUENCING_MELODY
 #define SEQUENCING_MELODY
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 class MelodicSequencer : public Sequencer {
     private:

@@ -6,7 +6,11 @@ using std::string;
 #include <utility>
 using std::pair;
 
-#include "time_constants.h"
+#ifdef ARDUINO
+#include <time_constants.h>
+#else
+#include "utils/time_constants.h"
+#endif
 
 static const int NOTES_PER_OCTAVE = 12;
 

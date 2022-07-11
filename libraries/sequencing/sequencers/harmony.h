@@ -1,7 +1,11 @@
 #ifndef SEQUENCING_HARMONY
 #define SEQUENCING_HARMONY
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 class HarmonySequencer : public Sequencer {
     private:

@@ -1,7 +1,11 @@
 #ifndef SEQUENCING_CHORD
 #define SEQUENCING_CHORD
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 class ChordSequencer : public Sequencer {
     private: 

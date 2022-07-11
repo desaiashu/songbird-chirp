@@ -1,7 +1,11 @@
 #ifndef SEQUENCING_FILE
 #define SEQUENCING_FILE
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 class FileSequencer : public Sequencer {
     private:

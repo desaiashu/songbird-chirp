@@ -26,6 +26,10 @@ class Composer {
 };
 
 // Includes for convenience of other classes
-#include "electronica_composer.h"
+#ifdef ARDUINO
+#include <electronica_composer.h>
+#else
+#include "composers/electronica_composer.h"
+#endif
 
 #endif // COMPOSITION_COMPOSER

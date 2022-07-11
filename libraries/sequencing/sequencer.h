@@ -2,22 +2,29 @@
 #define SEQUENCING_SEQUENCER
 
 #include "note.h"
-#include "swing.h"
-#include "time_constants.h"
-#include "patterns.h"
-#include "arpeggiator.h"
-#include "modulator.h"
 
 #ifdef ARDUINO
 #include <scale.h>
 #include <instrument.h>
 #include <progression.h>
 #include <console.h>
+
+#include <swing.h>
+#include <time_constants.h>
+#include <patterns.h>
+#include <arpeggiator.h>
+#include <modulator.h>
 #else
 #include "../theory/scale.h"
 #include "../theory/progression.h"
 #include "../voices/instrument.h"
 #include "../interface/console.h"
+
+#include "utils/swing.h"
+#include "utils/time_constants.h"
+#include "utils/patterns.h"
+#include "utils/arpeggiator.h"
+#include "utils/modulator.h"
 #endif
 
 enum sequencer_style {
@@ -55,12 +62,12 @@ class Sequencer {
 };
 
 #ifdef ARDUINO
-#include "bass.h"
-// #include "groove.h"
-// #include "melody.h"
-// #include "file_sequencer.h"
-#include "chord_sequencer.h"
-#include "harmony.h"
+#include <bass.h>
+#include <groove.h>
+#include <melody.h>
+#include <file_sequencer.h>
+#include <chord_sequencer.h>
+#include <harmony.h>
 #else
 // Includes for convenience of other classes
 #include "sequencers/bass.h"

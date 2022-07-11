@@ -14,14 +14,16 @@ int main()
 {
     println_to_console("Chirp Chirp");
 
-    program = new Program(electronica_program);
+    // program = new Program(electronica_program);
+
+    program = new Program(effects_program);
 
     // test_progression();
     // test_scale();
 
     midiclock->internal = true;
     intialize_midi();
-    midiclock->start();
+    // midiclock->start();
 
     // Keep program alive
     while(true) {

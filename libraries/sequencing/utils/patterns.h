@@ -1,7 +1,12 @@
 #ifndef PATTERNS
 #define PATTERNS
 
-#include "note.h"
+#ifdef ARDUINO
+#include <note.h>
+#else
+#include "../note.h"
+#endif
+
 #include <vector>
 using std::vector;
 

@@ -4,11 +4,27 @@ T="$(date +%s)"
 
 libs=(
     composition
+    composition/arrangement
+    composition/composers
+    composition/styles
+    composition/themes
+
     effects
+    effects/effects
+
     interface
+
     sequencing
+    sequencing/sequencers
+    sequencing/utils
+
     theory
+    
     voices
+    voices/drum_machines
+    voices/midi
+    voices/samplers
+    voices/synths
 )
     
 # Update libraries

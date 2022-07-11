@@ -23,6 +23,7 @@
 #include <MIDI.h>
 #include <console.h>
 #include <clock.h>
+#include <midi_effects.h>
 #include <thread>
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial0, MIDI);
@@ -37,10 +38,12 @@ void midi_loop()
 }
 
 void handle_note_off(byte channel, byte note, byte velocity){
-    //Send to effects
+    //conversion might need to be fixed
+    midieffects->note_off((int)note, (int)velocity, (int)channel);
 }
 void handle_note_on(byte channel, byte note, byte velocity){
-    //Send to effects
+    //conversion might need to be fixed
+    midieffects->note_off((int)note, (int)velocity, (int)channel);
 }
 
 void handleSongPosition(unsigned int beats){
@@ -119,6 +122,7 @@ void send_midi_pulse()
 
 #include "rtmidi/RtMidi.h"
 #include "../sequencing/clock.h"
+#include "../effects/midi_effects.h"
 #include "console.h"
 #include <cstdlib>
 
@@ -134,10 +138,10 @@ static RtMidiOut* midi_out = new RtMidiOut();
 static RtMidiIn* midi_in = new RtMidiIn();
 
 void handle_note_off(int note, int velocity, int channel){
-    //Send to effects
+    midieffects->note_off(note, velocity, channel);
 }
 void handle_note_on(int note, int velocity, int channel){
-    //Send to effects
+    midieffects->note_on(note, velocity, channel);
 }
 
 void handleSongPosition(){
@@ -175,7 +179,7 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
         int note;
         int velocity;
         if (message_type <= CHANNEL_MESSAGE) {
-            channel = message_type % 0x0F;
+            channel = message_type % 0x10;
             message_type = message_type - channel;
         }
         switch(message_type) {
@@ -185,7 +189,7 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
             case NOTE_OFF:
                 note = (int)message->at(1);
                 velocity = (int)message->at(2);
-                handle_note_on(note, velocity, channel);
+                handle_note_off(note, velocity, channel);
                 break;
             case NOTE_ON:
                 note = (int)message->at(1);

@@ -9,10 +9,11 @@
 
 class Instrument {
     private:
-        int midi_channel;
-
+    
     public:
+    
         Instrument(int midi_channel=0);
+        int midi_channel;
         void start_note(int note, int velocity);
         void end_note(int note);
         void send_note(Note note);

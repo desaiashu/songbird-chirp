@@ -6,6 +6,11 @@
 #include "../interface/console.h"
 #endif
 
+void initialize_effects() {
+    ChordVoicing* chords = new ChordVoicing(0);
+    midieffects->register_effect(chords);
+}
+
 Program::Program(int program_index) :
     program_index(program_index)
 {
@@ -22,8 +27,13 @@ Program::Program(int program_index) :
         case electronica_program:
             composer = ElectronicaComposer();
             break;
+        case effects_program:
+            initialize_effects();
+            break;
     }
 }
+
+
 
 // from .display import Display
 // from .buttons import Buttons

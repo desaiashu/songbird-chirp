@@ -1,7 +1,11 @@
 #ifndef VOICES_ORCHESTRAL_RACK
 #define VOICES_ORCHESTRAL_RACK
 
-#include "drum_machine.h"
+#ifdef ARDUNIO
+#include <drum_machine.h>
+#else
+#include "../drum_machine.h"
+#endif
 
 class OrchestralRack : public DrumMachine {
 

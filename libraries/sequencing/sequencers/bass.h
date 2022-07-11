@@ -1,7 +1,11 @@
 #ifndef SEQUENCING_BASS
 #define SEQUENCING_BASS
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 class BassSequencer : public Sequencer {
     private:

@@ -30,9 +30,17 @@ class DrumMachine : public Instrument {
         DrumMachine(int midi_channel=0);
 };
 
-// #include "ableton_drum_rack.h"
-// #include "nord_drum.h"
-#include "orchestral_rack.h"
-// #include "tr8s.h"
+#ifdef ARDUINO
+#include <orchestral_rack.h>
+// #include <ableton_drum_rack.h>
+// #include <nord_drum.h>
+// #include <tr8s.h>
+#else
+#include "drum_machines/orchestral_rack.h"
+// #include "drum_machines/ableton_drum_rack.h"
+// #include "drum_machines/nord_drum.h"
+// #include "drum_machines/tr8s.h"
+#endif
+
 
 #endif // VOICES_DRUM_MACHINE

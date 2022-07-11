@@ -1,12 +1,16 @@
 #ifndef SEQUENCING_GROOVE
 #define SEQUENCING_GROOVE
 
-#include "sequencer.h"
+#ifdef ARDUINO
+#include <sequencer.h>
+#else
+#include "../sequencer.h"
+#endif
 
 #ifdef ARDUINO
-#include <instrument.h>
+#include <drum_machine.h.h>
 #else
-#include "../../voices/drum_machines/drum_machine.h"
+#include "../../voices/drum_machine.h"
 #endif
 
 class GrooveSequencer : public Sequencer {

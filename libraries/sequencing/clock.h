@@ -1,7 +1,12 @@
 #ifndef SEQUENCING_CLOCK
 #define SEQUENCING_CLOCK
 
-#include "time_constants.h"
+#ifdef ARDUINO
+#include <time_constants.h>
+#else
+#include "utils/time_constants.h"
+#endif
+
 #include "sequencer.h"
 
 #include <thread>
