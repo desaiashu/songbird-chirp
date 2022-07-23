@@ -53,7 +53,6 @@ void Display::update_display()
     display->display();
 
     display->setRotation(1);
-    print_to_console("Button test");
 
     // text display tests
     display->setTextSize(1);

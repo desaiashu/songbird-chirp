@@ -102,7 +102,7 @@ void loop() {
     program->button_callback(1);
     button_1_pressed = false;
     // display.print("A");
-    Serial.println("A");
+    // Serial.println("A");
   }
 
   if(!digitalRead(BUTTON_B)) {
@@ -111,7 +111,7 @@ void loop() {
     program->button_callback(2);
     button_2_pressed = false;
     // display.print("B");
-    Serial.println("B");
+    // Serial.println("B");
   }
 
   if(!digitalRead(BUTTON_C)) {
@@ -120,7 +120,7 @@ void loop() {
     program->button_callback(3);
     button_3_pressed = false;
     // display.print("C");
-    Serial.println("C");
+    // Serial.println("C");
   }
 
   disp->refresh_display();
