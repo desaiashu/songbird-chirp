@@ -146,8 +146,6 @@ void ChordVoicing::increment_instrument()
 {
     instrument.midi_channel += 1;
     if (instrument.midi_channel == 10) {
-        instrument.midi_channel = 2;
-    } else if (instrument.midi_channel == 3) {
         instrument.midi_channel = 6;
     }
 }
