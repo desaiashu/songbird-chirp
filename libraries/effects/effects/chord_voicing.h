@@ -1,6 +1,8 @@
 #ifndef EFFECT_CHORD_VOICING
 #define EFFECT_CHORD_VOICING
 
+//Rename effect
+
 #ifdef ARDUINO
 #include <effect.h>
 #else
@@ -11,6 +13,8 @@ enum scale_lock {
         NONE,
         MUTE,
         SNAP,
+        CHORDSMUTE,
+        CHORDSSNAP,
 };
 
 class ChordVoicing : public Effect {
@@ -18,7 +22,7 @@ class ChordVoicing : public Effect {
         void handle_note(int note, int velocity, bool on);
         void increment_scale();
         void toggle_scale_lock();
-        void toggle_chords();
+        void increment_instrument();
 
         void update_display();
 

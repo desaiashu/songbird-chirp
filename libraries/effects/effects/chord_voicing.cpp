@@ -5,6 +5,7 @@
 #ifdef ARDUNIO
 #include <chord.h>
 #include <note.h>
+#include <display.h>
 #else
 #include "../../theory/chord.h"
 #include "../../sequencing/note.h"
@@ -35,7 +36,7 @@ void ChordVoicing::toggle_param(int param)
             toggle_scale_lock();
             break;
         case 3:
-            toggle_chords();
+            increment_instrument();
             break;
         default:
             break;
@@ -109,11 +110,21 @@ void ChordVoicing::toggle_scale_lock()
     switch (scale_lock) {
         case NONE:
             scale_lock = MUTE;
+            chords = false;
             break;
         case MUTE:
             scale_lock = SNAP;
+            chords = false;
             break;
         case SNAP:
+            scale_lock = CHORDSMUTE;
+            chords = true;
+            break;
+        case CHORDSMUTE:
+            scale_lock = CHORDSSNAP;
+            chords = true;
+            break;
+        case CHORDSSNAP:
             scale_lock = NONE;
             chords = false;
             break;
@@ -122,18 +133,55 @@ void ChordVoicing::toggle_scale_lock()
     }
 }
 
-void ChordVoicing::toggle_chords()
+void ChordVoicing::increment_instrument()
 {
-    chords = !chords;
-    if (chords && scale_lock == NONE) {
-        toggle_scale_lock();
+    instrument.midi_channel += 1;
+    if (instrument.midi_channel == 10) {
+        instrument.midi_channel = 6;
     }
 }
 
+// void ChordVoicing::toggle_chords()
+// {
+//     chords = !chords;
+//     if (chords && scale_lock == NONE) {
+//         toggle_scale_lock();
+//     }
+// }
+
 void ChordVoicing::update_display()
 {
+    #ifdef ARDUINO
+
     //This probably needs to be abstracted to a diff class
-    d.set_label_1();
-    d.set_label_2();
-    d.set_label_3();
+
+    d.set_label_1("Scale: " + scale.name());
+
+    string lock = "";
+    switch (scale_lock) {
+        case NONE:
+            lock = "off";
+            break;
+        case MUTE:
+            lock = "mute";
+            break;
+        case SNAP:
+            lock = "snap";
+            break;
+        case CHORDSMUTE:
+            lock = "mute + chords";
+            break;
+        case CHORDSSNAP:
+            lock = "snap + chords";
+            break;
+        default:
+            lock = "error";
+            break;
+    }
+    d.set_label_2(lock);
+
+    d.set_label_3("Instrument: " + std::to_string(instrument.midi_channel));
+
+    #endif // DEBUG
+
 }

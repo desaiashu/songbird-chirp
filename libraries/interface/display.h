@@ -12,9 +12,20 @@ class Display {
         string label_3;
 
     public:
-        Display(string l1="Scale: C minor", string l2="Lock: off", string l3="Chords: off" );
+        Display(string l1="Scale: C minor", string l2="Scale Lock: off", string l3="Channel: 8");
         void set_label(int label, const string text);
         void update_display();
+
+        static Display& getInstance()
+        {
+            static Display instance;
+            return instance;
+        }
 };
+
+#ifndef DISPLAY_IO
+#define DISPLAY_IO
+static Display* d = &Display::getInstance();
+#endif // !DISPLAY_IO
 
 #endif // INTERFACE_DISPLAY

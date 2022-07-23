@@ -7,8 +7,9 @@
 #include <midi_io.h>
 #include <program.h>
 #include <clock.h>
+#include <display.h>
 
-Display* d;
+// Display* d;
 Program* program;
 
 // TODO: move button code into buttons class
@@ -28,7 +29,7 @@ void setup() {
     Serial.println("File System Mounted");
   }
 
-  d = new Display();
+  // d = new Display();
 
   pinMode(BUTTON_A, INPUT_PULLUP);
   pinMode(BUTTON_B, INPUT_PULLUP);
