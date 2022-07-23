@@ -34,8 +34,8 @@ class ChordVoicing : public Effect {
         int scale_lock = NONE;
 
     public:
-        ChordVoicing(Display& disp, int channel=0, Scale scale=Scale("C", -1));
-        Display display;
+        ChordVoicing(Display* disp, int channel=0, Scale scale=Scale("C", -1));
+        Display* display;
         Scale scale;
         void note_on(int note, int velocity) override;
         void note_off(int note, int velocity) override;

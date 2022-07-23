@@ -10,7 +10,7 @@
 #include "../../sequencing/note.h"
 #endif
 
-ChordVoicing::ChordVoicing(Display& disp, int channel, Scale scale) : Effect(channel), scale(scale), display(disp)
+ChordVoicing::ChordVoicing(Display* disp, int channel, Scale scale) : Effect(channel), scale(scale), display(disp)
 {
     update_display();
 }
@@ -154,7 +154,7 @@ void ChordVoicing::update_display()
 
     //This probably needs to be abstracted to a diff class
 
-    display.set_label(1, "Scale: " + scale.name());
+    display->set_label(1, "Scale: " + scale.name());
 
     string lock = "";
     switch (scale_lock) {
@@ -177,9 +177,9 @@ void ChordVoicing::update_display()
             lock = "error";
             break;
     }
-    display.set_label(2, lock);
+    display->set_label(2, lock);
 
-    display.set_label(3, "Instrument: " + std::to_string(instrument.midi_channel));
+    display->set_label(3, "Instrument: " + std::to_string(instrument.midi_channel));
 
     #endif // DEBUG
 

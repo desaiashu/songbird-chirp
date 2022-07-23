@@ -79,7 +79,7 @@ void setup() {
 
   // disp = 
   disp = new Display(&display);
-  // program = new Program(effects_program, *disp);
+  program = new Program(effects_program, disp);
 
   // // program = new Program(electronica_program);
   // program = new Program(effects_program, disp);

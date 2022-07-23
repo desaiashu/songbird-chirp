@@ -7,13 +7,12 @@
 #endif
 
 void Program::initialize_effects() {
-    // ChordVoicing* chords = new ChordVoicing(8);
-    // chords->disp = disp;
-    // midieffects->register_effect(chords);
+    ChordVoicing* chords = new ChordVoicing(display, 8);
+    midieffects->register_effect(chords);
 }
 
-Program::Program(int program_index, Display& d) :
-    program_index(program_index), disp(d)
+Program::Program(int program_index, Display* d) :
+    program_index(program_index), display(d)
 {
     switch(program_index) {
         // case basic_program:

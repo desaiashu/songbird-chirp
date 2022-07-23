@@ -23,10 +23,10 @@ class Program {
 
     Composer composer;
 
-    Display disp;
+    Display* display;
 
     public:
-        Program(int program_index, Display& d);
+        Program(int program_index, Display* d);
         void initialize_effects();
         void button_callback(int button);
 };
