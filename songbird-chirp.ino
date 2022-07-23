@@ -49,12 +49,12 @@ void loop() {
 
   read_midi();
 
-  if(!digitalRead(BUTTON_A)) 
-      program.button_callback(1);
-  else if(!digitalRead(BUTTON_B)) 
-      program.button_callback(2);
-  else if(!digitalRead(BUTTON_C)) 
-      program.button_callback(3);
+  // if(!digitalRead(BUTTON_A)) 
+  //     program->button_callback(1);
+  // else if(!digitalRead(BUTTON_B)) 
+  //     program->button_callback(2);
+  // else if(!digitalRead(BUTTON_C)) 
+  //     program->button_callback(3);
 
 
   // Serial.print(stp);

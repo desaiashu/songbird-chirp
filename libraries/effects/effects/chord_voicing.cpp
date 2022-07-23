@@ -5,7 +5,6 @@
 #ifdef ARDUNIO
 #include <chord.h>
 #include <note.h>
-#include <display.h>
 #else
 #include "../../theory/chord.h"
 #include "../../sequencing/note.h"
@@ -155,7 +154,7 @@ void ChordVoicing::update_display()
 
     //This probably needs to be abstracted to a diff class
 
-    d.set_label_1("Scale: " + scale.name());
+    d->set_label(1, "Scale: " + scale.name());
 
     string lock = "";
     switch (scale_lock) {
@@ -178,9 +177,9 @@ void ChordVoicing::update_display()
             lock = "error";
             break;
     }
-    d.set_label_2(lock);
+    d->set_label(2, lock);
 
-    d.set_label_3("Instrument: " + std::to_string(instrument.midi_channel));
+    d->set_label(3, "Instrument: " + std::to_string(instrument.midi_channel));
 
     #endif // DEBUG
 

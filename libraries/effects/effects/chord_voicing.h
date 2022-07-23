@@ -5,8 +5,10 @@
 
 #ifdef ARDUINO
 #include <effect.h>
+#include <display.h>
 #else
 #include "../effect.h"
+#include "../../interface/display.h"
 #endif
 
 enum scale_lock {
