@@ -25,16 +25,21 @@ void MIDIEffects::register_effect(Effect* effect)
 
 void MIDIEffects::note_on(int note, int vel, int channel)
 {
-    for (Effect* e : effects)
+    for (Effect* e : effects) {
+        // print_to_console("note on");
         if (e->instrument.midi_channel == channel)
-            e->note_on(note, vel);     
+            e->note_on(note, vel);  
+    }
+           
 }
 
 void MIDIEffects::note_off(int note, int vel, int channel)
 {
-    for (Effect* e : effects)
+    for (Effect* e : effects) {
         if (e->instrument.midi_channel == channel)
             e->note_off(note, vel);
+    }
+        
 }
 
 void MIDIEffects::toggle_param(int param)

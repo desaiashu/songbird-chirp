@@ -11,12 +11,18 @@
 #include "../../interface/display.h"
 #endif
 
+enum setting {
+        sNONE,
+        sMUTE,
+        sSNAP,
+        sCHORDSMUTE,
+        sCHORDSSNAP,
+};
+
 enum scale_lock {
         NONE,
         MUTE,
         SNAP,
-        CHORDSMUTE,
-        CHORDSSNAP,
 };
 
 class ChordVoicing : public Effect {
@@ -32,6 +38,7 @@ class ChordVoicing : public Effect {
 
         bool chords = false;
         int scale_lock = NONE;
+        int setting = NONE;
 
     public:
         ChordVoicing(Display* disp, int channel=0, Scale scale=Scale("C", -1));

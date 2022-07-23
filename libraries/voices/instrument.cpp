@@ -3,6 +3,7 @@
 
 #ifdef ARDUINO
 #include <midi_io.h>
+#include <console.h>
 #else
 #include "../interface/midi_io.h"
 #endif // DEBUG
@@ -16,6 +17,7 @@ Instrument::Instrument(int midi_channel) :
 void Instrument::start_note(int note, int velocity) 
 {
     send_midi_note(true, note, velocity, midi_channel);
+    // println_to_console("sending note");
 }
 
 void Instrument::end_note(int note) 

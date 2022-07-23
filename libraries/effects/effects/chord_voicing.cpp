@@ -45,11 +45,11 @@ void ChordVoicing::toggle_param(int param)
 
 void ChordVoicing::handle_note(int note, int velocity, bool on)
 {
-    print_to_console(note);
-    print_to_console(" ");
-    println_to_console(on);
+    // print_to_console(note);
+    // print_to_console(" ");
+    // println_to_console(on);
 
-    // If no scale lock, just send things through (currently, chords are not active)
+    //If no scale lock, just send things through (currently, chords are not active)
     if (scale_lock == NONE) {
         if (on)
             instrument.start_note(note, velocity);
@@ -63,9 +63,14 @@ void ChordVoicing::handle_note(int note, int velocity, bool on)
     int octave = note/NOTES_PER_OCTAVE;
     int note_degree = scale.note_degree(note_index);
 
+    // print_to_console(note_degree);
+
     // If scale lock and note not in scale, return without sending anything
-    if (scale_lock == MUTE && note_degree < 0)
+    if (scale_lock == MUTE && note_degree < 0) {
         return;
+        // println_to_console("muted");
+    }
+        
 
     // If snap, snap down to the closest note in scale
     while (note_degree < 0)
@@ -88,11 +93,11 @@ void ChordVoicing::handle_note(int note, int velocity, bool on)
                 instrument.start_note(*nitr + octave*NOTES_PER_OCTAVE, velocity);
             else
                 instrument.end_note(*nitr + octave*NOTES_PER_OCTAVE);
-            print_to_console(*nitr + octave*NOTES_PER_OCTAVE);
-            print_to_console(" ");
+            // print_to_console(*nitr + octave*NOTES_PER_OCTAVE);
+            // print_to_console(" ");
             nitr++;
         }
-        println_to_console(" ");  
+        // println_to_console(" ");  
     }
 
     return;
@@ -106,26 +111,31 @@ void ChordVoicing::increment_scale()
 
 void ChordVoicing::toggle_scale_lock()
 {
-    switch (scale_lock) {
-        case NONE:
+    switch (setting) {
+        case sNONE:
             scale_lock = MUTE;
             chords = false;
+            setting = sMUTE;
             break;
-        case MUTE:
+        case sMUTE:
             scale_lock = SNAP;
             chords = false;
+            setting = sSNAP;
             break;
-        case SNAP:
-            scale_lock = CHORDSMUTE;
+        case sSNAP:
+            scale_lock = MUTE;
             chords = true;
+            setting = sCHORDSMUTE;
             break;
-        case CHORDSMUTE:
-            scale_lock = CHORDSSNAP;
+        case sCHORDSMUTE:
+            scale_lock = SNAP;
             chords = true;
+            setting = sCHORDSSNAP;
             break;
-        case CHORDSSNAP:
+        case sCHORDSSNAP:
             scale_lock = NONE;
             chords = false;
+            setting = sNONE;
             break;
         default:
             break;
@@ -136,6 +146,8 @@ void ChordVoicing::increment_instrument()
 {
     instrument.midi_channel += 1;
     if (instrument.midi_channel == 10) {
+        instrument.midi_channel = 2;
+    } else if (instrument.midi_channel == 3) {
         instrument.midi_channel = 6;
     }
 }
@@ -167,16 +179,13 @@ void ChordVoicing::update_display()
         case SNAP:
             lock += "snap";
             break;
-        case CHORDSMUTE:
-            lock += "mute + chords";
-            break;
-        case CHORDSSNAP:
-            lock += "snap + chords";
-            break;
         default:
             lock += "error";
             break;
     }
+    if (chords)
+        lock += " + chords";
+
     display->set_label(2, lock);
 
     display->set_label(3, "Channel: " + std::to_string(instrument.midi_channel));
