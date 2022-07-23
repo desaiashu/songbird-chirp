@@ -19,7 +19,9 @@ const int number_from_note(const string note, const int octave)
 
 const string note_from_number(const int num) 
 {
-    return notes[num%NOTES_PER_OCTAVE] + std::to_string(num/NOTES_PER_OCTAVE - 1);
+    return notes[num%NOTES_PER_OCTAVE];
+    // Removing octave
+    // return notes[num%NOTES_PER_OCTAVE] + std::to_string(num/NOTES_PER_OCTAVE - 1);
 }
 
 const int octave_from_number(const int num) 

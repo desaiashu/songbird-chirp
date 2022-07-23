@@ -47,34 +47,34 @@ void setup() {
   pinMode(BUTTON_C, INPUT_PULLUP);
 
 /////////////////////////////
-  Serial.println("128x64 OLED FeatherWing test");
-  delay(250); // wait for the OLED to power up
-  display.begin(0x3C, true); // Address 0x3C default
+  // Serial.println("128x64 OLED FeatherWing test");
+  // delay(250); // wait for the OLED to power up
+  // display.begin(0x3C, true); // Address 0x3C default
 
-  Serial.println("OLED begun");
+  // Serial.println("OLED begun");
 
-  // Show image buffer on the display hardware.
-  // Since the buffer is intialized with an Adafruit splashscreen
-  // internally, this will display the splashscreen.
-  display.display();
-  delay(1000);
+  // // Show image buffer on the display hardware.
+  // // Since the buffer is intialized with an Adafruit splashscreen
+  // // internally, this will display the splashscreen.
+  // display.display();
+  // delay(1000);
 
-  // Clear the buffer.
-  display.clearDisplay();
-  display.display();
+  // // Clear the buffer.
+  // display.clearDisplay();
+  // display.display();
 
-  display.setRotation(1);
-  Serial.println("Button test");
+  // display.setRotation(1);
+  // Serial.println("Button test");
 
-  // text display tests
-  display.setTextSize(1);
-  display.setTextColor(SH110X_WHITE);
-  display.setCursor(0,0);
-  display.print("Connecting to SSID\n'adafruit':");
-  display.print("connected!");
-  display.println("IP: 10.0.1.23");
-  display.println("Sending val #0");
-  display.display(); // actually display all of the above
+  // // text display tests
+  // display.setTextSize(1);
+  // display.setTextColor(SH110X_WHITE);
+  // display.setCursor(0,0);
+  // display.print("Connecting to SSID\n'adafruit':");
+  // display.print("connected!");
+  // display.println("IP: 10.0.1.23");
+  // display.println("Sending val #0");
+  // display.display(); // actually display all of the above
 /////////////////////
 
   // disp = 
@@ -94,31 +94,33 @@ void setup() {
 void loop() {
 
 
-  // read_midi();
+  read_midi();
 
   if(!digitalRead(BUTTON_A)) {
     button_1_pressed = true;
   } else if (button_1_pressed) {
-    // program->button_callback(1);
+    program->button_callback(1);
     button_1_pressed = false;
-    display.print("A");
+    // display.print("A");
     Serial.println("A");
   }
 
   if(!digitalRead(BUTTON_B)) {
     button_2_pressed = true;
   } else if (button_2_pressed) {
-    // program->button_callback(2);
+    program->button_callback(2);
     button_2_pressed = false;
-    display.print("B");
+    // display.print("B");
+    Serial.println("B");
   }
 
   if(!digitalRead(BUTTON_C)) {
     button_3_pressed = true;
   } else if (button_3_pressed) {
-    // program->button_callback(3);
+    program->button_callback(3);
     button_3_pressed = false;
-    display.print("C");
+    // display.print("C");
+    Serial.println("C");
   }
 
   disp->refresh_display();

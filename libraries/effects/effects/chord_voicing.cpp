@@ -154,32 +154,32 @@ void ChordVoicing::update_display()
 
     //This probably needs to be abstracted to a diff class
 
-    display->set_label(1, "Scale: " + scale.name());
+    display->set_label(1, "Scale: " + note_from_number(scale.root) + " min");
 
-    string lock = "";
+    string lock = "Lock: ";
     switch (scale_lock) {
         case NONE:
-            lock = "off";
+            lock += "off";
             break;
         case MUTE:
-            lock = "mute";
+            lock += "mute";
             break;
         case SNAP:
-            lock = "snap";
+            lock += "snap";
             break;
         case CHORDSMUTE:
-            lock = "mute + chords";
+            lock += "mute + chords";
             break;
         case CHORDSSNAP:
-            lock = "snap + chords";
+            lock += "snap + chords";
             break;
         default:
-            lock = "error";
+            lock += "error";
             break;
     }
     display->set_label(2, lock);
 
-    display->set_label(3, "Instrument: " + std::to_string(instrument.midi_channel));
+    display->set_label(3, "Channel: " + std::to_string(instrument.midi_channel));
 
     #endif // DEBUG
 

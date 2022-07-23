@@ -30,12 +30,17 @@ Display::Display(Adafruit_SH1107* disp) : display(disp)
   label_2="Scale Lock: off";
   label_3="Channel: 8";
 
-  delay(250);
+  Serial.println("128x64 OLED FeatherWing test");
+  delay(250); // wait for the OLED to power up
+  display->begin(0x3C, true); // Address 0x3C default
 
-  print_to_console("File Structure");
-  // display.begin(0x3C, true); // Address 0x3C default
+  Serial.println("OLED begun");
 
-  print_to_console("OLED begun");
+  // Show image buffer on the display hardware.
+  // Since the buffer is intialized with an Adafruit splashscreen
+  // internally, this will display the splashscreen.
+  display->display();
+  delay(1000);
 
   update_display();
 
@@ -43,21 +48,23 @@ Display::Display(Adafruit_SH1107* disp) : display(disp)
 
 void Display::update_display()
 {
-    // // Clear the buffer.
-    // display->clearDisplay();
-    // display->display();
+    // Clear the buffer.
+    display->clearDisplay();
+    display->display();
 
-    // display->setRotation(1);
-    // print_to_console("Button test");
+    display->setRotation(1);
+    print_to_console("Button test");
 
-    // // text display tests
-    // display->setTextSize(1);
-    // display->setTextColor(SH110X_WHITE);
-    // display->setCursor(0,0);
-    // display->println("Songbird");
-    // display->println(label_1.c_str());
-    // display->println(label_2.c_str());
-    // display->println(label_3.c_str());
+    // text display tests
+    display->setTextSize(1);
+    display->setTextColor(SH110X_WHITE);
+    display->setCursor(0,0);
+    display->println(" ");
+    display->println(label_1.c_str());
+    display->println(" ");
+    display->println(label_2.c_str());
+    display->println(" ");
+    display->println(label_3.c_str());
     refresh_display(); // actually display all of the above
 }
 
@@ -78,7 +85,7 @@ void Display::set_label(int label, const string text)
         label_2 = text;
         break;
       case 3:
-        label_2 = text;
+        label_3 = text;
         break;
       default:
         break;
