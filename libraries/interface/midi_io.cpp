@@ -19,7 +19,7 @@
 
 #include "midi_io.h"
 
-#if ARDUINO
+#ifdef ARDUINO
 #include <MIDI.h>
 #include <console.h>
 #include <clock.h>

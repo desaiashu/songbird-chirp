@@ -7,12 +7,14 @@
 #include <instrument.h>
 #include <progression.h>
 #include <console.h>
+#include <display.h>
 #else
 #include "../sequencing/note.h"
 #include "../theory/scale.h"
 #include "../theory/progression.h"
 #include "../voices/instrument.h"
 #include "../interface/console.h"
+#include "../interface/display.h"
 #endif
 
 class Effect {
@@ -22,6 +24,7 @@ class Effect {
         virtual void note_off(int note, int velocity);
         virtual void toggle_param(int param);
         Instrument instrument;
+        // Display& disp;
 };
 
 #ifdef ARDUINO

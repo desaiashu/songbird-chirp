@@ -6,13 +6,14 @@
 #include "../interface/console.h"
 #endif
 
-void initialize_effects() {
-    ChordVoicing* chords = new ChordVoicing(8);
-    midieffects->register_effect(chords);
+void Program::initialize_effects() {
+    // ChordVoicing* chords = new ChordVoicing(8);
+    // chords->disp = disp;
+    // midieffects->register_effect(chords);
 }
 
-Program::Program(int program_index) :
-    program_index(program_index)
+Program::Program(int program_index, Display& d) :
+    program_index(program_index), disp(d)
 {
     switch(program_index) {
         // case basic_program:

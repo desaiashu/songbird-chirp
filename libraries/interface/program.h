@@ -5,6 +5,7 @@
 #include <composer.h>
 #include <electronica_composer.h>
 #include <midi_effects.h>
+#include <display.h>
 #else
 #include "../composition/composer.h"
 #include "../effects/midi_effects.h"
@@ -22,8 +23,11 @@ class Program {
 
     Composer composer;
 
+    Display disp;
+
     public:
-        Program(int program_index);
+        Program(int program_index, Display& d);
+        void initialize_effects();
         void button_callback(int button);
 };
 

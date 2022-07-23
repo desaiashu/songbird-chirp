@@ -29,10 +29,10 @@ libs=(
     
 # Update libraries
 echo "Copying updated libraries"
-for l in ${libs[@]}; do
-  rm -rf ~/Documents/Arduino/libraries/${l}
-  cp -r libraries/${l} ~/Documents/Arduino/libraries
-done
+# for l in ${libs[@]}; do
+#   rm -rf ~/Documents/Arduino/libraries/${l}
+#   cp -r libraries/${l} ~/Documents/Arduino/libraries
+# done
 
 # Compile
 echo "Compiling"
