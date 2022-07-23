@@ -14,3 +14,8 @@ void Effect::note_off(int note, int velocity)
 {
     
 }
+
+void Effect::toggle_param(int param)
+{
+    
+}

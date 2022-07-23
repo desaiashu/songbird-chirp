@@ -20,6 +20,7 @@ class Effect {
         Effect(int channel=0);
         virtual void note_on(int note, int velocity);
         virtual void note_off(int note, int velocity);
+        virtual void toggle_param(int param);
         Instrument instrument;
 };
 

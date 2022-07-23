@@ -21,6 +21,7 @@ class MIDIEffects {
 
         void note_on(int note, int vel, int channel);
         void note_off(int note, int vel, int channel);
+        void toggle_param(int param);
 };
 
 

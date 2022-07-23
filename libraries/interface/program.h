@@ -24,6 +24,7 @@ class Program {
 
     public:
         Program(int program_index);
+        void button_callback(int button);
 };
 
 #endif // INTERFACE_PROGRAM

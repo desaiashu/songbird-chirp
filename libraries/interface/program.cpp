@@ -7,7 +7,7 @@
 #endif
 
 void initialize_effects() {
-    ChordVoicing* chords = new ChordVoicing(8, Scale("C", -1));
+    ChordVoicing* chords = new ChordVoicing(8);
     midieffects->register_effect(chords);
 }
 
@@ -32,6 +32,14 @@ Program::Program(int program_index) :
             break;
     }
 }
+
+void Program::button_callback(int button)
+{
+    if (effects_program) {
+        midieffects->toggle_param(button);
+    }
+}
+
 
 
 

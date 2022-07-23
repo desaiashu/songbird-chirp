@@ -36,3 +36,10 @@ void MIDIEffects::note_off(int note, int vel, int channel)
         if (e->instrument.midi_channel == channel)
             e->note_off(note, vel);
 }
+
+void MIDIEffects::toggle_param(int param)
+{
+    //TODO: test if effect or effect menu is active
+    for (Effect* e : effects)
+        e->toggle_param(param); 
+}

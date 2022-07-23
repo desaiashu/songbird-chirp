@@ -16,7 +16,7 @@
 #define BUTTON_C  20
 
 
-Display::Display()
+Display::Display() : label_1(l1), label_2(l2), label_3(l3)
 {
 
   Adafruit_SH1107 display(64, 128, &Wire);
@@ -26,31 +26,14 @@ Display::Display()
 
   print_to_console("OLED begun");
 
+  update_display();
+
 
   // Show image buffer on the display hardware.
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
 //  display.display();
 //  delay(1000); 
-
-  // Clear the buffer.
-  display.clearDisplay();
-  display.display();
-
-  display.setRotation(1);
-  print_to_console("Button test");
-
-  pinMode(BUTTON_A, INPUT_PULLUP);
-  pinMode(BUTTON_B, INPUT_PULLUP);
-  pinMode(BUTTON_C, INPUT_PULLUP);
-
-  // text display tests
-  display.setTextSize(3);
-  display.setTextColor(SH110X_WHITE);
-  display.setCursor(0,0);
-  display.print("Songbird");
-  display.print(FFat.usedBytes());
-  display.display(); // actually display all of the above
 
   //   for (size_t i = 0; i < 5000; i++) {
   //   print_to_console("DISP");
@@ -59,14 +42,45 @@ Display::Display()
 
 }
 
-void Display::setLabel1(const string text)
+void Display::update_display()
 {
-  return;
+    // Clear the buffer.
+    display.clearDisplay();
+    display.display();
+
+    display.setRotation(1);
+    print_to_console("Button test");
+
+    pinMode(BUTTON_A, INPUT_PULLUP);
+    pinMode(BUTTON_B, INPUT_PULLUP);
+    pinMode(BUTTON_C, INPUT_PULLUP);
+
+    // text display tests
+    display.setTextSize(1);
+    display.setTextColor(SH110X_WHITE);
+    display.setCursor(0,0);
+    display.println(label_1);
+    display.println(label_2);
+    display.println(label_3);
+    display.display(); // actually display all of the above
 }
 
-void Display::setLabel2(const string text)
+void Display::set_label(int label, const string text)
 {
-  return;
+    switch (label) {
+      case 1:
+        label_1 = text;
+        break;
+      case 2:
+        label_2 = text;
+        break;
+      case 3:
+        label_2 = text;
+        break;
+      default:
+        break;
+    }
+    update_display();
 }
 
 #else // Mac OSX
