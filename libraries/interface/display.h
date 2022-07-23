@@ -12,7 +12,7 @@ class Display {
         string label_3;
 
     public:
-        Display(string l1="Scale: C minor", string l2="Scale Lock: off", string l3="Channel: 8");
+        Display();
         void set_label(int label, const string text);
         void update_display();
 

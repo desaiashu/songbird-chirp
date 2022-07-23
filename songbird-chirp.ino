@@ -13,9 +13,9 @@
 Program* program;
 
 // TODO: move button code into buttons class
-#define BUTTON_A  9
-#define BUTTON_B  6
-#define BUTTON_C  5
+#define BUTTON_A  15
+#define BUTTON_B  32
+#define BUTTON_C  14
 
 void setup() {
   
@@ -49,12 +49,12 @@ void loop() {
 
   read_midi();
 
-  // if(!digitalRead(BUTTON_A)) 
-  //     program->button_callback(1);
-  // else if(!digitalRead(BUTTON_B)) 
-  //     program->button_callback(2);
-  // else if(!digitalRead(BUTTON_C)) 
-  //     program->button_callback(3);
+  if(!digitalRead(BUTTON_A)) 
+      program->button_callback(1);
+  else if(!digitalRead(BUTTON_B)) 
+      program->button_callback(2);
+  else if(!digitalRead(BUTTON_C)) 
+      program->button_callback(3);
 
 
   // Serial.print(stp);

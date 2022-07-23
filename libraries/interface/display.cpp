@@ -9,6 +9,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
 
+Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
+
 
 // OLED FeatherWing buttons map to different pins depending on board:
 #define BUTTON_A  5
@@ -16,10 +18,12 @@
 #define BUTTON_C  20
 
 
-Display::Display() : label_1(l1), label_2(l2), label_3(l3)
+Display::Display()
 {
 
-  Adafruit_SH1107 display(64, 128, &Wire);
+  label_1="Scale: C minor";
+  label_2="Scale Lock: off";
+  label_3="Channel: 8";
 
   print_to_console("File Structure");
   display.begin(0x3C, true); // Address 0x3C default
@@ -59,9 +63,9 @@ void Display::update_display()
     display.setTextSize(1);
     display.setTextColor(SH110X_WHITE);
     display.setCursor(0,0);
-    display.println(label_1);
-    display.println(label_2);
-    display.println(label_3);
+    display.println(label_1.c_str());
+    display.println(label_2.c_str());
+    display.println(label_3.c_str());
     display.display(); // actually display all of the above
 }
 
