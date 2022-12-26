@@ -21,10 +21,14 @@ class Display {
         string label_3;
 
     public:
+        
+        #ifdef ARDUINO
         Display(Adafruit_SH1107* disp);
+        Adafruit_SH1107* display;
+        #else
+        #endif
         void set_label(int label, const string text);
         void update_display();
-        Adafruit_SH1107* display;
         void refresh_display();
 
         // static Display& getInstance()

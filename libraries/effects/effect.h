@@ -14,7 +14,7 @@
 #include "../theory/progression.h"
 #include "../voices/instrument.h"
 #include "../interface/console.h"
-#include "../interface/display.h"
+// #include "../interface/display.h"
 #endif
 
 class Effect {

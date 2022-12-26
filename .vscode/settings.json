@@ -101,6 +101,15 @@
         "variant": "cpp",
         "cuchar": "cpp",
         "ranges": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "__availability": "cpp",
+        "cassert": "cpp",
+        "ccomplex": "cpp",
+        "cerrno": "cpp",
+        "cfloat": "cpp",
+        "climits": "cpp",
+        "ctgmath": "cpp",
+        "cstdbool": "cpp",
+        "version": "cpp"
     }
 }

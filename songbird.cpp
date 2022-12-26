@@ -9,14 +9,15 @@
 
 // Clock* midiclock;
 Program* program;
+Display* display = new Display();
 
 int main()
 {
     println_to_console("Chirp Chirp");
 
-    // program = new Program(electronica_program);
+    program = new Program(electronica_program, display);
 
-    program = new Program(effects_program);
+    // program = new Program(effects_program);
 
     // test_progression();
     // test_scale();
