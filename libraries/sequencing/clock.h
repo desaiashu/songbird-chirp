@@ -68,6 +68,7 @@ class Clock {
         inline double update_time();
         void pulse();
         inline void tick();
+        void begin_loop();
         void start();
         void stop();
 };

@@ -22,9 +22,10 @@ int main()
     // test_progression();
     // test_scale();
 
-    midiclock->internal = true;
+    midiclock->internal = false;
     intialize_midi();
-    // midiclock->start();
+    midiclock->begin_loop();
+    midiclock->start();
 
     // Keep program alive
     while(true) {

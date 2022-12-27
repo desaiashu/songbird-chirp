@@ -60,7 +60,6 @@
                 "-g",
                 "songbird.cpp",
                 "libraries/**/*.cpp",
-                "libraries/**/**/*.cpp",
                 "-framework",
                 "CoreMIDI",
                 "-framework",

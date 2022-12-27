@@ -205,12 +205,14 @@ void midi_callback(double deltatime, std::vector< unsigned char > *message, void
                 break;
             case MIDI_START:
                 handle_start();
+                // print_to_console("start");
                 break;
             case MIDI_CONTINUE:
                 handle_continue();
                 break;
             case MIDI_STOP:
                 handle_stop(); 
+                print_to_console("stop");
                 break; 
         }
     }

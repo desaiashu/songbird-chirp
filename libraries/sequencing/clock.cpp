@@ -35,7 +35,7 @@ void Transport::start()
     for (Sequencer* s : sequencers)
         s->start();
     playing = true;
-    println_to_console("Start");
+    // println_to_console("Start");
 }
 
 void Transport::stop() 
@@ -143,26 +143,32 @@ inline double Clock::update_time() {
     return delta_time;
 }
 
+void Clock::begin_loop()
+{
+    clock_thread = std::thread(clock_loop);
+    clock_thread.detach();
+}
+
 void Clock::start() 
 {
     transport.start();
     if (internal) {
-        println_to_console("internal");
-        println_to_console(ms_per_tick);
-
-        clock_thread = std::thread(clock_loop);
-        clock_thread.detach();
+        // println_to_console("internal");
+        // println_to_console(ms_per_tick);
 
         tick();
 
     } else {
         // TODO: enable ticks with external clock
+        // println_to_console("external");
+
+        // pulse();
     }
 }
 
 void Clock::stop() 
 {
-    clock_thread.~thread();
+    // clock_thread.~thread();
     transport.stop();
     midi_time = -1.0; // Workaround to ensure 
     ticks = 0;
