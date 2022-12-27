@@ -16,11 +16,6 @@ LiveComposer::LiveComposer() : Composer()
     begin_loop();
 }
 
-void LiveComposer::delete_sequencers()
-{
-    
-}
-
 void copy_file()
 {
     std::ifstream src("files/live.txt", std::ios::binary);
@@ -49,7 +44,7 @@ void LiveComposer::file_loop()
         if (last_opened < last_updated)
             read(last_updated);
         
-        usleep(200000);
+        usleep(500000);
     }
 }
 
@@ -65,12 +60,21 @@ void LiveComposer::read(time_t last_updated)
 
     std::ifstream file;
     file.open("files/live.temp");
-    std::string next;
 
     if ( file.is_open() ) {
         println_to_console("reading");
+
+        midiclock->purge_sequencers();
+
         while ( file ) { // equivalent to myfile.good()
-            std::getline (file, next);
+            vector<string> chunk;
+            std::string line;
+            std::getline(file, line);
+            while (file && line != "") {
+                chunk.push_back(line);
+                std::getline(file, line);
+            }
+            process_chunk(chunk);
         }
         file.close();
         destroy_file();
@@ -81,9 +85,32 @@ void LiveComposer::read(time_t last_updated)
     }
 }
 
-void LiveComposer::update()
+void LiveComposer::update_sequencers(std::ifstream file)
+{
+
+    
+
+    
+
+    // BassSequencer* bass = new BassSequencer(progression, 8*dur::w, 1);
+    // sequencers. push_back(bass);
+
+    // // GrooveSequencer* drums = new GrooveSequencer(4*dur::w, 1);
+    // // sequencers.push_back(drums);
+
+    // midiclock->register_sequencer(chords);
+    // midiclock->register_sequencer(bass);
+    // midiclock->register_sequencer(harmony);
+}
+
+void LiveComposer::process_chunk(vector<string> chunk)
 {
     
+    println_to_console("chunk ");
+    for (string s : chunk) {
+        println_to_console(s);
+    }
+    println_to_console("----");
 }
 
 #endif

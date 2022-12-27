@@ -64,6 +64,7 @@ class Clock {
         }
         
         void register_sequencer(Sequencer* sequencer);
+        void purge_sequencers();
         // void set_transport_callback(void func());
         inline double update_time();
         void pulse();

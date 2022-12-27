@@ -10,9 +10,9 @@ class LiveComposer : public Composer {
     private:
         void file_loop();
         void begin_loop();
-        void update();
+        void update_sequencers(std::ifstream file);
+        void process_chunk(vector<string> chunk);
         void read(time_t last_updated);
-        void delete_sequencers();
         
         std::thread file_thread;
         time_t last_opened;

@@ -76,6 +76,11 @@ void Clock::register_sequencer(Sequencer* sequencer)
     transport.sequencers.push_back(sequencer);
 }
 
+void Clock::purge_sequencers()
+{
+    transport.sequencers.clear();
+}
+
 void Clock::pulse() 
 {
     time_since_pulse = 0.0;

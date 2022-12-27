@@ -43,6 +43,7 @@ class Sequencer {
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
         void gen_sequence(int note, int velocity);
         void gen_drum_sequence(int note, int velocity, vector<int> p, Modulator m=NO_MOD, Swing s=Swing());
+        void gen_notes_sequence(vector<int> notes, int velocity);
         void gen_chord_sequence(int velocity, bool bass=false);
         void gen_arp_sequence(int velocity);
     public:
