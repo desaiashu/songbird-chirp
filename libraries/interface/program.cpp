@@ -27,6 +27,14 @@ Program::Program(int program_index, Display* d) :
         case electronica_program:
             composer = ElectronicaComposer();
             break;
+        case live_program:
+            #ifndef ARDUINO
+            composer = LiveComposer();
+            #else
+            composer = ElectronicaComposer(); //can't do livecoding on arduino
+            #endif // !ARDUINO
+            
+            break;
         case effects_program:
             initialize_effects();
             break;

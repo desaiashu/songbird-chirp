@@ -15,7 +15,7 @@ int main()
 {
     println_to_console("Chirp Chirp");
 
-    program = new Program(electronica_program, display);
+    program = new Program(live_program, display);
 
     // program = new Program(effects_program);
 

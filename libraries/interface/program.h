@@ -16,6 +16,7 @@ const int midi_file_program = 1;
 const int dance_loop_program = 2;
 const int electronica_program = 3;
 const int effects_program = 4;
+const int live_program = 5;
 
 class Program {
     private:

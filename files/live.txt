@@ -1,0 +1,15 @@
+chord 0
+v70, p:w
+[60 60 60]
+[63 64 64]
+[67 67 68]
+
+note 1
+v60, p:qt,qt,qt sw:st,q
+[60 63 67]
+
+drum 2
+n60 v100 p:xx,_xx
+n61, v70, p:_xx,xx sw:d20,x,h
+n62, v60, p:_q,xx,_xx sw:st,q,h
+n63, v40, p:x sw:d20,x
