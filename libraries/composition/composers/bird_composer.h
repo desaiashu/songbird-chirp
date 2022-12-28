@@ -12,7 +12,6 @@ class BirdComposer : public Composer {
         void begin_loop();
         void read(time_t last_updated);
         void process_chunk(vector<string> chunk);
-        // void update_sequencers();
 
         void construct_sequencers(vector<vector<string>> sequence);
         vector<int> construct_pattern(vector<string> data);
@@ -23,12 +22,13 @@ class BirdComposer : public Composer {
         
         std::thread file_thread;
         time_t last_opened;
+        bool read_exception;
 
         int bars;
         int last_note;
         int last_velocity;
         int last_dur;
-        
+
     public:
         BirdComposer();
 

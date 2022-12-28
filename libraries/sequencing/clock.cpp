@@ -82,7 +82,6 @@ void Clock::register_sequencer(Sequencer* sequencer)
 void Clock::register_update_sequencer(Sequencer* sequencer)
 {
     transport.update_sequencers.push_back(sequencer);
-    println_to_console("registered update");
 }
 
 void Clock::clear_update_sequencers()
@@ -98,10 +97,7 @@ void Clock::set_cycle_update(int bars)
 
     println_to_console("cycle set");
 
-    println_to_console(transport.playing);
-
     if (!transport.playing) { //can update immediately if transport is not playing
-        println_to_console("cycle updating");
         cycle_update();
     } 
         
@@ -109,8 +105,6 @@ void Clock::set_cycle_update(int bars)
 
 void Clock::cycle_update()
 {
-
-    println_to_console("attempting to update cycle");
 
     for (Sequencer *s : transport.sequencers) // Deallocate memory of old sequencers
         delete s;
@@ -122,12 +116,11 @@ void Clock::cycle_update()
     transport.cycle_refresh = false;
 
     println_to_console("cycle updated");
+    println_to_console("--------------");
 
     if (transport.playing) { // Need to kick off the sequencer start code
         for (Sequencer* s : transport.sequencers)
             s->start();
-
-        println_to_console("sequencers started");
     }
     // for (Sequencer *s : transport.sequencers) {
     //     s->dump_to_console();
@@ -142,13 +135,12 @@ void Clock::pulse()
     if (internal) {
         send_midi_pulse();
     } 
-    else {
-        //Only pulse if not ticking
-
+    else { //Internal clock runs on ticks, external runs on pulses
+        
         if (!transport.playing) // If external clock, don't pulse unless transport is playing
             return;
 
-        transport.pulse();
+        transport.pulse(); 
         double delta_time = update_time();
         estimate_BPM(delta_time);
     }
@@ -157,7 +149,6 @@ void Clock::pulse()
 
     #ifndef ARDUINO
     if (transport.cycle_refresh && (pulses % transport.cycle_pulses == 0)) {
-        println_to_console("attempting update - pulse");
         cycle_update();
     }
     #endif // ! ARDUINO

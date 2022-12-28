@@ -75,8 +75,15 @@ sec verse
 - Euclidean rythyms
 - Pre-saved patterns (pt)
 - Better humanize algo based on scientific research
-- Defining chords
+- Inputting notes with names
+- Inputting chords with words
+- Different update cycle lengths of diff sequencers
 - Syntax highlighting for .bird files
+- Arrangement implementation
+- Get song position info from MIDI to establish ticks
+
+### Bugs
+- 3 chord loop repeats the first (or perhaps bc it's repeating on 8)
 
 ### Long term ideas
 - Standalone songbird executable that reads / runs

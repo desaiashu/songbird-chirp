@@ -13,19 +13,19 @@ using std::string;
 
 BirdComposer::BirdComposer() : Composer()
 {
-    println_to_console("composer created");
+    println_to_console("bird composer");
     last_opened = 0;
 
     last_note = 0;
     last_velocity = 0;
     last_dur = 0;
+    bars = 4; //In case length of bars is not set
 
     begin_loop();
 }
 
 void copy_file()
 {
-    println_to_console("copying");
     std::ifstream src("files/live.bird", std::ios::binary);
     std::ofstream dst("files/live.temp", std::ios::binary);
 
@@ -52,7 +52,6 @@ void BirdComposer::file_loop()
         time_t last_updated = updated_time();
         if (last_opened < last_updated)
             read(last_updated);
-        
         usleep(500000);
     }
 }
@@ -66,15 +65,17 @@ void BirdComposer::begin_loop()
 void BirdComposer::read(time_t last_updated)
 {
     copy_file();
-
     std::ifstream file;
     file.open("files/live.temp");
-
     if ( file.is_open() ) {
+        println_to_console("--------------");
         println_to_console("reading");
 
-        midiclock->clear_update_sequencers(); // clear any pending update as file has changed
+        // clear any pending update as file has changed
+        midiclock->clear_update_sequencers(); 
 
+        // Read and process file, raising a read_exception when it occurs
+        read_exception = false;
         while ( file ) { // equivalent to myfile.good()
             vector<string> chunk;
             std::string line;
@@ -89,7 +90,15 @@ void BirdComposer::read(time_t last_updated)
         destroy_file();
         last_opened = last_updated;
 
-        midiclock->set_cycle_update(bars); // trigger cycle update to run
+        // Only update the cycle if no read exception occurred
+        if (!read_exception) {
+            midiclock->set_cycle_update(bars); // trigger cycle update to run
+        } else {
+            println_to_console("read exception");
+            println_to_console("--------------");
+            midiclock->clear_update_sequencers(); // clear pending update and wait for next save
+        }
+        
     }
     else {
         println_to_console("failed to read");
@@ -125,23 +134,26 @@ void BirdComposer::process_chunk(vector<string> chunk)
         vector<string> line = get_vector_from_string(s);
 
         if (line[0] == "#") {
-            println_to_console("COMMENT");
             data = true;
         } else if (line[0] == "b") {
             data = true;
-            bars = stoi(line[1]);
-            println_to_console("BARS");
-            println_to_console(bars);
+            try
+            {
+                bars = stoi(line[1]);
+                println_to_console(std::to_string(bars) + " bar cycle");
+            }
+            catch (...)
+            {
+                println_to_console("syntax error in # bars, setting to 4");
+                bars = 4;
+            }
         } else {
             sequence.push_back(line);
         }
     }
 
     if (!data) {
-        //sequencers.push_back(construct_sequencer(sequence));
         construct_sequencers(sequence);
-        // sequencers.insert(sequencers.end(), seqs.begin(), seqs.end());
-
     }
         
 }
@@ -151,45 +163,45 @@ void BirdComposer::construct_sequencers(vector<vector<string>> sequence)
     //TODO: graceful failure for syntax issues
     Sequencer* s = new Sequencer();
 
-    //TODO: set these to false and check if valid // gracefully fail
-    //If invalid, throw legible error in console and don't update patterns
-    bool valid_channel = true;
-    bool valid_pattern = true;
-    bool valid_velocities = true;
-    bool valid_notes = true;
-
     //velocity vector, since it needs to be preserved
     vector<int> velocity;
     
     for (vector<string> line : sequence) {
-
-        if (line[0] == "ch") {
-            s->set_channel(stoi(line[1]));
-
-        } else if (line[0] == "p") {
-            s->pattern = construct_pattern(line);
-
-        } else if (line[0] == "sw") {
-            s->swing = construct_swing(line);
-
-        } else if (line[0] == "m") {
-            s->mod = construct_modulator(line);
-
-        } else if (line[0] == "v") {
-            velocity.clear();
-            velocity = construct_velocities(line);
-
-        } else if (line[0] == "n") {
-            s->gen_notes_sequence(construct_notes(line), velocity);
-
+        try
+        {
+            if (line[0] == "ch") {
+                int channel = stoi(line[1])-1;
+                if (channel < 0 || channel > 15)
+                    throw 3;
+                s->set_channel(channel);
+            } else if (line[0] == "p") {
+                s->pattern = construct_pattern(line);
+            } else if (line[0] == "sw") {
+                s->swing = construct_swing(line);
+            } else if (line[0] == "m") {
+                s->mod = construct_modulator(line);
+            } else if (line[0] == "v") {
+                velocity.clear();
+                velocity = construct_velocities(line);
+            } else if (line[0] == "n") {
+                vector<int> notes = construct_notes(line);
+                if (!read_exception)
+                    s->gen_notes_sequence(notes, velocity);
+            }
+        }
+        catch (...) // Raise read exception if anything fails
+        {
+            read_exception = true;
+            println_to_console("!! syntax error on following line");
+            for (string s : line)
+                print_to_console(s+" ");
+            println_to_console("--");
         }
     }
 
-    if (valid_channel && valid_pattern && valid_velocities && valid_notes) {
+    if (!read_exception) {
         midiclock->register_update_sequencer(s);
-        println_to_console("CONSTRUCTING SEQUENCER");
     }
-
 }
 
 vector<int> BirdComposer::construct_pattern(vector<string> data)
@@ -206,6 +218,10 @@ vector<int> BirdComposer::construct_pattern(vector<string> data)
             pattern.push_back(last_dur);
         }
     }
+
+    if (pattern.size() == 0)
+        throw 16;
+
     return pattern;
 }
 
@@ -225,6 +241,10 @@ vector<int> BirdComposer::construct_velocities(vector<string> data)
             velocity.push_back(last_velocity);
         }
     }
+
+    if (velocity.size() == 0)
+        throw 22;
+
     return velocity;
 }
 
@@ -244,6 +264,10 @@ vector<int> BirdComposer::construct_notes(vector<string> data)
             notes.push_back(last_note);
         }
     }
+
+    if (notes.size() == 0)
+        throw 14;
+
     return notes;
 }
 

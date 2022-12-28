@@ -11,37 +11,49 @@
 
 b 4
 
-ch 0 chords
-  p w _ 
-    sw - ~
-      v 70 90 100
-        n 60 - -
-        n +3 +5 +4
-      v 60
-        n +7 +7 +8
-      v 30
-        n +12
+ch 1 kick
+  p xx _
+    v 100
+      n 60
 
-ch 1 lead
+ch 2 bass
+  p _xx xx
+    v 80
+      n 60
+
+ch 3 drums
+  p _xx xx
+    sw < 20 x ~
+      v 70
+        n 51
+  p _q xx _xx
+    sw - ~
+      v 60
+        n 42
+  p x
+    sw < 20 x
+      v 40
+        n 43
+
+ch 4 lead
   p qt qt qt
     sw - ~
       v 60
         n 60 63 67
 
-ch 2 drums
-  p xx _
-    v 100
-      n 60
+ch 5 chords
+  p w _ 
+    sw - ~
+      v 30 20 20
+        n 60 +5 -
+        n +3 +8 +4
+      v 20
+        n +7 +3 +8
+      v 30
+        n +12
 
-#  p _xx xx
-#    sw < 20 x ~
-#      v 70
-#        n 61
-#  p _q xx _xx
-#    sw - ~
-#      v 60
-#        n 62
-#  p x
-#    sw < 20 x
-#      v 40
-#        n 63
+
+
+
+
+
