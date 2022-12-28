@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+using std::string;
 #include <sys/stat.h>
 #include <unistd.h>
 #include <sstream>
@@ -143,19 +144,100 @@ void BirdComposer::process_chunk(vector<string> chunk)
 
 void BirdComposer::construct_sequencers(vector<vector<string>> sequence)
 {
-    Sequencer* s = new Sequencer(1);
+    //TODO: graceful failure for syntax issues
+    Sequencer* s = new Sequencer();
 
-    midiclock->register_update_sequencer(s);
+    //TODO: set these to false and check if valid // gracefully fail
+    //If invalid, throw legible error in console and don't update patterns
+    bool valid_channel = true;
+    bool valid_pattern = true;
+    bool valid_velocities = true;
+    bool valid_notes = true;
 
-    println_to_console("CONSTRUCTING SEQUENCER");
-    // // return sequencers;
+    //velocity vector, since it needs to be preserved
+    vector<int> velocity;
+    
+    for (vector<string> line : sequence) {
+
+        if (line[0] == "ch") {
+            s->set_channel(stoi(line[1]));
+            valid++;
+
+        } else if (line[0] == "p") {
+            s->pattern = construct_pattern(line);
+
+        } else if (line[0] == "sw") {
+            s->swing = construct_swing(line);
+
+        } else if (line[0] == "m") {
+            s->mod = construct_modulator(line);
+
+        } else if (line[0] == "v") {
+            velocity.clear();
+            velocity = construct_velocities(line);
+
+        } else if (line[0] == "n") {
+            s->gen_notes_sequence(construct_notes(line), velocity);
+
+        }
+    }
+
+    if (valid_channel && valid_pattern && valid_velocities && valid_notes) {
+        midiclock->register_update_sequencer(s);
+        println_to_console("CONSTRUCTING SEQUENCER");
+    }
+
 }
 
-// void BirdComposer::update_sequencers()
-// {
-//     midiclock->set_cycle_length(bars);
-//     midiclock->update_sequencers(bars, sequencers);
-//     // sequencers.clear();
-// }
+vector<int> BirdComposer::construct_pattern(vector<string> data)
+{
+    vector<int> pattern;
+    for(int i = 1; i < data.size(); i++)
+    {
+        pattern.push_back( dur_from_string(data[i]) );
+    }
+    return pattern;
+}
+
+vector<int> BirdComposer::construct_velocities(vector<string> data)
+{
+    vector<int> velocity;
+    for(int i = 1; i < data.size(); i++)
+    {
+        velocity.push_back(stoi(data[i]));
+    }
+    return velocity;
+}
+
+vector<int> BirdComposer::construct_notes(vector<string> data)
+{
+    vector<int> notes;
+    for(int i = 1; i < data.size(); i++)
+    {
+        notes.push_back(stoi(data[i]));
+    }
+    return notes;
+}
+
+Swing BirdComposer::construct_swing(vector<string> data)
+{
+    int swing_amount = 1;
+    int base = x;
+    bool humanize = false;
+    //TODO: read swing
+    return Swing();
+}
+
+Modulator BirdComposer::construct_modulator(vector<string> data)
+{
+    mod_type type=NO_MOD;
+    int cycle_length=0;
+    double max_mod=0.2;
+    bool step_based=false;
+    //TODO: read modulator
+    return Modulator();
+}
+
+
 
 #endif

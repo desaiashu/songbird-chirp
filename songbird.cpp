@@ -15,6 +15,9 @@ int main()
 {
     println_to_console("Chirp Chirp");
 
+    midiclock->internal = false;
+    intialize_midi();
+
     program = new Program(live_program, display);
 
     // program = new Program(effects_program);
@@ -22,8 +25,7 @@ int main()
     // test_progression();
     // test_scale();
 
-    midiclock->internal = false;
-    intialize_midi();
+
     midiclock->begin_loop();
     // midiclock->start();
 

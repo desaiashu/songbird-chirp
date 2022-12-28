@@ -1,6 +1,12 @@
 #ifndef TIME_CONSTANTS
 #define TIME_CONSTANTS
 
+// #include <map>
+// using namespace std;
+
+#include <string>
+using std::string;
+
 // PPQ = Pulses per quarter note (1 quarter note = 1 beat)
 static const int PPQ = 24;
 static const int MS_PER_MIN = 60000;
@@ -64,5 +70,123 @@ enum dur {
         _xt = -TICKS_PER_WHOLE_NOTE/16 *2/3,
         _c = 0,
 };
+
+
+static int dur_from_string(string s) { 
+    if (s == "ww")
+        return ww;
+    else if (s == "w")
+        return w;
+    else if (s == "qq")
+        return qq;
+    else if (s == "q")
+        return q;
+    else if (s == "xx")
+        return xx;
+    else if (s == "x")
+        return x;
+    else if (s == "wwd")
+        return wwd;
+    else if (s == "wd")
+        return wd;
+    else if (s == "qqd")
+        return qqd;
+    else if (s == "qd")
+        return qd;
+    else if (s == "xxd")
+        return xxd;
+    else if (s == "xd")
+        return xd;
+    else if (s == "wwt")
+        return wwt;
+    else if (s == "wt")
+        return wt;
+    else if (s == "qqt")
+        return qqt;
+    else if (s == "qt")
+        return qt;
+    else if (s == "xxt")
+        return xxt;
+    else if (s == "xt")
+        return xt;
+    else if (s == "_ww")
+        return _ww;
+    else if (s == "_w")
+        return _w;
+    else if (s == "_qq")
+        return _qq;
+    else if (s == "_q")
+        return _q;
+    else if (s == "_xx")
+        return _xx;
+    else if (s == "_x")
+        return _x;
+    else if (s == "_wwd")
+        return _wwd;
+    else if (s == "_wd")
+        return _wd;
+    else if (s == "_qqd")
+        return _qqd;
+    else if (s == "_qd")
+        return _qd;
+    else if (s == "_xxd")
+        return _xxd;
+    else if (s == "_xd")
+        return _xd;
+    else if (s == "_wwt")
+        return _wwt;
+    else if (s == "_wt")
+        return _wt;
+    else if (s == "_qqt")
+        return _qqt;
+    else if (s == "_qt")
+        return _qt;
+    else if (s == "_xxt")
+        return _xxt;
+    else if (s == "_xt")
+        return _xt;
+    else
+        return _c;
+};
+
+// map<string, int> dur_from_string = {
+//     { "ww", ww },
+//     { "w", w },
+//     { "qq", qq },
+//     { "q", q },
+//     { "xx", xx },
+//     { "x", x },
+//     { "wwd", wwd },
+//     { "wd", wd },
+//     { "qqd", qqd },
+//     { "qd", qd },
+//     { "xxd", xxd },
+//     { "xd", xd },
+//     { "wwt", wwt },
+//     { "wt", wt },
+//     { "qqt", qqt },
+//     { "qt", qt },
+//     { "xxt", xxt },
+//     { "xt", xt },
+//     { "_ww", _ww },
+//     { "_w", _w },
+//     { "_qq", _qq },
+//     { "_q", _q },
+//     { "_xx", _xx },
+//     { "_x", _x },
+//     { "_wwd", _wwd },
+//     { "_wd", _wd },
+//     { "_qqd", _qqd },
+//     { "_qd", _qd },
+//     { "_xxd", _xxd },
+//     { "_xd", _xd },
+//     { "_wwt", _wwt },
+//     { "_wt", _wt },
+//     { "_qqt", _qqt },
+//     { "_qt", _qt },
+//     { "_xxt", _xxt },
+//     { "_xt", _xt },
+//     { "_c", _c }
+// };
 
 #endif // TIME_CONSTANTS

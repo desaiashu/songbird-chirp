@@ -60,22 +60,27 @@ void Sequencer::gen_drum_sequence(int note, int velocity, vector<int> p, Modulat
     gen_sequence(note, velocity);
 }
 
-void Sequencer::gen_notes_sequence(vector<int> seq_notes, int velocity) 
+void Sequencer::gen_notes_sequence(vector<int> seq_notes, vector<int> velocity) 
 {
     int ticks = 0;
     int step = 0;
     vector<int>::iterator pitr = pattern.begin();
+    vector<int>::iterator nitr = seq_notes.begin();
+    vector<int>::iterator vitr = velocity.begin();
+
     while (ticks < sequence_length) {
         /*
         It generates a note and appends it to the note list.
         */
-        vector<int>::iterator nitr = seq_notes.begin();
         if (*pitr > 0) {
-            append_note(*nitr, *pitr, velocity, ticks, step);
+            append_note(*nitr, *pitr, *vitr, ticks, step);
             step++;
             nitr++;
+            vitr++;
             if (nitr == seq_notes.end())
                 nitr = seq_notes.begin();
+            if (vitr == velocity.end())
+                vitr = velocity.begin();
         }
         
         ticks += abs(*pitr);
@@ -83,6 +88,13 @@ void Sequencer::gen_notes_sequence(vector<int> seq_notes, int velocity)
         if (pitr == pattern.end())
             pitr = pattern.begin();
     }
+
+    sort(notes.begin(), notes.end());
+}
+
+void Sequencer::set_channel(int channel)
+{
+    instrument.midi_channel = channel;
 }
 
 void Sequencer::gen_chord_sequence(int velocity, bool bass) 

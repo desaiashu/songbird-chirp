@@ -43,18 +43,19 @@ class Sequencer {
         //TODOs: extend to support swing, progressions, chords, arpeggiation, velocity modulation, etc
         void gen_sequence(int note, int velocity);
         void gen_drum_sequence(int note, int velocity, vector<int> p, Modulator m=NO_MOD, Swing s=Swing());
-        void gen_notes_sequence(vector<int> notes, int velocity);
         void gen_chord_sequence(int velocity, bool bass=false);
         void gen_arp_sequence(int velocity);
     public:
         Sequencer(int sequence_length, int channel);
-        Sequencer(int channel) : Sequencer(4, channel) {};
+        Sequencer(int channel=0) : Sequencer(4, channel) {};
         Progression progression;
         vector<int> pattern;
         Arpeggiator arp;
         Modulator mod;
         Swing swing;
         Instrument instrument;
+        void gen_notes_sequence(vector<int> notes, vector<int> velocity);
+        void set_channel(int channel);
         virtual void pulse(); //Pulse is only called if using an external clock
         virtual void tick();
         virtual void start();
