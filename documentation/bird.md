@@ -31,6 +31,7 @@ Eventually, the notation and platform will support longer form composition throu
 
 # Syntax
 
+```
 ch - midi channel
 p - pattern (w:1/1 q:1/4 x:1/16, _:rest of same length, _q:1/4 rest)
 sw - swing (-:straight <:drag >:rush, #:amount, x:1/16 , ~:humanize)
@@ -40,6 +41,7 @@ n - notes to loop (#:midinote, -:repeat, +1:add to root, -2:subtract from root)
 cc - midi control change
 sec - section 
 arr - arrangement (intro:name #:length in bars)
+```
 
 # Example
 
