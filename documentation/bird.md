@@ -11,7 +11,7 @@ The notation builds on top of ideas from sheet music and MIDI and is optimized f
 
 These optimizations come with some shortcomings:
 - Less human readable than sheet music or MIDI editors
-- Fewer features than modern MIDI editors
+- Fewer features, and less time precise than modern MIDI editors
 - Slower to write than recording MIDI from a keyboard
 
 The notation is best suited for any of the following:
@@ -20,6 +20,8 @@ The notation is best suited for any of the following:
 - Musicians from a math / computer science background
 
 The Songbird software platform reads bird files and interacts with a DAW through a virtual MIDI port, similar to a software or hardware sequencer. In the future, the notation will be visualizable/exportable as sheet music and MIDI/piano roll.
+
+Most commonly, the bird notation will be used in tandem with audio recording techniques and DAW manupulation rather than as a standalone composition tool. Think of bird as the "computer based" composition tool, while audio recording of instrumentalists/vocalists in DAWs will provide an oft necessary "human" element to the compositions.
 
 ## Current state and use cases
 
