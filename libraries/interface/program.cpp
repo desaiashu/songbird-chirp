@@ -29,7 +29,7 @@ Program::Program(int program_index, Display* d) :
             break;
         case live_program:
             #ifndef ARDUINO
-            composer = LiveComposer();
+            composer = BirdComposer();
             #else
             composer = ElectronicaComposer(); //can't do livecoding on arduino
             #endif // !ARDUINO

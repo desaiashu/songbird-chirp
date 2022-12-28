@@ -30,7 +30,7 @@ class Composer {
 #include <electronica_composer.h>
 #else
 #include "composers/electronica_composer.h"
-#include "composers/live_composer.h"
+#include "composers/bird_composer.h"
 #endif
 
 #endif // COMPOSITION_COMPOSER

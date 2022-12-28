@@ -10,6 +10,8 @@
 #include "../interface/console.h"
 #include "../interface/midi_io.h"
 #include <unistd.h>
+#include <algorithm> // for copy() and assign() 
+#include <iterator> // for back_inserter 
 #endif
 
 Transport::Transport()
@@ -43,7 +45,7 @@ void Transport::stop()
     for (Sequencer* s : sequencers)
         s->stop();
     playing = false;
-    println_to_console("Stop");
+    // println_to_console("Stop");
 }
 
 // Clock
@@ -76,9 +78,24 @@ void Clock::register_sequencer(Sequencer* sequencer)
     transport.sequencers.push_back(sequencer);
 }
 
-void Clock::purge_sequencers()
+void Clock::update_sequencers(int cycle_length_bars, vector<Sequencer*> sequencers)
 {
+    transport.cycle_refresh = true;
+    transport.cycle_pulses = cycle_length_bars*PULSES_PER_BAR;
+    // transport.update_sequencers = sequencers;
+    copy(sequencers.begin(), sequencers.end(), back_inserter(transport.update_sequencers));
+    // transport.update_sequencers.insert(transport.update_sequencers.end(), sequencers.begin(), transport.sequencers.end());
+}
+
+void Clock::cycle_update()
+{
+    for ( int i = 0; i < transport.sequencers.size(); i++ ) 
+    {       
+        delete transport.sequencers[i];    
+    }
     transport.sequencers.clear();
+    transport.sequencers.insert(transport.sequencers.end(), transport.update_sequencers.begin(), transport.update_sequencers.end());
+    transport.update_sequencers.clear();
 }
 
 void Clock::pulse() 
@@ -94,7 +111,10 @@ void Clock::pulse()
         estimate_BPM(delta_time);
     }
         
-    pulses+=1;
+    pulses++;
+
+    if (transport.cycle_refresh && (pulses % transport.cycle_pulses == 0))
+        cycle_update();
 }
 
 inline void Clock::tick() 

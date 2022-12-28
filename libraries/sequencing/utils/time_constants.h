@@ -9,6 +9,7 @@ static const int TICKS_PER_PULSE = 4; // Assumes 24ppq clock and 96ppq midi file
 static const int TICKS_PER_WHOLE_NOTE = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_WHOLE_NOTE;
 
 static const int TICKS_PER_BAR = TICKS_PER_WHOLE_NOTE; // This may change later w/ diff time signatures
+static const int PULSES_PER_BAR = TICKS_PER_BAR / TICKS_PER_PULSE;
 
 enum swing_amount {
     STRAIGHT = 0,

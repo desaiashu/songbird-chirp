@@ -1,0 +1,72 @@
+# syntax guide
+# ch - midi channel
+# p - pattern (w:1/1 q:1/4 x:1/16, _:rest of same length, _q:1/4 rest)
+# sw - swing (-:straight <:drag >:rush, #:amount, x:1/16 , ~:humanize)
+# m - modulation (sin:sinewave, tri:triangle, #:percent)
+# v - velocity to loop
+# n - notes to loop (#:midinote, -:repeat, +1:add to root, -2:subtract from root)
+# cc - control change
+# sec - section (intro:name #:length in bars)
+# arr - arrangement
+
+arr
+  intro 8
+  verse 8
+  pre 4
+  chorus 8
+  verse 8
+  pre 4
+  chorus 8
+  bridge 8
+  chorus 8
+  outro 8
+
+sec intro
+
+  ch 0 chords
+    p w _ w _
+      sw - ~
+        v 70 90 100
+          n 60 - -
+          n +3 +5 +4
+        v 60
+          n +7 +7 +8
+        v 30
+          n +12
+
+  ch 1 lead
+    p qt qt qt
+      sw - ~
+        v 60
+          n 60 +3 +4
+
+  ch 2 drums
+    p xx _xx
+      v 100
+        n 60
+    p _xx xx
+      sw < 20 x ~
+        v 70
+          n 61
+    p _q xx _xx
+      sw - ~
+        v 60
+          n 62
+    p x
+      sw < 20 x
+        v 40
+          n 63
+
+  ch 3 chords
+    p x _ c _q
+      sw < 20 human
+        m sin 20
+          v 70 90 100
+            n 60 +3 +7
+          v 30
+            n +12
+    p ww
+      m sin 20
+        cc 18
+
+,
