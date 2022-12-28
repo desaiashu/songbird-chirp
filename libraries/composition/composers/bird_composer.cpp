@@ -10,12 +10,16 @@ using std::string;
 #include <sstream>
 
 #include "../../interface/console.h"
-#include "../../sequencing/utils/bird.h"
 
 BirdComposer::BirdComposer() : Composer()
 {
     println_to_console("composer created");
     last_opened = 0;
+
+    last_note = 0;
+    last_velocity = 0;
+    last_dur = 0;
+
     begin_loop();
 }
 
@@ -75,11 +79,11 @@ void BirdComposer::read(time_t last_updated)
             vector<string> chunk;
             std::string line;
             std::getline(file, line);
-            while (file && line != "") {
+            while (file && line != "") { // this while loop groups things into chunks, separated by a newline
                 chunk.push_back(line);
                 std::getline(file, line);
             }
-            process_chunk(chunk);
+            process_chunk(chunk); //decoding work happens here!
         }
         file.close();
         destroy_file();
@@ -161,7 +165,6 @@ void BirdComposer::construct_sequencers(vector<vector<string>> sequence)
 
         if (line[0] == "ch") {
             s->set_channel(stoi(line[1]));
-            valid++;
 
         } else if (line[0] == "p") {
             s->pattern = construct_pattern(line);
@@ -194,7 +197,14 @@ vector<int> BirdComposer::construct_pattern(vector<string> data)
     vector<int> pattern;
     for(int i = 1; i < data.size(); i++)
     {
-        pattern.push_back( dur_from_string(data[i]) );
+        //TODO: test this functionality
+        if (data[i][0] == '_') {
+            int rest_length = 0 - abs(last_dur);
+            pattern.push_back(rest_length);
+        } else {
+            last_dur = dur_from_string(data[i]);
+            pattern.push_back(last_dur);
+        }
     }
     return pattern;
 }
@@ -204,7 +214,14 @@ vector<int> BirdComposer::construct_velocities(vector<string> data)
     vector<int> velocity;
     for(int i = 1; i < data.size(); i++)
     {
-        velocity.push_back(stoi(data[i]));
+        //TODO: test this functionality (incrementing velocities)
+        if (data[i][0] == '+' || data[i][0] == '-') {
+            int new_velocity = last_velocity + stoi(data[i]);
+            velocity.push_back(new_velocity);
+        } else {
+            last_velocity = stoi(data[i]);
+            velocity.push_back(last_velocity);
+        }
     }
     return velocity;
 }
@@ -214,7 +231,14 @@ vector<int> BirdComposer::construct_notes(vector<string> data)
     vector<int> notes;
     for(int i = 1; i < data.size(); i++)
     {
-        notes.push_back(stoi(data[i]));
+        //TODO: test this functionality (incrementing notes)
+        if (data[i][0] == '+' || data[i][0] == '-') {
+            int new_note = last_note + stoi(data[i]);
+            notes.push_back(new_note);
+        } else {
+            last_note = stoi(data[i]);
+            notes.push_back(last_note);
+        }
     }
     return notes;
 }

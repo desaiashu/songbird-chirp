@@ -25,6 +25,10 @@ class BirdComposer : public Composer {
         time_t last_opened;
 
         int bars;
+        int last_note;
+        int last_velocity;
+        int last_dur;
+        
     public:
         BirdComposer();
 
