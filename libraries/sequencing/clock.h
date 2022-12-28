@@ -17,9 +17,11 @@ struct Transport {
         bool playing;
         vector<Sequencer*> sequencers;
 
+    #ifndef ARDUINO // no update sequencer on arduino
         bool cycle_refresh;
         int cycle_pulses;
         vector<Sequencer*> update_sequencers;
+    #endif
 
         // Not sure how to implement callbacks...
         // std::function<void()> step_callback();
@@ -68,8 +70,14 @@ class Clock {
         }
         
         void register_sequencer(Sequencer* sequencer);
-        void update_sequencers(int cycle_length_bars, vector<Sequencer*> sequencers);
+
+    #ifndef ARDUINO // no update sequencer on arduino
+        void register_update_sequencer(Sequencer* sequencer);
+        void clear_update_sequencers(); //in case file is reloaded before an update cycle
+        void set_cycle_update(int bars);
         void cycle_update();
+    #endif
+
         // void set_transport_callback(void func());
         inline double update_time();
         void pulse();

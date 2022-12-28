@@ -68,6 +68,8 @@ void BirdComposer::read(time_t last_updated)
     if ( file.is_open() ) {
         println_to_console("reading");
 
+        midiclock->clear_update_sequencers(); // clear any pending update as file has changed
+
         while ( file ) { // equivalent to myfile.good()
             vector<string> chunk;
             std::string line;
@@ -80,8 +82,9 @@ void BirdComposer::read(time_t last_updated)
         }
         file.close();
         destroy_file();
-        // update_sequencers();
         last_opened = last_updated;
+
+        midiclock->set_cycle_update(bars); // trigger cycle update to run
     }
     else {
         println_to_console("failed to read");
@@ -142,16 +145,17 @@ void BirdComposer::construct_sequencers(vector<vector<string>> sequence)
 {
     Sequencer* s = new Sequencer(1);
 
-    sequencers.push_back(s);
+    midiclock->register_update_sequencer(s);
 
     println_to_console("CONSTRUCTING SEQUENCER");
     // // return sequencers;
 }
 
-void BirdComposer::update_sequencers()
-{
-    // midiclock->update_sequencers(bars, sequencers);
-    // sequencers.clear();
-}
+// void BirdComposer::update_sequencers()
+// {
+//     midiclock->set_cycle_length(bars);
+//     midiclock->update_sequencers(bars, sequencers);
+//     // sequencers.clear();
+// }
 
 #endif

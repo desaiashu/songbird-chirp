@@ -37,7 +37,7 @@ void Transport::start()
     for (Sequencer* s : sequencers)
         s->start();
     playing = true;
-    // println_to_console("Start");
+    println_to_console("Start");
 }
 
 void Transport::stop() 
@@ -78,25 +78,51 @@ void Clock::register_sequencer(Sequencer* sequencer)
     transport.sequencers.push_back(sequencer);
 }
 
-void Clock::update_sequencers(int cycle_length_bars, vector<Sequencer*> sequencers)
+#ifndef ARDUINO
+void Clock::register_update_sequencer(Sequencer* sequencer)
+{
+    transport.update_sequencers.push_back(sequencer);
+    println_to_console("registered update");
+}
+
+void Clock::clear_update_sequencers()
+{
+    transport.cycle_refresh = false;
+    transport.update_sequencers.clear();
+}
+
+void Clock::set_cycle_update(int bars)
 {
     transport.cycle_refresh = true;
-    transport.cycle_pulses = cycle_length_bars*PULSES_PER_BAR;
-    // transport.update_sequencers = sequencers;
-    copy(sequencers.begin(), sequencers.end(), back_inserter(transport.update_sequencers));
-    // transport.update_sequencers.insert(transport.update_sequencers.end(), sequencers.begin(), transport.sequencers.end());
+    transport.cycle_pulses = bars*PULSES_PER_BAR;
+
+    println_to_console("cycle set");
+
+    println_to_console(transport.playing);
+
+    if (!transport.playing) { //can update immediately if transport is not playing
+        println_to_console("cycle updating");
+        cycle_update();
+    } 
+        
 }
 
 void Clock::cycle_update()
 {
-    for ( int i = 0; i < transport.sequencers.size(); i++ ) 
-    {       
-        delete transport.sequencers[i];    
-    }
     transport.sequencers.clear();
-    transport.sequencers.insert(transport.sequencers.end(), transport.update_sequencers.begin(), transport.update_sequencers.end());
+    transport.sequencers = transport.update_sequencers;
     transport.update_sequencers.clear();
+    transport.cycle_refresh = false;
+
+    println_to_console("cycle updated");
+
+    for (Sequencer *s : transport.sequencers) {
+        println_to_console("sequencer!");
+    }
+
 }
+
+#endif
 
 void Clock::pulse() 
 {

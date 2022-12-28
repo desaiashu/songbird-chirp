@@ -25,7 +25,7 @@ int main()
     midiclock->internal = false;
     intialize_midi();
     midiclock->begin_loop();
-    midiclock->start();
+    // midiclock->start();
 
     // Keep program alive
     while(true) {

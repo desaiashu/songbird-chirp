@@ -11,7 +11,7 @@ class BirdComposer : public Composer {
         void file_loop();
         void begin_loop();
         void process_chunk(vector<string> chunk);
-        void update_sequencers();
+        // void update_sequencers();
         void construct_sequencers(vector<vector<string>> sequence);
         void read(time_t last_updated);
         
