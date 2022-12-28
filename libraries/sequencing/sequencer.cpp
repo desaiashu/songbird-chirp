@@ -212,6 +212,28 @@ void Sequencer::stop()
     
 }
 
+
+void Sequencer::dump_to_console()
+{
+    println_to_console("----------");
+    println_to_console("length");
+    println_to_console(sequence_length);
+    println_to_console("Pattern");
+    for (int p : pattern) {
+        print_to_console(p);
+        print_to_console(" ");
+    }
+
+    println_to_console("Notes");
+    for (Note n : notes) {
+        println_to_console(n.name());
+    }
+        
+}
+
+
+
+
 // import random
 // from songbird.theory.scale import Scale
 // from .patterns import e_pattern

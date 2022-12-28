@@ -109,19 +109,31 @@ void Clock::set_cycle_update(int bars)
 
 void Clock::cycle_update()
 {
+
+    println_to_console("attempting to update cycle");
+
+    for (Sequencer *s : transport.sequencers) // Deallocate memory of old sequencers
+        delete s;
     transport.sequencers.clear();
-    transport.sequencers = transport.update_sequencers;
+
+    transport.sequencers = transport.update_sequencers; // Replaces the sequencers
+
     transport.update_sequencers.clear();
     transport.cycle_refresh = false;
 
     println_to_console("cycle updated");
 
-    for (Sequencer *s : transport.sequencers) {
-        println_to_console("sequencer!");
+    if (transport.playing) { // Need to kick off the sequencer start code
+        for (Sequencer* s : transport.sequencers)
+            s->start();
+
+        println_to_console("sequencers started");
     }
+    // for (Sequencer *s : transport.sequencers) {
+    //     s->dump_to_console();
+    // }
 
 }
-
 #endif
 
 void Clock::pulse() 
@@ -132,6 +144,10 @@ void Clock::pulse()
     } 
     else {
         //Only pulse if not ticking
+
+        if (!transport.playing) // If external clock, don't pulse unless transport is playing
+            return;
+
         transport.pulse();
         double delta_time = update_time();
         estimate_BPM(delta_time);
@@ -139,12 +155,18 @@ void Clock::pulse()
         
     pulses++;
 
-    if (transport.cycle_refresh && (pulses % transport.cycle_pulses == 0))
+    #ifndef ARDUINO
+    if (transport.cycle_refresh && (pulses % transport.cycle_pulses == 0)) {
+        println_to_console("attempting update - pulse");
         cycle_update();
+    }
+    #endif // ! ARDUINO
+    
+        
 }
 
 inline void Clock::tick() 
-{
+{ // This is only active on internal clock
     transport.tick();
     time_since_tick = 0.0;
     if (ticks % TICKS_PER_PULSE == 0)
@@ -219,11 +241,20 @@ void Clock::start()
 
 void Clock::stop() 
 {
-    // clock_thread.~thread();
+    if (!transport.playing) 
+        return;
+    
     transport.stop();
     midi_time = -1.0; // Workaround to ensure 
     ticks = 0;
     pulses = 0;
+
+    #ifndef ARDUINO
+    if (transport.cycle_refresh) {
+        println_to_console("attempting update - stop");
+        cycle_update();
+    }
+    #endif
 }
 
 void Clock::calc_miliseconds(double bpm) 
@@ -245,168 +276,3 @@ void Clock::estimate_BPM(double delta_time)
         // println_to_console(estimated_BPM);
     } 
 }
-
-
-
-
-
-// void clock_start(std::function<void(void)> func, unsigned int interval)
-// {
-//   std::thread([func, interval]()
-//   { 
-//     while (true)
-//     { 
-//       auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(interval);
-//       func();
-//       std::this_thread::sleep_until(x);
-//     }
-//   }).detach();
-// }
-
-// import time
-// from songbird.interface.midi import midi
-// from songbird.sequencing.sequencer import Sequencer
-// from adafruit_midi.start import Start
-// from adafruit_midi.stop import Stop
-// from adafruit_midi.timing_clock import TimingClock
-
-// class Transport:
-//     def __init__(
-//         self,
-//     ):
-//         self.playing = False
-//         self.sequencers = []
-
-//     def pulse(self):
-//         for sequencer in self.sequencers:
-//              sequencer.pulse()
-
-//     def tick(self):
-//         for sequencer in self.sequencers:
-//              sequencer.tick()
-
-//     def start(self):
-//         for sequencer in self.sequencers:
-//              sequencer.start()
-//         self.playing = True
-//         print('start')
-
-//     def stop(self):
-//         for sequencer in self.sequencers:
-//              sequencer.stop()
-//         self.playing = False
-//         print('stop')
-
-
-// # Todos:
-// # Rewrite midi clock in c++?
-// # Move to raspberry pi?
-// # Allow for 48ppq clock? 96ppq clock?
-
-// #PPQ = Pulses per quarter note (1 quarter note = 1 beat)
-// PPQ = 24
-// NS_PER_MIN = 60000000000
-// QUARTER_NOTE_PER_BAR = 4 # This may change later
-// TICKS_PER_PULSE = 4 # Assumes 24ppq clock and 96ppq midi files
-// TICKS_PER_BAR = TICKS_PER_PULSE*PPQ*QUARTER_NOTE_PER_BAR
-
-// class Clock:
-
-//     def __init__(
-//         self,
-//         internal = True
-//     ):
-//         self.internal = internal
-//         self.transport = Transport()
-//         if internal:
-//             self.BPM = 120.0
-//             self.calc_miliseconds()
-//         # else:
-//         #     self.estimated_BPM = 0.0
-
-//         self.estimated_BPM = 0.0
-
-//         self.midi_time = -1.0
-//         self.time = 0.0
-
-//         self.ticks = 0
-//         self.pulses = 0
-
-//     def register_sequencer(self, sequencer: Sequencer):
-//         self.transport.sequencers.append(sequencer)
-
-//     def set_transport_callback(self, callback):
-//         self.transport.step_callback = callback
-
-//     def pulse(self):
-//         self.transport.pulse()
-//         self.time_since_pulse = 0.0
-//         # if self.internal:
-//         #     midi.send(TimingClock())
-
-//     def tick(self):
-//         self.transport.tick()
-//         self.time_since_tick = 0.0
-
-//     def start(self):
-//         self.transport.start()
-
-//     def stop(self):
-//         self.transport.stop()
-//         self.midi_time = -1.0
-
-
-//     def calc_miliseconds(self, bpm=None):
-//         if not bpm:
-//             bpm = self.BPM
-//         self.ns_per_pulse = NS_PER_MIN/(bpm*PPQ)
-//         self.ns_per_tick = self.ns_per_pulse / TICKS_PER_PULSE
-
-//     def estimate_bpm(self, delta_ns):
-//         if delta_ns > 0:
-//             if self.estimated_BPM == 0.0:
-//                 self.estimated_BPM = NS_PER_MIN/(self.time_since_pulse*PPQ)
-//             else:
-//                 self.estimated_BPM = 0.5 * (self.estimated_BPM + NS_PER_MIN/(self.time_since_pulse*PPQ))
-//             self.calc_miliseconds(self.estimated_BPM)
-//             # print(self.estimated_BPM)
-
-//     def get_midi_and_delta_time(self):
-//         current_time = time.monotonic_ns()
-//         if self.midi_time >=0:
-//             delta_time = (current_time - self.time)
-//             self.midi_time += delta_time
-//             self.time_since_tick += delta_time
-//             self.time_since_pulse += delta_time
-//         else:
-//             delta_time = 0
-//             self.midi_time = 0.0
-//             self.time_since_tick = 0.0
-//             self.time_since_pulse = 0.0
-//         self.time = current_time
-//         return delta_time
-
-//     def handler(self):
-//         delta = self.get_midi_and_delta_time()
-//         if self.internal:
-//             if self.transport.playing:
-//                 if self.time_since_tick >= self.ns_per_tick:
-//                     self.tick()
-//                 if self.time_since_pulse >= self.ns_per_pulse:
-//                     self.pulse()
-//         else:
-//             msg = midi.receive()
-//             if msg is not None:
-//                 if isinstance(message, TimingClock) and self.transport.playing:
-//                     self.estimate_bpm(delta)
-//                     self.pulse()
-//                 elif isinstance(message, Start):
-//                     self.start()
-//                 elif isinstance(message, Stop):
-//                     self.stop()
-//             elif self.estimated_BPM > 0:
-//                 if self.time_since_tick > self.ns_per_tick:
-//                     self.tick()
-
-
-// clock = Clock()

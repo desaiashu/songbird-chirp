@@ -47,7 +47,7 @@ class Sequencer {
         void gen_arp_sequence(int velocity);
     public:
         Sequencer(int sequence_length, int channel);
-        Sequencer(int channel=0) : Sequencer(4, channel) {};
+        Sequencer(int channel=0) : Sequencer(8*dur::w, channel) {};
         Progression progression;
         vector<int> pattern;
         Arpeggiator arp;
@@ -61,6 +61,8 @@ class Sequencer {
         virtual void start();
         virtual void stop();
         void change_scale(Scale new_scale);
+
+        void dump_to_console();
 };
 
 #ifdef ARDUINO

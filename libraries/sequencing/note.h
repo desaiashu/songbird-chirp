@@ -24,7 +24,7 @@ struct Note {
         Note(int note, bool on, int velocity, int tick);
 
         bool operator< (const Note &other) const { return tick < other.tick; }   
-        string name() { return "Note: " + std::to_string(note) + " On: " + std::to_string(on) + " Vel: " + std::to_string(velocity); };
+        string name() { return "Note: " + std::to_string(note) + " On: " + std::to_string(on) + " Vel: " + std::to_string(velocity)+  " Tick: " + std::to_string(tick); };
 
 };
 

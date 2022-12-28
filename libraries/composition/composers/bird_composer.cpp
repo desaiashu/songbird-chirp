@@ -215,7 +215,9 @@ vector<int> BirdComposer::construct_velocities(vector<string> data)
     for(int i = 1; i < data.size(); i++)
     {
         //TODO: test this functionality (incrementing velocities)
-        if (data[i][0] == '+' || data[i][0] == '-') {
+        if (data[i] == "-"){
+            velocity.push_back(last_velocity);
+        } else if (data[i][0] == '+' || data[i][0] == '-') {
             int new_velocity = last_velocity + stoi(data[i]);
             velocity.push_back(new_velocity);
         } else {
@@ -232,7 +234,9 @@ vector<int> BirdComposer::construct_notes(vector<string> data)
     for(int i = 1; i < data.size(); i++)
     {
         //TODO: test this functionality (incrementing notes)
-        if (data[i][0] == '+' || data[i][0] == '-') {
+        if (data[i] == "-"){
+            notes.push_back(last_note);
+        } else if (data[i][0] == '+' || data[i][0] == '-') {
             int new_note = last_note + stoi(data[i]);
             notes.push_back(new_note);
         } else {
