@@ -31,7 +31,7 @@ Eventually, the notation and platform will support longer form composition throu
 
 ## Syntax and example
 
-# Syntax
+### Syntax
 
 ```
 ch - midi channel
@@ -45,7 +45,7 @@ sec - section
 arr - arrangement (intro:name #:length in bars)
 ```
 
-# Example
+### Example
 
 ```
 arr
@@ -78,7 +78,7 @@ sec verse
 - Defining chords
 - Syntax highlighting for .bird files
 
-## Long term ideas
+### Long term ideas
 - Standalone songbird executable that reads / runs
 - More human readable visualization
 - Visualization in MIDI / sheet music
