@@ -209,9 +209,14 @@ void Sequencer::start()
 
 void Sequencer::stop() 
 {
-    
+    silence_all_notes();
 }
 
+void Sequencer::silence_all_notes()
+{
+    for (Note n: notes)
+        instrument.end_note(n.note);
+}
 
 void Sequencer::dump_to_console()
 {

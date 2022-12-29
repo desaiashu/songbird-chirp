@@ -106,8 +106,11 @@ void Clock::set_cycle_update(int bars)
 void Clock::cycle_update()
 {
 
-    for (Sequencer *s : transport.sequencers) // Deallocate memory of old sequencers
+    for (Sequencer *s : transport.sequencers) {
+         // Deallocate memory of old sequencers
+        s->stop();
         delete s;
+    }
     transport.sequencers.clear();
 
     transport.sequencers = transport.update_sequencers; // Replaces the sequencers

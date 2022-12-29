@@ -9,17 +9,17 @@
 # sec - section (intro:name #:length in bars)
 # arr - arrangement
 
-b 4
+b 1
 
 ch 1 kick
   p xx _
-    v 100
-      n 60
+    v 80
+      n 36
 
 ch 2 bass
-  p _xx xx
-    v 80
-      n 60
+  p _xt xt _xt xt
+    v 60 
+      n 48
 
 ch 3 drums
   p _xx xx
