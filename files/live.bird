@@ -37,6 +37,9 @@ ch 3 drums
     sw < 20 x
       v 40
         n 43
+  p _ _ _ x _ _ x _ _ x _ _
+    v 30
+      n 44
 
 ch 4 lead
   p qt qt qt
@@ -45,7 +48,7 @@ ch 4 lead
         n 60 63 67
 
 ch 5 chords
-  p w 
+  p ww 
     sw - ~
       v 30 20 20
         n 60 +2 +5 -
@@ -53,7 +56,7 @@ ch 5 chords
       v 20
         n +7 +8 - +7
       v 30
-        n +12 +14 +12 +10
+        n +10 +14 +12 +15
 
 
 
