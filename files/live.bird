@@ -17,11 +17,14 @@ ch 1 kick
       n 36
 
 ch 2 bass
-  p _xt xt _xt xt
+  p _xx xx _ x x _ x _ x
     v 60 
-      n 48
+      n 30 - +3 - - - +3 -
 
 ch 3 drums
+  p _q q
+    v 70
+      n 61
   p _xx xx
     sw < 20 x ~
       v 70

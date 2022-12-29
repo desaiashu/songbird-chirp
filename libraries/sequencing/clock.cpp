@@ -45,7 +45,7 @@ void Transport::stop()
     for (Sequencer* s : sequencers)
         s->stop();
     playing = false;
-    // println_to_console("Stop");
+    println_to_console("Stop");
 }
 
 // Clock
