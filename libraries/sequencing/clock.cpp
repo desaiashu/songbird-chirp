@@ -125,9 +125,9 @@ void Clock::cycle_update()
         for (Sequencer* s : transport.sequencers)
             s->start();
     }
-    // for (Sequencer *s : transport.sequencers) {
-    //     s->dump_to_console();
-    // }
+    for (Sequencer *s : transport.sequencers) {
+        s->dump_to_console();
+    }
 
 }
 #endif
