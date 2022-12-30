@@ -71,6 +71,9 @@ sec verse
 ## Roadmap
 
 ### Near term
+- Enable multiple rows of notes for one velocity
+- Enable note progressions that match chord changes
+- Enable chord definitions based on root / scale
 - Better documentation on installing // running locally
 - Euclidean rythyms
 - Pre-saved patterns (pt)
