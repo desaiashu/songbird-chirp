@@ -127,16 +127,13 @@ void BirdComposer::process_chunk(vector<string> chunk)
 {
     vector<vector<string>> sequence;
 
-    bool data;
-
     for (string s : chunk) {
         ltrim(s);
         vector<string> line = get_vector_from_string(s);
 
-        if (line[0] == "#") {
-            data = true;
+        if (line.size() == 0 || line[0] == "#") {
+            // ignore empty lines and comments
         } else if (line[0] == "b") {
-            data = true;
             try
             {
                 bars = stoi(line[1]);
@@ -147,15 +144,14 @@ void BirdComposer::process_chunk(vector<string> chunk)
                 println_to_console("syntax error in # bars, setting to 4");
                 bars = 4;
             }
-        } else {
+        } else { // ignore empty lines and comments
             sequence.push_back(line);
         }
     }
 
-    if (!data) {
+    if (sequence.size() > 0) {
         construct_sequencers(sequence);
     }
-        
 }
 
 void BirdComposer::construct_sequencers(vector<vector<string>> sequence)
@@ -210,7 +206,7 @@ vector<int> BirdComposer::construct_pattern(vector<string> data)
     for(int i = 1; i < data.size(); i++)
     {
         //TODO: test this functionality
-        if (data[i][0] == '_') {
+        if (data[i] == "_") {
             int rest_length = 0 - abs(last_dur);
             pattern.push_back(rest_length);
         } else {
