@@ -45,6 +45,7 @@ class Sequencer {
         void gen_drum_sequence(int note, int velocity, vector<int> p, Modulator m=NO_MOD, Swing s=Swing());
         void gen_chord_sequence(int velocity, bool bass=false);
         void gen_arp_sequence(int velocity);
+        void silence_all_notes();
     public:
         Sequencer(int sequence_length, int channel);
         Sequencer(int channel=0) : Sequencer(8*dur::w, channel) {};
