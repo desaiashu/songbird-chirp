@@ -33,6 +33,8 @@ echo "Copying updated libraries"
 #   rm -rf ~/Documents/Arduino/libraries/${l}
 #   cp -r libraries/${l} ~/Documents/Arduino/libraries
 # done
+#TODO: potentially hardlink the library folders instead of cp!
+#ln (-s for soft) libraries/${l} ~/Documents/Arduino/libraries
 
 # Compile
 echo "Compiling"
